@@ -1,0 +1,662 @@
+[
+{
+   "id":"menu1",
+   "text":"注册管理",
+   "icons":"&#xe663;",
+   "children":[
+	{
+	   "id":"a2",
+	   "text":"用户管理",
+	   "icons":"&#xe663;",
+	   "target": "stage",
+	   "children":[
+		 {
+		   "id":"a1",
+		   "text":"企业用户",
+		   "icons":"&#xe699;",
+		   "target": "stage",
+		   "url":"user/register/enterprise/index.html"
+		 },{
+		   "id":"a2",
+		   "text":"机构用户",
+		   "icons":"&#xe652;",
+		   "target": "stage",
+		   "url":"user/register/organization/index.html"
+		 },{
+		   "id":"a3",
+		   "text":"个人用户",
+		   "icons":"&#xe638;",
+		   "target": "stage",
+		   "url":"user/register/individual/index.html"
+		 },{
+		   "id":"a4",
+		   "text":"团队用户",
+		   "icons":"&#xe69d;",
+		   "target": "stage",
+		   "url":"user/register/team/index.html"
+		 },{
+		   "id":"a5",
+		   "text":"投资人用户",
+		   "icons":"&#xe657;",
+		   "target": "stage",
+		   "url":"user/register/investor/index.html"
+		 },{
+		   "id":"a6",
+		   "text":"导师用户",
+		   "icons":"&#xe6ea;",
+		   "target": "stage",
+		   "url":"user/register/mentor/index.html"
+		 },{
+		   "id":"a7",
+		   "text":"载体用户",
+		   "icons":"&#xe6a9;",
+		   "target": "stage",
+		   "url":"user/register/carrier/index.html"
+		 }
+	   ]
+	},
+	{
+	   "id":"a1",
+	   "text":"注册统计",
+	   "icons":"&#xe63a;",
+	   "target": "stage",
+	   "url":"user/statistic/index.html"
+	 }
+   ]
+},
+{
+   "id":"menu2",
+   "text":"科技服务平台",
+   "icons":"&#xe720;",
+   "children":[
+	 {
+       "id":"a1",
+       "text":"知识产权",
+       "icons":"&#xe6ec;",
+       "target": "stage",
+	   "children":[
+		 {
+		   "id":"a1",
+		   "text":"专利资助管理",
+		   "icons":"&#xe71f;",
+		   "target": "stage",
+		   "url":"service/intellectual/patents/index.html"
+		 }
+	   ]
+     },
+	 {
+       "id":"a2",
+       "text":"维权援助管理",
+       "icons":"&#xe67b;",
+       "target": "stage",
+	   "children":[
+		 {
+		   "id":"a1",
+		   "text":"维权需求",
+		   "icons":"&#xe698;",
+		   "target": "stage",
+		   "url":"service/rights/demand/index.html"
+		 },
+		 {
+		   "id":"a2",
+		   "text":"维权案例",
+		   "icons":"&#xe64b;",
+		   "target": "stage",
+		   "url":"service/rights/case/index.html"
+		 }
+	   ]
+     },
+	 {
+       "id":"a3",
+       "text":"科技型企业管理",
+       "icons":"&#xe699;",
+       "target": "stage",
+	   "children":[
+		 {
+		   "id":"a31",
+		   "text":"企业认定管理",
+		   "icons":"&#xe721;",
+		   "target": "stage",
+	   	   "children":[
+			{
+			   "id":"a311",
+			   "text":"区县审核",
+			   "icons":"&#xe721;",
+			   "target": "stage",
+			   "url":"service/enterprise/affirm/index.html"
+			 },
+			 {
+			   "id":"a312",
+			   "text":"市局审核",
+			   "icons":"&#xe721;",
+			   "target": "stage",
+			   "url":"service/enterprise/affirmcity/index.html"
+			 }
+		   ]
+		 },
+		 {
+		   "id":"a32",
+		   "text":"认定公示管理",
+		   "icons":"&#xe6d1;",
+		   "target": "stage",
+		   "url":"service/enterprise/publicity/index.html"
+		 },
+		 {
+		   "id":"a33",
+		   "text":"科技企业公告",
+		   "icons":"&#xe639;",
+		   "target": "stage",
+		   "url":"service/enterprise/announcement/index.html"
+		 }
+	   ]
+     }
+   ]
+},
+{
+  "id":"menu3",
+  "text":"技术交易市场",
+  "icons":"&#xe64e;",
+  "children":[
+    {
+      "id":"a1",
+      "text":"信息管理",
+      "icons":"&#xe61e;",
+      "target": "stage",
+	  "children":[
+		  {
+			  "id":"a11",
+			  "text":"成果管理",
+			  "icons":"&#xe72e;",
+			  "target": "stage",
+			  "url":"market/message/achievement/index.html"
+		  },
+		  {
+			  "id":"a12",
+			  "text":"需求管理",
+			  "icons":"&#xe73a;",
+			  "target": "stage",
+			  "url":"market/message/demand/index.html"
+		  }
+	  ]
+    },
+	{
+      "id":"a2",
+      "text":"技术交易厅",
+      "icons":"&#xe6ae;",
+      "target": "stage",
+	  "children":[
+		  {
+			  "id":"a21",
+			  "text":"交易信息管理",
+			  "icons":"&#xe731;",
+			  "target": "stage",
+			  "url":"market/bourse/tradeInfo/index.html"
+		  }
+	  ]
+    },
+	{
+      "id":"a3",
+      "text":"合作伙伴",
+      "icons":"&#xe73e;",
+      "target": "stage",
+      "url":"market/partner/index.html"
+    },
+	{
+      "id":"a4",
+      "text":"友情链接",
+      "icons":"&#xe733;",
+      "target": "stage",
+      "url":"market/blogroll/index.html"
+    }
+  ]
+},
+{
+  "id":"menu4",
+  "text":"创新创业平台",
+  "icons":"&#xe6b7;",
+  "children":[
+  	{
+		"id":"a1",
+		"text":"招商信息管理",
+		"icons":"&#xe725;",
+		"target": "stage",
+		"url":"innovationImbark/merchants/index.html"
+	}, 
+	{
+      "id":"a2",
+      "text":"政策服务",
+      "icons":"&#xe6dd;",
+      "target": "stage",
+	  "children":[
+		  {
+			  "id":"a21",
+			  "text":"金融服务管理",
+			  "icons":"&#xe645;",
+			  "target": "stage",
+			  "url":"innovationImbark/policy/financial/index.html"
+		  },
+		  {
+			  "id":"a22",
+			  "text":"检测服务管理",
+			  "icons":"&#xe73f;",
+			  "target": "stage",
+			  "url":"innovationImbark/policy/detection/index.html"
+		  },
+		  {
+			  "id":"a23",
+			  "text":"人才共享管理",
+			  "icons":"&#xe638;",
+			  "target": "stage",
+			  "url":"innovationImbark/policy/talents/index.html"
+		  },
+		  {
+			  "id":"a24",
+			  "text":"科技咨询管理",
+			  "icons":"&#xe726;",
+			  "target": "stage",
+			  "url":"innovationImbark/policy/consult/index.html"
+		  },
+		  {
+			  "id":"a25",
+			  "text":"研究开发管理",
+			  "icons":"&#xe73d;",
+			  "target": "stage",
+			  "url":"innovationImbark/policy/development/index.html"
+		  },
+		  {
+			  "id":"a26",
+			  "text":"设备共享管理",
+			  "icons":"&#xe73c;",
+			  "target": "stage",
+			  "url":"innovationImbark/policy/equipment/index.html"
+		  }
+	  ]
+    }, 
+	{
+      "id":"a3",
+      "text":"资助申报管理",
+      "icons":"&#xe6dc;",
+      "target": "stage",
+	  "children":[
+		  {
+			  "id":"a31",
+			  "text":"检测补助管理",
+			  "icons":"&#xe734;",
+			  "target": "stage",
+			  "children":[
+				  {
+					  "id":"a311",
+					  "text":"专家库管理",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/detection/expert/index.html"
+				  },
+				  {
+					  "id":"a312",
+					  "text":"区县审核",
+					  "icons":"&#xe729;",
+					  "url":"innovationImbark/subsidize/detection/countyFirst/index.html"
+				  },
+				  {
+					  "id":"a313",
+					  "text":"市局初审",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/detection/cityFirst/index.html"
+				  },
+				  {
+					  "id":"a314",
+					  "text":"专家复审",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/detection/expertReview/index.html"
+				  },
+				  {
+					  "id":"a315",
+					  "text":"区县终审",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/detection/countyEnd/index.html"
+				  },
+				  {
+					  "id":"a316",
+					  "text":"公示信息管理",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/detection/publicity/index.html"
+				  },
+				  {
+					  "id":"a317",
+					  "text":"检测公告管理",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/detection/detection/index.html"
+				  }
+			  ]
+		  },
+		  {
+			  "id":"a32",
+			  "text":"众创认定管理",
+			  "icons":"&#xe729;",
+			  "target": "stage",
+			  "children":[
+				  {
+					  "id":"a321",
+					  "text":"区县审核",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/affirm/countyReview/index.html"
+				  },
+				  {
+					  "id":"a322",
+					  "text":"区县汇总推荐",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/affirm/recommended/index.html"
+				  },
+				  {
+					  "id":"a323",
+					  "text":"市局审核",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/affirm/cityReview/index.html"
+				  },
+				  {
+					  "id":"a324",
+					  "text":"众创认定",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/affirm/identified/index.html"
+				  },
+				  {
+					  "id":"a325",
+					  "text":"众创指南",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/affirm/guide/index.html"
+				  }
+			  ]
+		  },
+		  {
+			  "id":"a33",
+			  "text":"科研机构补助",
+			  "icons":"&#xe652;",
+			  "target": "stage",
+			  "children":[
+				  {
+					  "id":"a331",
+					  "text":"区县审核",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/scientificResearch/countyReview/index.html"
+				  },
+				  {
+					  "id":"a332",
+					  "text":"市局审核",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/scientificResearch/cityReview/index.html"
+				  },
+				  {
+					  "id":"a333",
+					  "text":"公示信息管理",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/scientificResearch/publicity/index.html"
+				  },
+				  {
+					  "id":"a334",
+					  "text":"科研公告管理",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/scientificResearch/detection/index.html"
+				  }
+			  ]
+		  },
+		  {
+			  "id":"a34",
+			  "text":"贷款引导资金",
+			  "icons":"&#xe743;",
+			  "target": "stage",
+			  "children":[
+				  {
+					  "id":"a341",
+					  "text":"分行库管理",
+					  "url":"innovationImbark/subsidize/loan/branchLibrary/index.html"
+				  },
+				  {
+					  "id":"a342",
+					  "text":"分行审核",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/loan/branchReview/index.html"
+				  },
+				  {
+					  "id":"a343",
+					  "text":"分行汇总",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/loan/branchSummary/index.html"
+				  },
+				  {
+					  "id":"a344",
+					  "text":"市局审核",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/loan/cityReview/index.html"
+				  },
+				  {
+					  "id":"a345",
+					  "text":"市局汇总",
+					  "target": "stage",
+					  "url":"innovationImbark/subsidize/loan/citySummary/index.html"
+				  }
+			  ]
+		  }
+	  ]
+    }, 
+	{
+      "id":"a4",
+      "text":"创新活动",
+      "icons":"&#xe737;",
+      "target": "stage",
+	  "children":[
+	  	{
+			"id":"a41",
+			"text":"项目征集管理",
+			"icons":"&#xe6fe;",
+			"target": "stage",
+			"url":"innovationImbark/activity/collect/index.html"
+		},
+		{
+			"id":"a42",
+			"text":"活动预告",
+			"icons":"&#xe738;",
+			"target": "stage",
+			"url":"innovationImbark/activity/forecast/index.html"
+		},
+		{
+			"id":"a3",
+			"text":"活动风采",
+			"icons":"&#xe741;",
+			"target": "stage",
+			"url":"innovationImbark/activity/mien/index.html"
+		}
+	  ]
+    }, 
+	{
+      "id":"a5",
+      "text":"科技合作",
+      "icons":"&#xe720;",
+      "target": "stage",
+	  "children":[
+	  	{
+			"id":"a41",
+			"text":"合作需求管理",
+			"icons":"&#xe73a;",
+			"target": "stage",
+			"url":"innovationImbark/cooperation/demand/index.html"
+		},
+		{
+			"id":"a42",
+			"text":"合作伙伴管理",
+			"icons":"&#xe73e;",
+			"target": "stage",
+			"url":"innovationImbark/cooperation/partner/index.html"
+		}
+	  ]
+    }, 
+	{
+      "id":"a6",
+      "text":"交流管理",
+      "icons":"&#xe6e5;",
+      "target": "stage",
+	  "children":[
+	  	{
+			"id":"a41",
+			"text":"留言管理",
+			"icons":"&#xe742;",
+			"target": "stage",
+			"url":"innovationImbark/exchange/leaveWords/index.html"
+		},
+		{
+			"id":"a42",
+			"text":"回复管理",
+			"icons":"&#xe722;",
+			"target": "stage",
+			"url":"innovationImbark/exchange/reply/index.html"
+		}
+	  ]
+    }, 
+	{
+      "id":"a7",
+      "text":"创新券管理",
+      "icons":"&#xe737;",
+      "target": "stage",
+      "url":"javascript:;"
+    }
+  ]
+},
+{
+   "id":"menu5",
+   "text":"信息发布",
+   "icons":"&#xe61e;",
+   "children":[
+     {
+       "id":"a1",
+       "text":"栏目管理",
+       "icons":"&#xe634;",
+       "target": "stage",
+       "url":"information/column/index.html"
+     },
+	 {
+       "id":"a2",
+       "text":"信息发布管理",
+       "icons":"&#xe6ac;",
+       "target": "stage",
+       "url":"information/info/index.html"
+     }
+   ]
+},
+{
+   "id":"menu6",
+   "text":"统计分析",
+   "icons":"&#xe691;",
+   "children":[
+     {
+       "id":"a1",
+       "text":"科技型企业统计",
+       "icons":"&#xe699;",
+       "target": "stage",
+       "url":"statistics/enterprise/index.html"
+     },
+	 {
+       "id":"a2",
+       "text":"众创空间统计",
+       "icons":"&#xe69e;",
+       "target": "stage",
+       "url":"statistics/space/index.html"
+	 },
+	 {
+       "id":"a3",
+       "text":"项目信息统计",
+       "icons":"&#xe6fe;",
+       "target": "stage",
+       "url":"statistics/items/index.html"
+	 },
+	 {
+       "id":"a4",
+       "text":"研发检验测试费补助",
+       "icons":"&#xe6e4;",
+       "target": "stage",
+       "url":"statistics/subsidy/index.html"
+	 },
+	 {
+       "id":"a5",
+       "text":"引进科研机构补助",
+       "icons":"&#xe652;",
+       "target": "stage",
+       "url":"statistics/organization/index.html"
+	 },
+	 {
+       "id":"a6",
+       "text":"银行贷款引导",
+       "icons":"&#xe728;",
+       "target": "stage",
+       "url":"statistics/loan/index.html"
+	 }
+   ]
+},
+{
+   "id":"menu7",
+   "text":"系统管理",
+   "icons":"&#xe691;",
+   "children":[
+     {
+       "id":"a1",
+       "text":"角色管理",
+       "icons":"&#xe72b;",
+       "target": "stage",
+       "url":"javascript:;"
+     },
+	 {
+       "id":"a2",
+       "text":"用例管理",
+       "icons":"&#xe73b;",
+       "target": "stage",
+       "url":"javascript:;"
+	 },
+	 {
+       "id":"a3",
+       "text":"日志管理",
+       "icons":"&#xe6b6;",
+       "target": "stage",
+       "url":"javascript:;"
+	 },
+	 {
+       "id":"a4",
+       "text":"机构管理",
+       "icons":"&#xe652;",
+       "target": "stage",
+       "url":"javascript:;"
+	 },
+	 {
+       "id":"a5",
+       "text":"系统用户",
+       "icons":"&#xe736;",
+       "target": "stage",
+       "url":"javascript:;"
+	 },
+	 {
+       "id":"a6",
+       "text":"栏目管理",
+       "icons":"&#xe634;",
+       "target": "stage",
+       "url":"javascript:;"
+	 },
+	 {
+       "id":"a7",
+       "text":"敏感词汇管理",
+       "icons":"&#xe72c;",
+       "target": "stage",
+       "url":"javascript:;"
+	 },
+	 {
+       "id":"a8",
+       "text":"接口管理（预留）",
+       "icons":"&#xe735;",
+       "target": "stage",
+       "url":"javascript:;"
+	 },
+	 {
+       "id":"a9",
+       "text":"公示期限设置",
+       "icons":"&#xe739;",
+       "target": "stage",
+       "url":"javascript:;"
+	 }
+   ]
+}
+]

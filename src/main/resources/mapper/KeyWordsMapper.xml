@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.KeyWordsMapper">
+	<resultMap id="BaseResultMap" type="com.xiaoshu.entity.KeyWords">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<id column="KEYES" jdbcType="VARCHAR" property="keyes" />
+		<id column="VALUESS" jdbcType="VARCHAR" property="valuess" />
+		<id column="TYPESS" jdbcType="VARCHAR" property="typess" />
+		<id column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<id column="STATUS" jdbcType="VARCHAR" property="status" />
+		<id column="SORT" jdbcType="VARCHAR" property="sort" />
+		<id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+		<id column="PARENT_MENU_ID" jdbcType="VARCHAR" property="parentMenuId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,
+		KEYES,
+		VALUESS,
+		TYPESS,
+		CREATE_TIME,
+		UPDATE_TIME,
+		STATUS,
+		SORT,
+		MENU_ID,
+		PARENT_MENU_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from key_words where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from key_words where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.xiaoshu.entity.KeyWords">
+		insert into key_words
+		(ID,KEYES,VALUESS,TYPESS,CREATE_TIME,UPDATE_TIME,STATUS,SORT,MENU_ID,PARENT_MENU_ID)
+		values
+		(#{id,jdbcType=VARCHAR},#{keyes,jdbcType=VARCHAR},#{valuess,jdbcType=VARCHAR},#{typess,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{sort,jdbcType=VARCHAR},#{menuId,jdbcType=VARCHAR},#{parentMenuId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.xiaoshu.entity.KeyWords">
+		insert into key_words
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="keyes != null">KEYES,</if>
+			<if test="valuess != null">VALUESS,</if>
+			<if test="typess != null">TYPESS,</if>
+			<if test="createTime != null">CREATE_TIME,</if>
+			<if test="updateTime != null">UPDATE_TIME,</if>
+			<if test="status != null">STATUS,</if>
+			<if test="sort != null">SORT,</if>
+			<if test="menuId != null">MENU_ID,</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=VARCHAR},</if>
+			<if test="keyes != null">#{keyes,jdbcType=VARCHAR},</if>
+			<if test="valuess != null">#{valuess,jdbcType=VARCHAR},</if>
+			<if test="typess != null">#{typess,jdbcType=VARCHAR},</if>
+			<if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="status != null">#{status,jdbcType=VARCHAR},</if>
+			<if test="sort != null">#{sort,jdbcType=VARCHAR},</if>
+			<if test="menuId != null">#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">#{parentMenuId,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiaoshu.entity.KeyWords">
+		update key_words
+		<set>
+			<if test="keyes != null">KEYES =#{keyes,jdbcType=VARCHAR},</if>
+			<if test="valuess != null">VALUESS =#{valuess,jdbcType=VARCHAR},</if>
+			<if test="typess != null">TYPESS =#{typess,jdbcType=VARCHAR},</if>
+			<if test="createTime != null">CREATE_TIME =#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">UPDATE_TIME =#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="status != null">STATUS =#{status,jdbcType=VARCHAR},</if>
+			<if test="sort != null">SORT =#{sort,jdbcType=VARCHAR},</if>
+			<if test="menuId != null">MENU_ID =#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID =#{parentMenuId,jdbcType=VARCHAR},</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xiaoshu.entity.KeyWords">
+		update
+		key_words
+		set
+		KEYES = #{keyes,jdbcType=VARCHAR},
+		VALUESS = #{valuess,jdbcType=VARCHAR},
+		TYPESS = #{typess,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=VARCHAR},
+		SORT = #{sort,jdbcType=VARCHAR},
+		MENU_ID = #{menuId,jdbcType=VARCHAR},
+		PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap" resultType="java.util.List">
+		select
+		<include refid="Base_Column_List" />
+		from key_words
+		<where>
+			1=1 and status = 1
+            <if test="menuid != null">
+                AND MENU_ID = '${menuid}'
+            </if>
+			<if test="search != null">
+				AND (KEYES LIKE concat('%',#{search},'%') OR VALUESS LIKE concat('%',#{search},'%'))
+			</if>
+			<if test="orderName != null and orderName !=''">
+				order by ${orderName} ${descAsc}
+			</if>
+			<if test="startRow !=null">
+				limit ${startRow},${pageSize}
+			</if>
+		</where>
+	</select>
+	<select id="selectCount" parameterType="com.xiaoshu.entity.KeyWords"
+		resultType="int">
+		select count(*) from key_words
+		<where>
+			1=1
+            <if test="menuid != null">
+                AND MENU_ID = '${menuid}'
+            </if>
+			<if test="search != null">
+				AND (KEYES LIKE concat('%',#{search},'%') OR VALUESS LIKE concat('%',#{search},'%'))
+			</if>
+		</where>
+	</select>
+</mapper>

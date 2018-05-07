@@ -1,0 +1,87 @@
+*{padding:0;margin:0;}
+html,body{width:100%;height:100%;background:#FFFFFF;}
+a{text-decoration: none;}
+ul,li{list-style: none;}
+
+/*轮播*/
+ .m-carousel{ position:relative}
+ .m-carousel, .m-carousel ul, .m-carousel li{ display:block; height:100%!important;}
+ .m-carousel.li-inline li{ float:left; overflow:hidden; }
+ 
+.hd-lunbo{height:250px}
+.hd-lunbo li img{width:100%;height:100%;}
+.hd-lunbo .pager{ clear:both; position:absolute; z-index:9; bottom:8px; left:50%;margin-left:-42px;background:transparent;}
+.hd-lunbo .pager a{ width:10px; height:1px; display:block; overflow:hidden; padding-top:9px; float:left; margin:0 2px; border-radius:50%; background-color:#FFFFFF;transform: all 0.5s);}
+.hd-lunbo .pager a.selected{ background-color:#FF9E00;margin-right:0;width:12px;border-radius:50% 0 0 50%;}
+.hd-lunbo .pager a.selected + a{ background-color:#FF9E00;margin-left:0;width:12px;border-radius:0 50% 50% 0;}
+.hd-lunbo .pager a:last-child{border-radius:50%;}
+
+.ydBody{width:100%;padding-bottom:2rem;overflow: auto;}
+.ydBody .ydHead{position:fixed;top:0;left:0;width:calc(100% - 2rem);height:3rem;z-index: 1;padding:0.5rem 1rem;}
+.ydBody .ydHead .ydFh{float:left;width:3rem;height:3rem;cursor:pointer;background:url(../img/img7.png) no-repeat left center;}
+.ydBody .ydHead .ydMore{float:right;width:3rem;height:3rem;cursor:pointer;background:url(../img/img8.png) no-repeat right center;}
+.ydBody .ydCon{padding:1rem 2rem;}
+.ydBody .ydCon .title{color:#313131;font-size:2rem;font-weight:700;}
+.f-clear:after{content:' ';display:block;clear: both;}
+.ydBody .ydCon .ydLine{border-bottom:1px solid #dcdcdc;padding:1.5rem 0;}
+.ydBody .ydCon .ydLine .ydAddress{float:left;/*padding:1rem 0;*/}
+.ydBody .ydCon .ydLine .ydAddress li{line-height:2rem;color:#313131;font-size:1.6rem;}
+.ydBody .ydCon .ydLine .ydAddress li:first-child{color:#313131;font-weight: 700;}
+.ydBody .ydCon .ydLine .ydAddress li:last-child{color:#f56e4e;}
+.ydBody .ydCon .ydLine .ydAddImg{float:right;width:4rem;height:4rem;}
+.ydBody .ydCon .ydLine .ydAddImg img{width:100%;height:100%;}
+.ydBody .ydCon .ydLine .ydtgLabel{float:left;width:3rem;height:3rem;margin-right:2rem;}
+.ydBody .ydCon .ydLine .ydtgLabel img{width:100%;height:100%;}
+.ydBody .ydCon .ydLine .ydTime{float:left;}
+.ydBody .ydCon .ydLine .ydTime li{line-height:2rem;color:#434343;font-size:1.4rem;font-weight: 600;}
+.ydBody .ydCon .ydLine .tfTime{float:right;}
+.ydBody .ydCon .ydLine .tfTime li{line-height:2rem;color:#434343;font-size:1.4rem;font-weight: 600;}
+.ydBody .ydCon .ydLine .ydNum{float:left;color:#434343;font-size:1.4rem;font-weight: 600;}
+.ydBody .ydCon .ydLine .ydSL{float:right;border:1px solid #434343;}
+.ydBody .ydCon .ydLine .ydSL span{float:left;width:2.5rem;height:2.5rem;line-height:2.5rem;text-align:center;}
+.ydBody .ydCon .ydLine .ydSL span:first-child{cursor: pointer;}
+.ydBody .ydCon .ydLine .ydSL span:last-child{cursor: pointer;}
+.ydBody .ydCon .ydLine .ydSL span:nth-child(2){border-left:1px solid #434343;border-right:1px solid #434343;}
+.ydBody .ydCon .ydLine .ydSL span:nth-child(2) input{width:100%;height:100%;border:0;background:transparent;outline: none;text-align:center;}
+
+
+.ydBody .ydFooter{position:fixed;bottom:0;left:0;height:5.5rem;width:100%;box-sizing: border-box;padding:1rem 2rem;box-shadow:0 -3px 5px #f1f1f1;background:#FFFFFF;}
+.ydBody .ydFooter .footLeft{float:left;}
+.ydBody .ydFooter .footLeft .span1{display:inline-block;line-height:3.5rem;color:#313131;font-size:1.4rem;font-weight:bold;}
+.ydBody .ydFooter .footLeft .span2{display:inline-block;line-height:3.5rem;color:#f56e4e;font-size:1.4rem;font-weight:bold;}
+.ydBody .ydFooter .footLeft .span3{display:inline-block;line-height:3.5rem;color:#f56e4e;font-size:2.2rem;font-weight:bold;}
+.ydBody .ydFooter .footRight{float:right;width:10rem;height:3.5rem;line-height:3.5rem;text-align:center;background:#f56e4e;color:#FFFFFF;font-size:1.2rem;border-radius:5px;cursor: pointer;}
+
+/*我的订单*/
+.myOrder{padding:0rem 1.5rem;position:relative;}
+.myOrder .head{position: fixed;z-index:1;top:0;left:0;width:100%;height:4.5rem;background:#f56e4e;box-shadow: 0px 3px 10px rgba(4,0,0,0.3);}
+.myOrder .head .headLeft{cursor:pointer;position:absolute;left:1rem;top:0;width:3rem;height:3rem;background:url(../img/img7.png) no-repeat left;}
+.myOrder .head .headRight{cursor:pointer;position:absolute;right:1rem;top:0;width:3rem;height:3rem;background:url(../img/img8.png) no-repeat right;}
+.myOrder .head .headText{line-height:3rem;text-align:center;color:#FFFFFF;font-size:1.5rem;font-weight:700;}
+.orderDiv{margin-top:1.5rem;position:relative;padding-left:11rem;padding-right:1rem;height:10rem;box-shadow: 0px 0px 15px 3px rgba(4,0,0,0.15);background:#FFFFFF;}
+.orderDiv img{position:absolute;left:0;top:0;width:10rem;height:10rem;}
+.orderDiv .u-title{padding-top:0.5em;color:#707070;font-size:1.5rem;line-height:2rem;font-weight:700;}
+.orderDiv .u-pn{color:#f56e4e;font-size:1rem;line-height:1.5rem;font-weight:700;position:relative;}
+.orderDiv .u-pn span:first-child{float:left;}
+.orderDiv .u-pn span:last-child{float:right;}
+.orderDiv .u-ddh{color:#707070;font-size:1rem;line-height:1.5rem;font-weight:700;}
+.orderDiv .u-time{color:#707070;font-size:1rem;line-height:1.5rem;font-weight:700;}
+.orderDiv .myXfm{cursor:pointer;position:absolute;right:1rem;bottom:0.5rem;width:8rem;height:2.5rem;line-height:2.5rem;text-align: center;color:#FFFFFF;font-size:1rem;background:#f56e4e;border-radius:3px;}
+
+/*支付失败*/
+.payFail{position:relative;padding-top:3rem;}
+.payFail .head{position: fixed;top:0px;left:0px;width:100%;height:3rem;background:#e5e5e5;}
+.payFail .head .headLeft{cursor:pointer;position:absolute;left:1rem;top:0;width:3rem;height:3rem;background:url(../img/img10.png) no-repeat left;}
+.payFail .head .headRight{cursor:pointer;position:absolute;right:1rem;top:0;width:3rem;height:3rem;background:url(../img/img11.png) no-repeat right;}
+.payFail .payFailBox{padding-top:20rem;background:url(../img/img12.png) no-repeat center 2rem;background-size:15rem;}
+.payFail .payFailBox .text{line-height:2.5rem;color:#a0a0a0;font-size:1.5rem;text-align:center;}
+.payFail .payFailBox .fhBtn{cursor:pointer;width:22rem;height:4rem;line-height:4rem;text-align:center;margin:0 auto;background:#f56e4e;color:#FFFFFF;font-size:1.2rem;font-weight:700;}
+
+/*支付成功*/
+.paySucc{position:relative;padding-top:3rem;}
+.paySucc .head{position: fixed;top:0px;left:0px;width:100%;height:3rem;background:#e5e5e5;}
+.paySucc .head .headLeft{cursor:pointer;position:absolute;left:1rem;top:0;width:3rem;height:3rem;background:url(../img/img10.png) no-repeat left;}
+.paySucc .head .headRight{cursor:pointer;position:absolute;right:1rem;top:0;width:3rem;height:3rem;background:url(../img/img11.png) no-repeat right;}
+.paySucc .paySuccBox{padding-top:20rem;background:url(../img/img9.png) no-repeat center 4rem;background-size:20rem;}
+.paySucc .paySuccBox .text{line-height:2.5rem;color:#a0a0a0;font-size:1.5rem;text-align:center;}
+.paySucc .paySuccBox .fhBtn{cursor:pointer;width:22rem;height:4rem;line-height:4rem;text-align:center;margin:0 auto;background:#f56e4e;color:#FFFFFF;font-size:1.5rem;font-weight:700;}

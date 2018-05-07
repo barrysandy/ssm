@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.CommodityMapper">
+<!-- 自定义返回结果集 -->
+   <resultMap id="CommodityList" type="com.xiaoshu.entity.Commodity">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="commodityName" column="commodityName" javaType="java.lang.String"></result>
+	    <result property="image" column="image" javaType="java.lang.String"></result>
+		<result property="commodityStock" column="commodityStock" javaType="java.lang.Integer"></result>
+		<result property="commodityPrice" column="commodityPrice" javaType="java.lang.Double"></result>
+		<result property="arrayImg" column="arrayImg" javaType="java.lang.String"></result>
+		<result property="sellerId" column="sellerId" javaType="java.lang.Integer"></result>
+		<result property="createDate" column="createDate" javaType="java.lang.String"></result>
+		<result property="invalidDate" column="invalidDate" javaType="java.lang.String"></result>
+	    <result property="url" column="url" javaType="java.lang.String"></result>
+	    <result property="maxNumber" column="maxNumber" javaType="java.lang.Integer"></result>
+	    <result property="maxNumber2" column="maxNumber2" javaType="java.lang.Integer"></result>
+	    <result property="groupNumber" column="groupNumber" javaType="java.lang.Integer"></result>
+	    <result property="groupNumber2" column="groupNumber2" javaType="java.lang.Integer"></result>
+	    <result property="typese" column="typese" javaType="java.lang.Integer"></result>
+	    <result property="wechatActivityId" column="wechatActivityId" javaType="java.lang.String"></result>
+	    <result property="timeStatus" column="timeStatus" javaType="java.lang.Integer"></result>
+	   	<result property="totalGroup" column="totalGroup" javaType="java.lang.Integer"></result>
+	    <result property="maxGroup" column="maxGroup" javaType="java.lang.Integer"></result>
+	    <result property="createGroupNumber" column="createGroupNumber" javaType="java.lang.Integer"></result>
+	    <result property="videoMaterialId" column="videoMaterialId" javaType="java.lang.String"></result>
+	    <result property="showList" column="showList" javaType="java.lang.Integer"></result>
+	</resultMap>
+	
+<!-- 自定义返回结果集-->
+   <resultMap id="CommodityByID" type="com.xiaoshu.entity.Commodity">
+	   <id property="id" column="id" javaType="java.lang.Integer"></id>
+	   <result property="commodityName" column="commodityName" javaType="java.lang.String"></result>
+	   <result property="image" column="image" javaType="java.lang.String"></result>
+	   <result property="commodityDetails" column="commodityDetails" javaType="java.lang.String"></result>
+	   <result property="commodityStock" column="commodityStock" javaType="java.lang.Integer"></result>
+	   <result property="commodityPrice" column="commodityPrice" javaType="java.lang.Double"></result>
+	   <result property="arrayImg" column="arrayImg" javaType="java.lang.String"></result>
+	   <result property="sellerId" column="sellerId" javaType="java.lang.Integer"></result>
+	   <result property="createDate" column="createDate" javaType="java.lang.String"></result>
+	   <result property="invalidDate" column="invalidDate" javaType="java.lang.String"></result>
+	   <result property="share" column="share" javaType="java.lang.Integer"></result>
+	   <result property="shareTitle" column="shareTitle" javaType="java.lang.String"></result>
+	   <result property="shareDescM" column="shareDescM" javaType="java.lang.String"></result>
+	   <result property="shareImage" column="shareImage" javaType="java.lang.String"></result>
+	   <result property="url" column="url" javaType="java.lang.String"></result>
+	   <result property="maxNumber" column="maxNumber" javaType="java.lang.Integer"></result>
+	   <result property="maxNumber2" column="maxNumber2" javaType="java.lang.Integer"></result>
+	   <result property="groupNumber" column="groupNumber" javaType="java.lang.Integer"></result>
+	   <result property="groupNumber2" column="groupNumber2" javaType="java.lang.Integer"></result>
+	   <result property="typese" column="typese" javaType="java.lang.Integer"></result>
+	   <result property="wechatActivityId" column="wechatActivityId" javaType="java.lang.String"></result>
+	   <result property="timeStatus" column="timeStatus" javaType="java.lang.Integer"></result>
+	   <result property="totalGroup" column="totalGroup" javaType="java.lang.Integer"></result>
+	   <result property="maxGroup" column="maxGroup" javaType="java.lang.Integer"></result>
+	   <result property="createGroupNumber" column="createGroupNumber" javaType="java.lang.Integer"></result>
+	   <result property="videoMaterialId" column="videoMaterialId" javaType="java.lang.String"></result>
+	   <result property="showList" column="showList" javaType="java.lang.Integer"></result>
+	   <!--<collection property="commodityPriceList" column="id" ofType="com.xiaoshu.entity.CommodityPriceList" select="com.xiaoshu.dao.CommodityPriceListMapper.listByCommodityIdInStatus">-->
+		   <!--<id property="id" column="ID" javaType="java.lang.String"></id>-->
+		   <!--<result property="commodityId" column="COMMODITY_ID" javaType="java.lang.Integer"></result>-->
+		   <!--<result property="priceName" column="PRICE_NAME" javaType="java.lang.String"></result>-->
+		   <!--<result property="price" column="PRICE" javaType="java.lang.Double"></result>-->
+		   <!--<result property="priceUnit" column="PRICE_UNIT" javaType="java.lang.String"></result>-->
+		   <!--<result property="status" column="STATUS" javaType="java.lang.Integer"></result>-->
+		   <!--<result property="descM" column="DESC_M" javaType="java.lang.String"></result>-->
+		   <!--<result property="createTime" column="CREATE_TIME" javaType="java.lang.String"></result>-->
+		   <!--<result property="priceTime" column="PRICE_TIME" javaType="java.lang.String"></result>-->
+		   <!--<result property="sort" column="SORT" javaType="java.lang.String"></result>-->
+		   <!--<result property="address" column="ADDRESS" javaType="java.lang.String"></result>-->
+		   <!--<result property="remark" column="REMARK" javaType="java.lang.String"></result>-->
+		   <!--<result property="contacts" column="CONTACTS" javaType="java.lang.String"></result>-->
+		   <!--<result property="contactsPhone" column="CONTACTS_PHONE" javaType="java.lang.String"></result>-->
+	   <!--</collection>-->
+	</resultMap>
+
+
+	<!-- 自定义返回结果集-->
+	<resultMap id="CommodityByIDAll" type="com.xiaoshu.entity.Commodity">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="commodityName" column="commodityName" javaType="java.lang.String"></result>
+		<result property="image" column="image" javaType="java.lang.String"></result>
+		<result property="commodityDetails" column="commodityDetails" javaType="java.lang.String"></result>
+		<result property="commodityStock" column="commodityStock" javaType="java.lang.Integer"></result>
+		<result property="commodityPrice" column="commodityPrice" javaType="java.lang.Double"></result>
+		<result property="arrayImg" column="arrayImg" javaType="java.lang.String"></result>
+		<result property="sellerId" column="sellerId" javaType="java.lang.Integer"></result>
+		<result property="createDate" column="createDate" javaType="java.lang.String"></result>
+		<result property="invalidDate" column="invalidDate" javaType="java.lang.String"></result>
+		<result property="share" column="share" javaType="java.lang.Integer"></result>
+		<result property="shareTitle" column="shareTitle" javaType="java.lang.String"></result>
+		<result property="shareDescM" column="shareDescM" javaType="java.lang.String"></result>
+		<result property="shareImage" column="shareImage" javaType="java.lang.String"></result>
+		<result property="url" column="url" javaType="java.lang.String"></result>
+		<result property="maxNumber" column="maxNumber" javaType="java.lang.Integer"></result>
+		<result property="maxNumber2" column="maxNumber2" javaType="java.lang.Integer"></result>
+		<result property="groupNumber" column="groupNumber" javaType="java.lang.Integer"></result>
+		<result property="groupNumber2" column="groupNumber2" javaType="java.lang.Integer"></result>
+		<result property="typese" column="typese" javaType="java.lang.Integer"></result>
+		<result property="wechatActivityId" column="wechatActivityId" javaType="java.lang.String"></result>
+		<result property="timeStatus" column="timeStatus" javaType="java.lang.Integer"></result>
+		<result property="totalGroup" column="totalGroup" javaType="java.lang.Integer"></result>
+		<result property="maxGroup" column="maxGroup" javaType="java.lang.Integer"></result>
+		<result property="createGroupNumber" column="createGroupNumber" javaType="java.lang.Integer"></result>
+		<result property="videoMaterialId" column="videoMaterialId" javaType="java.lang.String"></result>
+		<result property="showList" column="showList" javaType="java.lang.Integer"></result>
+		<!--<collection property="commodityPriceList" column="id" ofType="com.xiaoshu.entity.CommodityPriceList" select="com.xiaoshu.dao.CommodityPriceListMapper.listByCommodityId">-->
+			<!--<id property="id" column="ID" javaType="java.lang.String"></id>-->
+			<!--<result property="commodityId" column="COMMODITY_ID" javaType="java.lang.Integer"></result>-->
+			<!--<result property="priceName" column="PRICE_NAME" javaType="java.lang.String"></result>-->
+			<!--<result property="price" column="PRICE" javaType="java.lang.Double"></result>-->
+			<!--<result property="priceUnit" column="PRICE_UNIT" javaType="java.lang.String"></result>-->
+			<!--<result property="status" column="STATUS" javaType="java.lang.Integer"></result>-->
+			<!--<result property="descM" column="DESC_M" javaType="java.lang.String"></result>-->
+			<!--<result property="createTime" column="CREATE_TIME" javaType="java.lang.String"></result>-->
+			<!--<result property="priceTime" column="PRICE_TIME" javaType="java.lang.String"></result>-->
+			<!--<result property="sort" column="SORT" javaType="java.lang.String"></result>-->
+			<!--<result property="address" column="ADDRESS" javaType="java.lang.String"></result>-->
+			<!--<result property="remark" column="REMARK" javaType="java.lang.String"></result>-->
+			<!--<result property="contacts" column="CONTACTS" javaType="java.lang.String"></result>-->
+			<!--<result property="contactsPhone" column="CONTACTS_PHONE" javaType="java.lang.String"></result>-->
+		<!--</collection>-->
+	</resultMap>
+
+
+	<insert id="saveCommodityDao" parameterType="com.xiaoshu.entity.Commodity" useGeneratedKeys="true" keyProperty="id">
+		insert into commodity(image,url,commodityName,commodityDetails,commodityStock,commodityPrice,sellerId,arrayImg,commodityState,createDate,invalidDate,share,shareTitle,shareDescM,shareImage,maxNumber,maxNumber2,groupNumber,groupNumber2,typese,wechatActivityId,timeStatus,totalGroup,maxGroup,createGroupNumber,videoMaterialId,showList)
+		values( #{image},#{url}, #{commodityName}, #{commodityDetails}, #{commodityStock}, #{commodityPrice}, #{sellerId}, #{arrayImg}, #{commodityState}, #{createDate}, #{invalidDate}, #{share}, #{shareTitle}, #{shareDescM}, #{shareImage}, #{maxNumber}, #{maxNumber2}, #{groupNumber}, #{groupNumber2}, #{typese}, #{wechatActivityId},
+		#{timeStatus},#{totalGroup},#{maxGroup},#{createGroupNumber},#{videoMaterialId},#{showList} )
+	</insert>
+	
+	<!-- 按照模糊分页查询列表 -->
+	<select id="findAllCommodityByKeyDao" parameterType="java.util.Map" resultMap="CommodityList">
+   		select * from  commodity where 1 = 1 
+   		<if test="seller_id != -1 ">
+        	AND sellerId = #{sellerId}
+        </if>
+        <if test="key != null and key != ''">
+        	AND commodityName LIKE concat(concat('%',#{key}),'%') OR  commodityDetails LIKE concat(concat('%',#{key}),'%') 
+        </if>
+   		limit #{index},#{pageSize}
+	</select>
+	
+	<!-- 按照key统计个数 -->
+	<select id="totalCommodityByKeyDao" resultType="java.lang.Integer">
+   		select COUNT(id) from  commodity where 1 = 1 
+   		<if test="seller_id != -1 ">
+        	AND sellerId = #{sellerId}
+        </if>
+        <if test="key != null and key != ''">
+        	AND commodityName LIKE concat(concat('%',#{key}),'%') OR  commodityDetails LIKE concat(concat('%',#{key}),'%') 
+        </if>
+	</select>  
+
+	<select id="findCommodityByIdDao" parameterType="java.util.Map" resultMap="CommodityByIDAll">
+		select * from commodity where id = #{id }
+	</select>
+
+
+	<select id="findCommodityByIdPriceStatusOne" parameterType="java.util.Map" resultMap="CommodityByID">
+		select * from commodity where id = #{id }
+	</select>
+
+
+
+
+	<resultMap id="NewListCommodity" type="com.xiaoshu.entity.Commodity">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="commodityName" column="commodityName" javaType="java.lang.String"></result>
+		<result property="image" column="image" javaType="java.lang.String"></result>
+		<result property="commodityStock" column="commodityStock" javaType="java.lang.Integer"></result>
+		<result property="commodityPrice" column="commodityPrice" javaType="java.lang.Double"></result>
+		<result property="arrayImg" column="arrayImg" javaType="java.lang.String"></result>
+		<result property="sellerId" column="sellerId" javaType="java.lang.Integer"></result>
+		<result property="createDate" column="createDate" javaType="java.lang.String"></result>
+		<result property="invalidDate" column="invalidDate" javaType="java.lang.String"></result>
+		<result property="url" column="url" javaType="java.lang.String"></result>
+		<result property="maxNumber" column="maxNumber" javaType="java.lang.Integer"></result>
+		<result property="maxNumber2" column="maxNumber2" javaType="java.lang.Integer"></result>
+		<result property="groupNumber" column="groupNumber" javaType="java.lang.Integer"></result>
+		<result property="groupNumber2" column="groupNumber2" javaType="java.lang.Integer"></result>
+		<result property="typese" column="typese" javaType="java.lang.Integer"></result>
+		<result property="wechatActivityId" column="wechatActivityId" javaType="java.lang.String"></result>
+		<result property="timeStatus" column="timeStatus" javaType="java.lang.Integer"></result>
+		<result property="totalGroup" column="totalGroup" javaType="java.lang.Integer"></result>
+		<result property="maxGroup" column="maxGroup" javaType="java.lang.Integer"></result>
+		<result property="createGroupNumber" column="createGroupNumber" javaType="java.lang.Integer"></result>
+		<result property="videoMaterialId" column="videoMaterialId" javaType="java.lang.String"></result>
+		<result property="showList" column="showList" javaType="java.lang.Integer"></result>
+	</resultMap>
+
+	<!-- 按照模糊分页查询列表 -->
+	<select id="getNewList" parameterType="java.util.Map" resultMap="NewListCommodity">
+		select * from  commodity
+		where 1=1
+		<if test="typese != '-1' ">
+			AND typese = #{typese}
+		</if>
+		<if test="timeStatus != '-1' ">
+			AND timeStatus = #{timeStatus}
+		</if>
+		<if test="showList != -1 ">
+			AND showList = #{showList}
+		</if>
+		ORDER BY timeStatus DESC,typese DESC,invalidDate DESC
+		limit #{index},#{pageSize}
+	</select>
+
+	<select id="countNewList" resultType="java.lang.Integer">
+		select COUNT(*) from  commodity where 1 = 1
+		<if test="typese != '-1' ">
+			AND typese = #{typese}
+		</if>
+		<if test="timeStatus != '-1' ">
+			AND timeStatus = #{timeStatus}
+		</if>
+		<if test="showList != -1 ">
+			AND showList = #{showList}
+		</if>
+	</select>
+
+
+
+	<resultMap id="NewListCommodityAFewData" type="com.xiaoshu.entity.Commodity">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="createDate" column="createDate" javaType="java.lang.String"></result>
+		<result property="invalidDate" column="invalidDate" javaType="java.lang.String"></result>
+		<result property="typese" column="typese" javaType="java.lang.Integer"></result>
+		<result property="timeStatus" column="timeStatus" javaType="java.lang.Integer"></result>
+		<result property="totalGroup" column="totalGroup" javaType="java.lang.Integer"></result>
+		<result property="showList" column="showList" javaType="java.lang.Integer"></result>
+	</resultMap>
+	<!-- 按照模糊分页查询列表 -->
+	<select id="getNewListAFewData" parameterType="java.util.Map" resultMap="NewListCommodityAFewData">
+		select * from  commodity
+		where 1=1
+		<if test="typese != -1 ">
+			AND typese = #{typese}
+		</if>
+		<if test="timeStatus != -1 ">
+			AND timeStatus = #{timeStatus}
+		</if>
+		ORDER BY typese DESC,invalidDate DESC
+		limit #{index},#{pageSize}
+	</select>
+
+
+
+</mapper>

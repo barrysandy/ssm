@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.InterfaceInfoMapper">
+	<resultMap id="BaseResultMap" type="com.xiaoshu.entity.InterfaceInfo">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<id column="DESC_M" jdbcType="VARCHAR" property="descM" />
+		<id column="KEYES" jdbcType="VARCHAR" property="keyes" />
+		<id column="URL" jdbcType="VARCHAR" property="url" />
+		<id column="PARAMS" jdbcType="VARCHAR" property="params" />
+		<id column="TYPE" jdbcType="INTEGER" property="type" />
+		<id column="STATUS" jdbcType="INTEGER" property="status" />
+		<id column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<id column="IS_USE" jdbcType="INTEGER" property="isUse" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,
+		KEYES,
+		DESC_M,
+		URL,
+		PARAMS,
+		TYPE,
+		STATUS,
+		CREATE_TIME,
+		UPDATE_TIME,
+		IS_USE
+	</sql>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from interface_info where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from interface_info where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.xiaoshu.entity.InterfaceInfo">
+		insert into interface_info
+		(ID,DESC_M,URL,PARAMS,TYPE,STATUS,CREATE_TIME,UPDATE_TIME,IS_USE)
+		values
+		(#{id,jdbcType=VARCHAR},#{keyes,jdbcType=VARCHAR},#{descM,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},#{params,jdbcType=VARCHAR},#{type,jdbcType=INTEGER},#{status,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{isUse,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<insert id="insertSelective" parameterType="com.xiaoshu.entity.InterfaceInfo">
+		insert into interface_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="keyes != null">KEYES,</if>
+			<if test="descM != null">DESC_M,</if>
+			<if test="url != null">URL,</if>
+			<if test="params != null">PARAMS,</if>
+			<if test="type != null">TYPE,</if>
+			<if test="status != null">STATUS,</if>
+			<if test="createTime != null">CREATE_TIME,</if>
+			<if test="updateTime != null">UPDATE_TIME,</if>
+			<if test="isUse != null">IS_USE,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=VARCHAR},</if>
+			<if test="keyes != null">#{keyes,jdbcType=VARCHAR},</if>
+			<if test="descM != null">#{descM,jdbcType=VARCHAR},</if>
+			<if test="url != null">#{url,jdbcType=VARCHAR},</if>
+			<if test="params != null">#{params,jdbcType=VARCHAR},</if>
+			<if test="type != null">#{type,jdbcType=INTEGER},</if>
+			<if test="status != null">#{status,jdbcType=INTEGER},</if>
+			<if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="isUse != null">#{isUse,jdbcType=INTEGER},</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiaoshu.entity.InterfaceInfo">
+		update interface_info
+		<set>
+			<if test="keyes != null">KEYES =#{keyes,jdbcType=VARCHAR},</if>
+			<if test="descM != null">DESC_M =#{descM,jdbcType=VARCHAR},</if>
+			<if test="url != null">URL =#{url,jdbcType=VARCHAR},</if>
+			<if test="params != null">PARAMS =#{params,jdbcType=VARCHAR},</if>
+			<if test="type != null">TYPE =#{type,jdbcType=INTEGER},</if>
+			<if test="status != null">STATUS =#{status,jdbcType=INTEGER},</if>
+			<if test="createTime != null">CREATE_TIME =#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">UPDATE_TIME =#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="isUse != null">IS_USE =#{isUse,jdbcType=INTEGER},</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateByPrimaryKey" parameterType="com.xiaoshu.entity.InterfaceInfo">
+		update
+		interface_info
+		set
+		KEYES = #{keyes,jdbcType=VARCHAR},
+		DESC_M = #{descM,jdbcType=VARCHAR},
+		URL = #{url,jdbcType=VARCHAR},
+		PARAMS = #{params,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		IS_USE = #{isUse,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap" resultType="java.util.List">
+		select
+		<include refid="Base_Column_List" />
+		from interface_info
+		<where>
+			1=1 and status = 1
+			<if test="search != null">
+				AND (DESC_M LIKE CONCAT('%','${search}','%') OR PARAMS LIKE CONCAT('%','${search}','%'))
+			</if>
+			<if test="type != null and type != ''">
+				AND TYPE = ${type}
+			</if>
+			<if test="startDate!=null and endDate == null ">
+				AND CREATE_TIME &gt;=#{startDate}
+			</if>
+			<if test="startDate==null and endDate != null ">
+				AND CREATE_TIME &lt;=#{endDate}
+			</if>
+			<if test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
+				and (CREATE_TIME &gt;=#{startDate} and CREATE_TIME &lt;=#{endDate})
+			</if>
+			<if test="orderName != null and orderName !=''">
+				order by ${orderName} ${descAsc}
+			</if>
+			<if test="startRow !=null">
+				limit ${startRow},${pageSize}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectCount" parameterType="com.xiaoshu.entity.InterfaceInfo"
+		resultType="int">
+		select count(*) from interface_info
+		<where>
+			1=1 AND STATUS = 1
+			<if test="search != null">
+				AND (DESC_M LIKE CONCAT('%','${search}','%') OR PARAMS LIKE CONCAT('%','${search}','%'))
+			</if>
+			<if test="type != null and type != ''">
+				AND TYPE = ${type}
+			</if>
+			<if test="startDate!=null and endDate == null ">
+				AND CREATE_TIME &gt;=#{startDate}
+			</if>
+			<if test="startDate==null and endDate != null ">
+				AND CREATE_TIME &lt;=#{endDate}
+			</if>
+			<if test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
+				and (CREATE_TIME &gt;=#{startDate} and CREATE_TIME &lt;=#{endDate})
+			</if>
+		</where>
+	</select>
+</mapper>

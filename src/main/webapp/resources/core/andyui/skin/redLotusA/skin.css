@@ -1,0 +1,167 @@
+*a{outline:none;blr:expression(this.onFocus=this.blur());}
+/*头部导航菜单*/
+.u-topmenu{ background:#FEEBDE url(img/top-bg.png) left top no-repeat; padding-left:175px}
+.u-topmenuul{background:none;}
+.u-topmenuul li a{color:#B20000!important;}
+.u-topmenuul li a .iconfont{ color:#B20000!important;}
+.u-topmenuul li a:hover{ background-color:#FFFFFF; color:#000000}
+.u-topmenuul li a:hover .iconfont{ color:#000000}
+.u-topmenuul li ul{ border:#F1F1F1 1px solid; }
+.u-topmenuul li ul li{border-bottom:#F1F1F1 1px solid;}
+.u-topmenuul li ul li a{background-color:#FFFFFF; color:#888;}
+.u-topmenuul li ul li a:hover{ background-color:#F7F7F7; color:#3D3D3D}
+.u-topmenuul li a.activate , .u-topmenuul li a.activate .iconfont{background-color:#B20000;color: #fff!important;}
+/*右侧菜单*/
+#leftnavbox{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feebde+0,ffffff+51 */
+background: rgb(255,255,255); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(255,255,255,1) 41%, rgba(254,235,222,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 41%,rgba(254,235,222,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 41%,rgba(254,235,222,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#feebde',GradientType=0 ); /* IE6-9 */
+}
+#leftnavbox .u-menutitle{background-color: rgb(175, 71, 71);/* padding: 8px; */}
+#leftnavbox .u-menutitle .pull{/* top: 0px; *//* width: 30px; *//* height: 30px; *//* line-height: 30px; *//* right: 1px; */}
+#menu-nav-left{padding: 0;background:url(img/leftbottombg.png) right top no-repeat;}
+.u-sidemenu li a{color: #B20000; height: 35px;line-height: 35px; background:none; border-bottom:none!important;}
+.u-sidemenu li a{ font-weight:bold; font-size:13px}
+.u-sidemenu li a .iconfont{ font-weight:normal}
+.u-sidemenu li a:hover{
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feebde+1,feebde+1,ffffff+100&0.8+0,0.8+100 */
+background: -moz-linear-gradient(left,  rgba(254,235,222,0.8) 0%, rgba(254,235,222,0.8) 1%, rgba(255,255,255,0.8) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(254,235,222,0.8) 0%,rgba(254,235,222,0.8) 1%,rgba(255,255,255,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(254,235,222,0.8) 0%,rgba(254,235,222,0.8) 1%,rgba(255,255,255,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
++background:#FEEFE6 !important;
+border-bottom:none!important;
+color:#B20000!important;
+}
+.u-sidemenu li.activate a.activate:hover{background:#FA9216 !important;}
+
+
+.u-sidemenu li ul { border-left:#AB4C4D 1px dotted; margin-left:20px; width:170px}
+.u-sidemenu li ul li{ border-bottom:none!important;}
+.u-sidemenu li ul li a{background: none; color: #B20000; border-bottom:none;}
+.u-sidemenu li ul li a:hover{
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feebde+1,feebde+1,ffffff+100&0.8+0,0.8+100 */
+background: -moz-linear-gradient(left,  rgba(254,235,222,0.8) 0%, rgba(254,235,222,0.8) 1%, rgba(255,255,255,0.8) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(254,235,222,0.8) 0%,rgba(254,235,222,0.8) 1%,rgba(255,255,255,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(254,235,222,0.8) 0%,rgba(254,235,222,0.8) 1%,rgba(255,255,255,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccfeebde', endColorstr='#ccffffff',GradientType=1 ); /* IE6-9 */
+color:#B20000}
+.u-sidemenu .nav-sub li.activate a{ font-weight:bold;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feebde+1,feebde+1,ffffff+100&0.8+0,0.8+100 */
+background: -moz-linear-gradient(left,  rgba(254,235,222,0.8) 0%, rgba(254,235,222,0.8) 1%, rgba(255,255,255,0.8) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(254,235,222,0.8) 0%,rgba(254,235,222,0.8) 1%,rgba(255,255,255,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(254,235,222,0.8) 0%,rgba(254,235,222,0.8) 1%,rgba(255,255,255,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccfeebde', endColorstr='#ccffffff',GradientType=1 ); /* IE6-9 */
+}
+.u-sidemenu .nav-sub li.activate li a{ font-weight:normal; background:none}
+
+/*min-side*/
+.g-min-side .u-sidemenu li a{background:none!important; text-decoration:none !important; padding:0px; width:45px; overflow:hidden; text-indent:1000px!important;}
+.g-min-side .u-sidemenu li a .classicon{display:block !important; float:left!important; width:45px!important; height:40px!important; left:0px!important; top:0px!important; margin:0 !important; text-align:center; line-height:40px !important; }
+.g-min-side .u-sidemenu li.activate{ width:45px; overflow:hidden;}
+
+.g-min-side .u-sidemenu li a.activate .iconfont{ color:#6F0000}
+.g-min-side .u-sidemenu li .nav-sub{background:#fff;margin-left: 0;border-left: 1px #FEEBDE solid;}
+.g-min-side .u-sidemenu li.ic .iconfont{ color:#A2181A}
+.g-min-side .u-sidemenu li.ic li a{ text-indent:0; color:#A2181A;}
+.g-min-side .u-sidemenu li.ic li.activate a{ text-indent:0; color:#A2181A; font-weight:bold; background:#FEEBDE!important;}
+.g-min-side .u-sidemenu li.ic li a:hover{ background:#FEEBDE !important;}
+.g-min-side .u-sidemenu li .iconfont{ display:none !important}
+.g-min-side .u-sidemenu li.ic li.ic a{ text-indent:20px}
+
+.g-min-side .u-sidemenu li.activate a.classicon{ width:45px; background:#FFE8D7 !important; padding:0px;}
+.g-min-side .u-sidemenu li.activate a.activate:hover{background:#FFE8D7 !important}
+/*不常用菜单*/
+.u-navmore{bottom: 3px;}
+.u-navmore .u-but-group{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,fbd7bf+12,fbd7bf+77 */
+background: rgb(255,255,255); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(251,215,191,1) 12%, rgba(251,215,191,1) 77%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(251,215,191,1) 12%,rgba(251,215,191,1) 77%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(251,215,191,1) 12%,rgba(251,215,191,1) 77%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fbd7bf',GradientType=0 ); /* IE6-9 */
+border:#D5AA99 1px solid;
+}
+.u-navmore .u-but-group:hover{ background:#DEB89F}
+.u-navmore .u-but-group .iconfont{ color:#D5AA99}
+.u-navmore .u-but-group:hover .iconfont{ color:#fff}
+
+
+.g-login{}
+.g-login-bg-top{ background:url(/andyui/admin/img/loginbg03.jpg) center top}
+.g-login-bg-buttom{ background:#EEF2F5}
+.g-login-box{ position:absolute;  z-index:5;  box-shadow:0 0 8px rgba(0,0,0,.5); width:300px; height:180px; left:50%; top:50%; margin-top:-100px; margin-left:-150px; font-family:"微软雅黑"}
+.g-login-logo{ position:absolute;  z-index:5; left:50%; top:50%; margin-top:-200px; margin-left:-85px}
+.g-login-banner{width:500px; height:300px; display:none}
+.g-login-title{ font-weight:200; color:#aaa}
+
+
+.u-path{border-bottom:none!important;background-color:#FBD7BF;width: 100%;/* height: 25px; */}
+.u-path li{color:#DC8F8F;/* height: 25px; *//* line-height: 25px; */}
+.u-path li.activate { color: #B20000;}
+.u-path li.home{display: none;}/*首页导航不要 */
+.index-foot{ height:30px; line-height:30px; border:none!important;background: #08395E;color: #557995;text-align: right;}
+.u-topmenuul li a{ color:#fff}
+.u-topmenuul li a .iconfont {color:#fff}
+
+
+
+
+
+
+/**额外加的***/
+#maskLeft,#maskRight{
+    position: absolute;
+    display: none;
+    z-index: 3;
+}
+#maskLeft{
+    background:#FEEBDE url(/andyui/admin/skin/redLotus/img/top-bg.png) left top no-repeat;
+}
+#maskRight{
+    background:rgb(254, 235, 222);
+}
+#leftBt,#rightBt {
+    color: #B20000!important;
+    width: 25px;
+    position: absolute;
+    text-decoration: none;
+    cursor: pointer;
+    display: none;
+}
+.u-topmenuul{
+    position: relative;
+    transition: left 0.3s;
+    -moz-transition: left 0.3s;
+    -webkit-transition: left 0.3s;
+    -o-transition: left 0.3s;
+}
+
+
+.u-topmenuul li{
+    /*width: 138px;*/
+}
+
+/***头部菜单动画--没有成功******/
+/*.u-topmenuul li a .iconfont.moreicon {*/
+/*transition: transform 0.5s;*/
+/*-moz-transition:  -moz-transform 0.3s;*/
+/*-webkit-transition:  -webkit-transform 0.3s;*/
+/*-o-transition:-o-transform 0.3s;*/
+/*}*/
+/*.u-topmenuul >li:hover a .iconfont.moreicon{*/
+/*transform: rotate(180deg);*/
+/*}*/
+
+.u-sidemenuul li a .iconfont.moreicon{
+    transform: rotate(-90deg);
+    transition: transform 0.5s;
+    -moz-transition:  -moz-transform 0.3s;
+    -webkit-transition:  -webkit-transform 0.3s;
+    -o-transition:-o-transform 0.3s;
+}
+.u-sidemenuul .activate .iconfont.moreicon{
+    transform: rotate(0deg);
+}
+
+i.iconfont.pull{ cursor:pointer;}

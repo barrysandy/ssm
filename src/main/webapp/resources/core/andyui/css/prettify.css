@@ -1,0 +1,94 @@
+/*代码高亮*/
+/* Pretty printing styles. Used with prettify.js.
+ *
+ * This version is slight modified based on the original version.
+ *
+ * Name:	Stanley Ng
+ * Email: 	stanleyhlng@googlegroups.com
+ * 
+ * Reference:
+ * http://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css
+ */
+body{ font-size: 12px; line-height: 15px;}
+.pln { color: #48484C; }
+.str { color: #DD1144; }
+.kwd { color: #1E347B; }
+.com { color: #93A1A1; }
+.typ { color: teal; }
+.lit { color: #195F91; }
+.pun { color: #93A1A1; }
+.opn { color: #93A1A1; }
+.clo { color: #93A1A1; }
+.tag { color: #008; }
+.atn { color: teal; }
+.atv { color: #DD1144; }
+.dec { color: teal; }
+.var { color: teal; }
+.fun { color: #DC322F; }
+xmp{ margin: 0; border-radius: 0; display:inline-block; width:100%;}
+/* Put a border around prettyprinted code snippets. */
+xmp.prettyprint { background-color: #F3F3F3; padding: 10px 0; /* border: 1px solid #E1E1E8; */ }
+xmp.prettyprint.linenums {box-shadow: 40px 0 0 #FBFBFC inset, 41px 0 0 #ECECF0 inset; position:relative; border-top:none;}
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { color: #1E347B; margin:0 0 0 40px; padding-left:0}
+ol.linenums li { color: #BEBEC5; line-height: 16px; padding-left: 4px; text-shadow: 0 1px 0 #FFFFFF; }
+li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: decimal !important; }
+/* Alternate shading for lines */
+li.L1, li.L3, li.L5, li.L7, li.L9 { background: #ECECEC; }
+/* 新增侧边导航栏样式 */
+.list-unstyled {
+	margin: 0;
+	padding: 0
+}
+
+.list-unstyled li {
+   font-size: 13px;
+   padding:0px;
+   
+}
+
+.list-unstyled li.classtitle{
+	font-size: 16px;
+	font-weight: 500;
+	color: #2E2A2A;
+	border-bottom:#E7E7E7 1px solid;
+	padding: 0px 9px 7px 10px;
+	margin-bottom: 4px;
+	}
+
+.list-unstyled li a {
+	color: #787878;
+	display: block;
+	width: 100%;
+	padding: 10px 10px 8px 20px;
+	border-radius: 5px;
+	line-height: 11px;
+}
+
+.list-unstyled li a:hover {
+	background-color: #F5F5F5
+}.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout-warning {
+    border-left-color:#FA8900;
+}
+.bs-callout-info {
+    border-left-color:#16aad8;
+}
+.bs-callout-success {
+    border-left-color:#27c24c;
+}
+.bs-callout-primary {
+    border-left-color:#7266ba;
+}
+
+.bs-callout-danger {
+    border-left-color:#E33737;
+	
+}

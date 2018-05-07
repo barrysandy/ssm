@@ -1,0 +1,115 @@
+/*头部导航菜单*/
+.u-topmenu{background-color:#3B3E51;background-position:left top;background-repeat:no-repeat;margin: 0;}
+.u-topmenuul{background:none;}
+.u-topmenuul li a{color: #CCCCCE}
+.u-topmenuul li a .iconfont{color: #CCCCCE}
+.u-topmenuul li a:hover{ background-color:#55586B; color:#fff}
+.u-topmenuul li a:hover .iconfont{ color:#fff}
+.u-topmenuul li ul{ border:#F1F1F1 1px solid; }
+.u-topmenuul li ul li{border-bottom:#F1F1F1 1px solid;}
+.u-topmenuul li ul li a{background-color:#FFFFFF; color:#888;}
+.u-topmenuul li ul li a:hover{ background-color:#F7F7F7; color:#3D3D3D}
+.u-topmenuul li a.activate , .u-topmenuul li a.activate .iconfont{background-color: #FB8A00;color: #fff!important;}
+
+
+
+/*右侧菜单*/
+#leftnavbox{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feebde+0,ffffff+51 */background: #3B3E51;/* background: rgb(255,255,255); */ /* Old browsers */background: -moz-linear-gradient(top,  rgba(255,255,255,1) 41%, rgba(254,235,222,1) 100%); /* FF3.6-15 *//* background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 41%,rgba(254,235,222,1) 100%); */ /* Chrome10-25,Safari5.1-6 *//* background: linear-gradient(to bottom,  rgba(255,255,255,1) 41%,rgba(254,235,222,1) 100%); */ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#feebde',GradientType=0 ); /* IE6-9 */}
+#leftnavbox .u-menutitle{background-color: #988FCA;/* padding: 8px; */}
+#leftnavbox .u-menutitle .pull{/* top: 0px; *//* width: 30px; *//* height: 30px; *//* line-height: 30px; *//* right: 1px; */}
+#menu-nav-left{padding: 0;/* background:url(img/leftbottombg.png) right top no-repeat; */}
+.u-sidemenu li a{color: #D2D1D4;height: 35px;line-height: 35px;background:none;border-bottom:none!important;}
+.u-sidemenu li a{ font-weight:bold; font-size:13px}
+.u-sidemenu li a .iconfont{font-weight: 200;}
+.u-sidemenu li a:hover{color:#fff; background-color:#5F6383;}
+
+.u-sidemenu li ul {border-left: #B9B8BB 1px dotted;margin-left:20px;width:179px;}
+.u-sidemenu li ul li{ border-bottom:none!important;}
+.u-sidemenu li ul li a{background: none;color: #B9B8BB;border-bottom:none;}
+.u-sidemenu li ul li a:hover{ color:#fff; background-color:#5F6383}
+
+.u-sidemenu li ul li ul {margin-left:0px; background-color:#222534; border-left:none}
+
+.u-sidemenu .nav-sub li.activate a{ font-weight:bold; color:#fff; background-color:#00AEDB}
+.u-sidemenu .nav-sub li.activate ul li a{color:#B9B8BB; }
+.u-sidemenu .nav-sub li.activate ul li a:hover{ color:#fff; background-color:#5F6383}
+.u-sidemenu .nav-sub li.activate li a{ font-weight:normal; background:none}
+
+/*min-side*/
+.g-min-side .u-sidemenu li a{background:none!important;}
+.g-min-side .u-sidemenu li .nav-sub{background:#2e3344;margin-left: 0;border-left: 1px #222534 solid;}
+.g-min-side .u-sidemenu li.ic .iconfont{color: #CCCDD2;}
+.g-min-side .u-sidemenu li.ic li a{text-indent:0;color: #A9ABB5;}
+.g-min-side .u-sidemenu li.ic li.activate a{text-indent:0;color: #FFFFFF;font-weight:bold;background: #00AEDB!important;}
+.g-min-side .u-sidemenu li.ic li.activate a{text-indent:0;color: #ffffff;}
+.g-min-side .u-sidemenu li.ic li.activate li.activate a{text-indent:0;color: #FFFFFF;font-weight:bold;background: #00AEDB!important;}
+
+.g-min-side .u-sidemenu li.ic li a:hover{ background:#00AEDB !important; color: #FFFFFF;}
+
+.g-min-side .u-sidemenu li.ic li.ic a{ text-indent:20px}
+/*不常用菜单*/
+.u-navmore .u-but-group{background: #3B3E51;border: #222534 solid 1px;}
+.u-navmore .u-but-group:hover{ background:#55586B}
+.u-navmore .u-but-group .iconfont{ color:#D0D0D0; font-size:17px}
+.u-navmore .u-but-group:hover .iconfont{ color:#fff}
+
+
+.g-login{}
+.g-login-bg-top{ background:url(/andyui/admin/img/loginbg03.jpg) center top}
+.g-login-bg-buttom{ background:#EEF2F5}
+.g-login-box{ position:absolute;  z-index:5;  box-shadow:0 0 8px rgba(0,0,0,.5); width:300px; height:180px; left:50%; top:50%; margin-top:-100px; margin-left:-150px; font-family:"微软雅黑"}
+.g-login-logo{ position:absolute;  z-index:5; left:50%; top:50%; margin-top:-200px; margin-left:-85px}
+.g-login-banner{width:500px; height:300px; display:none}
+.g-login-title{ font-weight:200; color:#aaa}
+
+
+.u-path {border-bottom: 1px solid #394058;background-color: #505369;width: 100%;}
+.u-path li a{ color:#A9B4C1; }
+.u-path li.activate a{color: #FFF;}
+.u-path li.activate.home{ background:none}
+.u-path li.activate.home a .iconfont {right: -6px;font-weight: normal;color: #ADB9C5;}
+.u-path li.activate.home a .homeicon{right: 12px;}
+
+
+.index-foot{ height:30px; line-height:30px; border:none!important;background: #08395E;color: #557995;text-align: right;}
+.u-topmenuul li a{color: #A9ABB5;}
+.u-topmenuul li a .iconfont {color: #A9ABB5;}
+
+/**额外加的***/
+#maskLeft,#maskRight{
+    position: absolute;
+    display: none;
+    z-index: 3;
+}
+#maskLeft{
+    background: #222534 url(img/top-bg.png) left top no-repeat;
+}
+#maskRight{
+    background: rgb(59, 62, 81);
+}
+#leftBt,#rightBt {
+    color: #A5A4A9!important;
+    width: 25px;
+    position: absolute;
+    text-decoration: none;
+    cursor: pointer;
+    display: none;
+}
+.u-topmenuul{
+    position: relative;
+    transition: left 0.3s;
+    -moz-transition: left 0.3s;
+    -webkit-transition: left 0.3s;
+    -o-transition: left 0.3s;
+}
+.u-topmenuul li{}
+.u-sidemenuul li a .iconfont.moreicon{
+    transform: rotate(-90deg);
+    transition: transform 0.5s;
+    -moz-transition:  -moz-transform 0.3s;
+    -webkit-transition:  -webkit-transform 0.3s;
+    -o-transition:-o-transform 0.3s;
+}
+.u-sidemenuul .activate .iconfont.moreicon{
+    transform: rotate(0deg);
+}

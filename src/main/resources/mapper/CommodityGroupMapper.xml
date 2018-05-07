@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.CommodityGroupMapper">
+   <!-- 自定义返回结果集 -->
+   <resultMap id="CommodityGroup" type="com.xiaoshu.entity.CommodityGroup">
+		<id property="id" column="ID" javaType="java.lang.String"></id>
+	    <result property="groupCode" column="GROUP_CODE" javaType="java.lang.String"></result>
+		<result property="commodityId" column="COMMODITY_ID" javaType="java.lang.Integer"></result>
+		<result property="createDate" column="CREATE_DATE" javaType="java.util.Date"></result>
+	    <result property="groupTime" column="GROUP_TIME" javaType="java.lang.String"></result>
+		<result property="descM" column="DESC_M" javaType="java.lang.String"></result>
+	    <result property="totalPerson" column="TOTAL_PERSON" javaType="java.lang.Integer"></result>
+	    <result property="maxPerson" column="MAX_PERSON" javaType="java.lang.Integer"></result>
+	    <result property="status" column="STATUS" javaType="java.lang.Integer"></result>
+	</resultMap>
+
+	<!-- 查询列表 -->
+	<select id="getListByCIDAndStatus" parameterType="java.util.Map" resultMap="CommodityGroup">
+   		SELECT * FROM  commodity_group WHERE COMMODITY_ID = #{commodityId}
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		ORDER BY CREATE_DATE DESC
+   		limit #{index},#{pageSize}
+	</select>
+	
+	<!-- 统计 -->
+	<select id="countByStatus" resultType="java.lang.Integer">
+		SELECT COUNT(ID) FROM  commodity_group WHERE COMMODITY_ID = #{commodityId}
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+	</select>
+
+
+	<!-- 查询我的组团列表 -->
+	<select id="getListMyGroupByUserId" parameterType="java.util.Map" resultType="com.xiaoshu.vo.MyGroup">
+		SELECT
+		commodity_group.COMMODITY_ID AS id,commodity_group.Id AS groupId,orders.ID AS orderId,orders.ORDER_NAME AS name,orders.IMAGE AS image,
+		commodity_group.GROUP_TIME AS time,commodity_group.MAX_PERSON - commodity_group.TOTAL_PERSON AS total,commodity_group.STATUS AS status
+		FROM orders INNER JOIN commodity_group ON orders.GROUP_ID = commodity_group.ID
+		WHERE USER_ID = #{userId}
+		ORDER BY commodity_group.GROUP_TIME DESC
+		LIMIT #{index},#{pageSize}
+	</select>
+
+	<!-- 统计 -->
+	<select id="countMyGroupByUserId" resultType="java.lang.Integer">
+		SELECT COUNT(commodity_group.ID)
+		FROM orders INNER JOIN commodity_group ON orders.GROUP_ID = commodity_group.ID
+		WHERE USER_ID = #{userId}
+	</select>
+
+
+	<!-- 统计过期团列表 -->
+	<select id="getListByStatusAndAfterTime" parameterType="java.util.Map" resultMap="CommodityGroup">
+		SELECT * FROM commodity_group
+		WHERE GROUP_TIME &lt;= #{groupTime}
+		AND STATUS = #{status}
+		LIMIT #{index},#{pageSize}
+	</select>
+
+	<!-- 统计 -->
+	<select id="countByStatusAndAfterTime" resultType="java.lang.Integer">
+		SELECT COUNT(ID) FROM commodity_group
+		WHERE GROUP_TIME &lt;= #{groupTime}
+		AND STATUS = #{status}
+	</select>
+
+</mapper>

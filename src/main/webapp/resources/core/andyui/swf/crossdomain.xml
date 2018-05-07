@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cross-domain-policy> 
+	<site-control permitted-cross-domain-policies="by-ftp-filename"/>
+	<!-- 配置允许访问的地址 当前是允许所有地址访问 -->
+    <allow-access-from domain="*"/>
+</cross-domain-policy> 

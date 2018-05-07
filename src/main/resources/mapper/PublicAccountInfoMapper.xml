@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.PublicAccountInfoMapper">
+	<resultMap id="BaseResultMap" type="com.xiaoshu.entity.PublicAccountInfo">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<id column="ACCOUNT_NAME" jdbcType="VARCHAR" property="accountName" />
+		<id column="ACCOUNT_ID" jdbcType="VARCHAR" property="accountId" />
+		<id column="TOKEN" jdbcType="VARCHAR" property="token" />
+		<id column="APP_ID" jdbcType="VARCHAR" property="appId" />
+		<id column="APP_SECRET" jdbcType="VARCHAR" property="appSecret" />
+		<id column="ACCOUNT_TYPE" jdbcType="INTEGER" property="accountType" />
+		<id column="INTERFACE_URL" jdbcType="VARCHAR" property="interfaceUrl" />
+		<id column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<id column="STATUS" jdbcType="INTEGER" property="status" />
+		<id column="DESC_M" jdbcType="VARCHAR" property="descM" />
+		<id column="USABLE" jdbcType="INTEGER" property="usable" />
+		<id column="EFFECTIVE_TIME" jdbcType="VARCHAR" property="effectiveTime" />
+		<id column="OPEN_PLATFORM" jdbcType="VARCHAR" property="openPlatform" />
+		<id column="MCH_ID" jdbcType="VARCHAR" property="mchId" />
+		<id column="MCH_KEY" jdbcType="VARCHAR" property="mchKey" />
+		<id column="NOTIFY_ERROR_URL" jdbcType="VARCHAR" property="notifyErrorUrl" />
+		<id column="NOTIFY_URL" jdbcType="VARCHAR" property="notifyUrl" />
+		<id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+		<id column="PARENT_MENU_ID" jdbcType="VARCHAR" property="parentMenuId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,
+		ACCOUNT_NAME,
+		ACCOUNT_ID,
+		TOKEN,
+		APP_ID,
+		APP_SECRET,
+		ACCOUNT_TYPE,
+		INTERFACE_URL,
+		CREATE_TIME,
+		UPDATE_TIME,
+		STATUS,
+		DESC_M,
+		USABLE,
+		EFFECTIVE_TIME,
+		OPEN_PLATFORM,
+		MCH_ID,
+		MCH_KEY,
+		NOTIFY_ERROR_URL,
+		NOTIFY_URL,
+		MENU_ID,
+		PARENT_MENU_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from public_account_info where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from public_account_info where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.xiaoshu.entity.PublicAccountInfo">
+		insert into public_account_info
+		(ID,ACCOUNT_NAME,ACCOUNT_ID,TOKEN,APP_ID,APP_SECRET,ACCOUNT_TYPE,INTERFACE_URL,CREATE_TIME,UPDATE_TIME,STATUS,DESC_M,USABLE,EFFECTIVE_TIME,OPEN_PLATFORM,MCH_ID,MCH_KEY,NOTIFY_ERROR_URL,NOTIFY_URL,MENU_ID,PARENT_MENU_ID)
+		values
+		(#{id,jdbcType=VARCHAR},#{accountName,jdbcType=VARCHAR},#{accountId,jdbcType=VARCHAR},#{token,jdbcType=VARCHAR},#{appId,jdbcType=VARCHAR},#{appSecret,jdbcType=VARCHAR},#{accountType,jdbcType=INTEGER},#{interfaceUrl,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{status,jdbcType=INTEGER},#{descM,jdbcType=VARCHAR},#{usable,jdbcType=INTEGER},#{effectiveTime,jdbcType=VARCHAR},#{openPlatform,jdbcType=VARCHAR},#{mchId,jdbcType=VARCHAR},#{mchKey,jdbcType=VARCHAR},#{notifyErrorUrl,jdbcType=VARCHAR},#{notifyUrl,jdbcType=VARCHAR},#{menuId,jdbcType=VARCHAR},#{parentMenuId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.xiaoshu.entity.PublicAccountInfo">
+		insert into public_account_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="accountName != null">ACCOUNT_NAME,</if>
+			<if test="accountId != null">ACCOUNT_ID,</if>
+			<if test="token != null">TOKEN,</if>
+			<if test="appId != null">APP_ID,</if>
+			<if test="appSecret != null">APP_SECRET,</if>
+			<if test="accountType != null">ACCOUNT_TYPE,</if>
+			<if test="interfaceUrl != null">INTERFACE_URL,</if>
+			<if test="createTime != null">CREATE_TIME,</if>
+			<if test="updateTime != null">UPDATE_TIME,</if>
+			<if test="status != null">STATUS,</if>
+			<if test="descM != null">DESC_M,</if>
+			<if test="usable != null">USABLE,</if>
+			<if test="effectiveTime != null">EFFECTIVE_TIME,</if>
+			<if test="openPlatform != null">OPEN_PLATFORM,</if>
+			<if test="mchId != null">MCH_ID,</if>
+			<if test="mchKey != null">MCH_KEY,</if>
+			<if test="notifyErrorUrl != null">NOTIFY_ERROR_URL,</if>
+			<if test="notifyUrl != null">NOTIFY_URL,</if>
+			<if test="menuId != null">MENU_ID,</if>,
+			<if test="parentMenuId != null">PARENT_MENU_ID</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=VARCHAR},</if>
+			<if test="accountName != null">#{accountName,jdbcType=VARCHAR},</if>
+			<if test="accountId != null">#{accountId,jdbcType=VARCHAR},</if>
+			<if test="token != null">#{token,jdbcType=VARCHAR},</if>
+			<if test="appId != null">#{appId,jdbcType=VARCHAR},</if>
+			<if test="appSecret != null">#{appSecret,jdbcType=VARCHAR},</if>
+			<if test="accountType != null">#{accountType,jdbcType=INTEGER},</if>
+			<if test="interfaceUrl != null">#{interfaceUrl,jdbcType=VARCHAR},</if>
+			<if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="status != null">#{status,jdbcType=INTEGER},</if>
+			<if test="descM != null">#{descM,jdbcType=VARCHAR},</if>
+			<if test="usable != null">#{usable,jdbcType=INTEGER},</if>
+			<if test="effectiveTime != null">#{effectiveTime,jdbcType=VARCHAR},</if>
+			<if test="openPlatform != null">#{openPlatform,jdbcType=VARCHAR},</if>
+			<if test="mchId != null">#{mchId,jdbcType=VARCHAR},</if>
+			<if test="mchKey != null">#{mchKey,jdbcType=VARCHAR},</if>
+			<if test="notifyErrorUrl != null">#{notifyErrorUrl,jdbcType=VARCHAR},</if>
+			<if test="notifyUrl != null">#{notifyUrl,jdbcType=VARCHAR},</if>
+			<if test="menuId != null">#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">#{parentMenuId,jdbcType=VARCHAR}</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiaoshu.entity.PublicAccountInfo">
+		update public_account_info
+		<set>
+			<if test="accountName != null">ACCOUNT_NAME =#{accountName,jdbcType=VARCHAR},</if>
+			<if test="accountId != null">ACCOUNT_ID =#{accountId,jdbcType=VARCHAR},</if>
+			<if test="token != null">TOKEN =#{token,jdbcType=VARCHAR},</if>
+			<if test="appId != null">APP_ID =#{appId,jdbcType=VARCHAR},</if>
+			<if test="appSecret != null">APP_SECRET =#{appSecret,jdbcType=VARCHAR},</if>
+			<if test="accountType != null">ACCOUNT_TYPE =#{accountType,jdbcType=INTEGER},</if>
+			<if test="interfaceUrl != null">INTERFACE_URL =#{interfaceUrl,jdbcType=VARCHAR},</if>
+			<if test="createTime != null">CREATE_TIME =#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">UPDATE_TIME =#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="status != null">STATUS =#{status,jdbcType=INTEGER},</if>
+			<if test="descM != null">DESC_M =#{descM,jdbcType=VARCHAR},</if>
+			<if test="usable != null">USABLE =#{usable,jdbcType=INTEGER},</if>
+			<if test="effectiveTime != null">EFFECTIVE_TIME =#{effectiveTime,jdbcType=VARCHAR},</if>
+			<if test="openPlatform != null">OPEN_PLATFORM =#{openPlatform,jdbcType=VARCHAR},</if>
+			<if test="mchId != null">MCH_ID =#{mchId,jdbcType=VARCHAR},</if>
+			<if test="mchKey != null">MCH_KEY =#{mchKey,jdbcType=VARCHAR},</if>
+			<if test="notifyErrorUrl != null">NOTIFY_ERROR_URL =#{notifyErrorUrl,jdbcType=VARCHAR},</if>
+			<if test="notifyUrl != null">NOTIFY_URL =#{notifyUrl,jdbcType=VARCHAR},</if>
+			<if test="menuId != null">MENU_ID =#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID =#{parentMenuId,jdbcType=VARCHAR}</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.xiaoshu.entity.PublicAccountInfo">
+		update
+		public_account_info
+		set
+		ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+		ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+		TOKEN = #{token,jdbcType=VARCHAR},
+		APP_ID = #{appId,jdbcType=VARCHAR},
+		APP_SECRET = #{appSecret,jdbcType=VARCHAR},
+		ACCOUNT_TYPE = #{accountType,jdbcType=INTEGER},
+		INTERFACE_URL = #{interfaceUrl,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER},
+		DESC_M = #{descM,jdbcType=VARCHAR},
+		USABLE = #{usable,jdbcType=INTEGER},
+		EFFECTIVE_TIME = #{effectiveTime,jdbcType=VARCHAR},
+		OPEN_PLATFORM = #{openPlatform,jdbcType=VARCHAR},
+		MCH_ID = #{mchId,jdbcType=VARCHAR},
+		MCH_KEY = #{mchKey,jdbcType=VARCHAR},
+		NOTIFY_ERROR_URL = #{notifyErrorUrl,jdbcType=VARCHAR},
+		NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
+		MENU_ID = #{menuId,jdbcType=VARCHAR},
+		PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap" resultType="java.util.List">
+		select
+		<include refid="Base_Column_List" />
+		from public_account_info
+		<where>
+			1=1 and status = 1
+			<if test="search != null">
+				AND ACCOUNT_NAME LIKE CONCAT('%','${search}','%')
+			</if>
+			<if test="usable != null and usable != ''">
+				AND USABLE = ${usable}
+			</if>
+			<if test="orderName != null and orderName !=''">
+				order by ${orderName} ${descAsc}
+			</if>
+			<if test="startRow !=null">
+				limit ${startRow},${pageSize}
+			</if>
+		</where>
+	</select>
+	<select id="selectCount" parameterType="com.xiaoshu.entity.PublicAccountInfo" resultType="int">
+		select count(*) from public_account_info
+		<where>
+			1=1 and status = 1
+			<if test="search != null">
+				AND ACCOUNT_NAME LIKE CONCAT('%','${search}','%')
+			</if>
+			<if test="usable != null and usable != ''">
+				AND USABLE = ${usable}
+			</if>
+		</where>
+	</select>
+	<select id="getInfoByUserId" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT * FROM public_account_info where MENU_ID = '${menuId}' AND  status = 1
+	</select>
+</mapper>
