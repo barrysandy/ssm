@@ -1,0 +1,130 @@
+.index-head{ height:50px; border-bottom:none !important; background:url(img/topbg.png) center top no-repeat}
+.topbar{ display:block; position:absolute; right: 9px; top: 11px; z-index:3}
+
+
+
+.topbar li{ display:block; float:left; margin: 0px 2px;}
+.topbar li a i{ display:block; margin-bottom: 0px; font-size: 15px;}
+.topbar li a{ color: #AAD7F3; text-align:center;font-size: 12px; width: 25px; height: 25px; border-radius:3px; border: #4BA9DE 1px solid; display:block;line-height: 24px;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#49a5dc+0,1c8ad9+100 */
+background: rgb(73,165,220); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(73,165,220,1) 0%, rgba(28,138,217,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(73,165,220,1) 0%,rgba(28,138,217,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(73,165,220,1) 0%,rgba(28,138,217,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#49a5dc', endColorstr='#1c8ad9',GradientType=0 ); /* IE6-9 */
+
+}
+.topbar li a:hover{ color:#fff
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#358dc8+0,1569a8+100 */
+background: rgb(53,141,200); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(53,141,200,1) 0%, rgba(21,105,168,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(53,141,200,1) 0%,rgba(21,105,168,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(53,141,200,1) 0%,rgba(21,105,168,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#358dc8', endColorstr='#1569a8',GradientType=0 ); /* IE6-9 */
+}
+.topbar li a:hover i{color:#fff}
+
+.logo{display:block; position:absolute; left: 9px; top: 6px; z-index:3; width:350px}
+.index-left{ background: #27B1EA;}
+.index-center{ border:none!important;}
+.u-menutitle{ background: #1087CB;}
+.u-sidemenu li a{background: #27B1EA;color: #FFFFFF;border-bottom: #77C8F1 1px solid;height: 35px;line-height: 35px;}
+.u-sidemenu li a:hover{background:#1087CB; color:#fff}
+.u-sidemenu li ul li{ border-bottom:none!important;}
+.u-sidemenu li ul li ul{border-left: #4EA7D4 1px solid;}
+.u-sidemenu li ul li a{background: #108ACD;color: #DAF0FA;border-bottom: #4EA7D4 1px solid;}
+.u-sidemenu li ul li a:hover{background:#40A1D7; color:#fff}
+.u-topmenu{ background-color: #08395E;}
+.u-topmenu li a.activate{background-color: #FF7300;color: #fff;}
+
+
+.u-topmenuul{background-color: #27B1EA;border-bottom: 1px solid #E0F5FD;}
+.u-topmenuul li a{color:#666}
+.u-topmenuul li a .iconfont{ color:#aaa }
+.u-topmenuul li a:hover{ background-color:#FFFFFF; color:#000000}
+.u-topmenuul li a:hover .iconfont{ color:#000000}
+.u-topmenuul li ul{ border:#F1F1F1 1px solid; }
+.u-topmenuul li ul li{border-bottom:#F1F1F1 1px solid;}
+.u-topmenuul li ul li a{background-color:#FFFFFF; color:#888;}
+.u-topmenuul li ul li a:hover{ background-color:#F7F7F7; color:#3D3D3D}
+.u-topmenuul li a.activate{background-color: #FF7300;color: #fff;}
+.u-topmenuul li a.activate:hover .iconfont{color: #fff;}
+
+
+.u-path{border-bottom:none!important;background-color: #E0F5FD;width: 100%;}
+.index-foot{ height:30px; line-height:30px; border:none!important;background: #109DD8;color: #AADAEC;text-align: right;}
+.u-topmenuul li a{color: #FFF;}
+.u-topmenuul li a .iconfont {color: #FFF;}
+.u-topmenuul li a:hover .iconfont{color: #888;}
+
+.g-login{}
+.g-login-bg-top{ background:url(img/loginbg02.jpg) center top}
+.g-login-bg-buttom{ background:#EEF2F5}
+.g-login-box{ position:absolute;  z-index:5;  box-shadow:0 0 8px rgba(0,0,0,.5); width:780px; height:260px; left:50%; top:50%; margin-top:-130px; margin-left:-380px; font-family:"微软雅黑"}
+.g-login-logo{ position:absolute;  z-index:8; left:50%; top:50%; margin-top: -57px; margin-left: -83px;}
+.g-login-banner{width:500px; height:260px; display:block}
+.g-login-title{ font-weight:200; color:#aaa}
+
+
+
+
+#maskLeft, #maskRight {
+    position: absolute;
+    display: none;
+    z-index: 3;
+    background: #FEEBDE;
+}
+
+#maskRight {
+    background: rgb(254, 235, 222);
+}
+
+#leftBt, #rightBt {
+    color: #B20000 !important;
+    width: 25px;
+    position: absolute;
+    text-decoration: none;
+    cursor: pointer;
+    display: none;
+}
+
+.u-topmenuul {
+    position: absolute;
+    transition: left 0.3s;
+    -moz-transition: left 0.3s;
+    -webkit-transition: left 0.3s;
+    -o-transition: left 0.3s;
+}
+
+.u-topmenuul li {
+    /*width: 138px;*/
+}
+
+.u-topmenuul li a .iconfont.moreicon {
+    transform: rotate(-90deg);
+    color: #aaa;
+}
+
+/***头部菜单动画******/
+.u-topmenuul li .rootmenu .iconfont.moreicon {
+    transform: rotate(0deg);
+    color: #fff;
+    right: 0px;
+    transition: transform 0.5s;
+    -moz-transition: -moz-transform 0.3s;
+    -webkit-transition: -webkit-transform 0.3s;
+    -o-transition: -o-transform 0.3s;
+}
+
+/***左侧菜单动画******/
+.u-sidemenu li a .iconfont.moreicon {
+    transform: rotate(-90deg);
+    transition: transform 0.2s;
+    -moz-transition: -moz-transform 0.2s;
+    -webkit-transition: -webkit-transform 0.2s;
+    -o-transition: -o-transform 0.2s;
+}
+
+.u-sidemenu .activate .iconfont.moreicon {
+    transform: rotate(0deg);
+}

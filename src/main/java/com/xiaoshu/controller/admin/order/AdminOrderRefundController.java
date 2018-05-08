@@ -102,6 +102,7 @@ public class AdminOrderRefundController {
         try{
 
             OrderRefund orderRefund = orderRefundService.getById(id);
+            orderRefund.setTypeState(3);//重试
             AdminOrderRefundFunctionController.processPersistentMQ(orderRefundService, deadLetterPublishService , sellerService, orderRefund);
             //AdminOrderRefundFunctionController.processPersistentMQ(request ,orderRefundService,persistentMessageQueueService ,sellerService,orderRefund,descM);
         }catch (Exception e){
@@ -144,6 +145,9 @@ public class AdminOrderRefundController {
     public String viewRefund(String orderNo, Model model, String menuid){
         try{
             OrderRefund bean = orderRefundService.getByOrderNo(orderNo);
+            String refundResult = bean.getRefundDesc();
+            System.out.println(refundResult);
+            model.addAttribute("refundResult",refundResult);
             model.addAttribute("bean", bean);
         }catch (Exception e){
             e.printStackTrace();

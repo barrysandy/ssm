@@ -86,14 +86,14 @@ public class AdminOrderRefundFunctionController {
     public static void processPersistentMQ(OrderRefundService orderRefundService, DeadLetterPublishService deadLetterPublishService , SellerService sellerService,OrderRefund orderRefund){
         try{
             if(orderRefund != null) {
-                if (orderRefund.getTypeState() == 1) { //已提交
+                if (orderRefund.getTypeState() == 1 || orderRefund.getTypeState() == 3) { //已提交
                     /** 换取商户的 绑定的服务号id*/
                     Seller seller = sellerService.findSellerByIdService(orderRefund.getSellerId());
                     String menuId = seller.getMenuId();
                     String time = ToolsDate.getStringDateToFormat(new Date(), ToolsDate.simpleSecond);
-                    orderRefundService.updateTypeStateById(2,1,time,orderRefund.getId());
-
-
+                    if(orderRefund.getTypeState() == 1){
+                        orderRefundService.updateTypeStateById(2,1,time,orderRefund.getId());
+                    }
                     //TODO Rabbit消息队列 处理退款申请
                     String url = Set.SYSTEM_URL + "interfaceMqOrderRefund/interfaceWechatReurn";
                     String sign = "一个半小时旅游圈";

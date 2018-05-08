@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.CommodityOrder">
+	<!-- 自定义返回结果集 -->
+	<resultMap id="commodityOrder" type="com.xiaoshu.entity.CommodityOrder">
+		<id property="co_id" column="co_id" javaType="java.lang.Integer"></id>
+		<result property="commodity_id" column="commodity_id" javaType="java.lang.Integer"></result>
+		<result property="commodity_number" column="commodity_number" javaType="java.lang.Integer"></result>
+		<result property="commodity_price" column="commodity_price" javaType="java.lang.Double"></result>
+		<result property="order_id" column="order_id" javaType="java.lang.Integer"></result>
+		<association property="commodity" column="commodity_id" javaType="com.xiaoshu.entity.Commodity" select="com.wisdom.travel.mapper.CommodityMapper.findCommodityByIdDao">
+			<id property="id" column="id" javaType="java.lang.Integer"></id>
+			<result property="commodityName" column="commodityName" javaType="java.lang.String"></result>
+			<result property="commodityPrice" column="commodityPrice" javaType="java.lang.Double"></result>
+			<result property="arrayImg" column="arrayImg" javaType="java.lang.String"></result>
+			
+			<collection property="imgList" column="img_ref" ofType="com.wisdom.travel.entity.Image_transplant" select="com.wisdom.travel.mapper.Image_transplantMapper.findImgByCOMMODITY_IMGDao">
+				<id property="img_id" column="img_id" javaType="java.lang.Integer"></id>
+				<result property="img_DiskPath" column="img_DiskPath" javaType="java.lang.String"></result>
+				<result property="img_DataBasePath" column="img_DataBasePath" javaType="java.lang.String"></result>
+				<result property="img_ref" column="img_ref" javaType="java.lang.Integer"></result>
+			</collection>
+		</association>
+	</resultMap>
+	
+	<select id="findAllCommodityOrderByOrderIdDao" parameterType="java.util.Map" resultMap="commodityOrder">
+   		select * from  commodityorder where order_id = #{order_id}
+	</select>
+	
+</mapper>

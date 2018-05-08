@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.WechatActivityWinningMapper">
+	<resultMap id="BaseResultMap" type="com.xiaoshu.entity.WechatActivityWinning">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<id column="DESC_M" jdbcType="VARCHAR" property="descM" />
+		<id column="CODE" jdbcType="VARCHAR" property="code" />
+		<id column="WECHAT_ACTIVITY_ID" jdbcType="VARCHAR" property="wechatActivityId" />
+		<id column="WECHAT_ACTIVITY_SIGN_ID" jdbcType="VARCHAR" property="wechatActivitySignId" />
+		<id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<id column="STATUS" jdbcType="INTEGER" property="status" />
+		<id column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,
+		DESC_M,
+		CODE,
+		WECHAT_ACTIVITY_ID,
+		WECHAT_ACTIVITY_SIGN_ID,
+		USER_ID,
+		STATUS,
+		CREATE_TIME,
+		UPDATE_TIME
+	</sql>
+	<select id="getByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from wechat_activity_winning where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from wechat_activity_winning where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="saveRecord" parameterType="com.xiaoshu.entity.WechatActivityWinning">
+		insert into wechat_activity_winning
+		(ID,DESC_M,CODE,WECHAT_ACTIVITY_ID,WECHAT_ACTIVITY_SIGN_ID,USER_ID,STATUS,CREATE_TIME,UPDATE_TIME)
+		values
+		(#{id,jdbcType=VARCHAR},#{descM,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR},#{wechatActivityId,jdbcType=VARCHAR},#{wechatActivitySignId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="saveSelective" parameterType="com.xiaoshu.entity.WechatActivityWinning">
+		insert into wechat_activity_winning
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="descM != null">DESC_M,</if>
+			<if test="code != null">CODE,</if>
+			<if test="wechatActivityId != null">WECHAT_ACTIVITY_ID,</if>
+			<if test="wechatActivitySignId != null">WECHAT_ACTIVITY_SIGN_ID,</if>
+			<if test="userId != null">USER_ID,</if>
+			<if test="status != null">STATUS,</if>
+			<if test="createTime != null">CREATE_TIME,</if>
+			<if test="updateTime != null">UPDATE_TIME,</if>
+			<if test="menuId != null">MENU_ID,</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=VARCHAR},</if>
+			<if test="descM != null">#{descM,jdbcType=VARCHAR},</if>
+			<if test="code != null">#{code,jdbcType=VARCHAR},</if>
+			<if test="wechatActivityId != null">#{wechatActivityId,jdbcType=VARCHAR},</if>
+			<if test="wechatActivitySignId != null">#{wechatActivitySignId,jdbcType=VARCHAR},</if>
+			<if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+			<if test="status != null">#{status,jdbcType=INTEGER},</if>
+			<if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="menuId != null">#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">#{parentMenuId,jdbcType=VARCHAR}</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiaoshu.entity.WechatActivityWinning">
+		update wechat_activity_winning
+		<set>
+			<if test="id != null">ID =#{id,jdbcType=VARCHAR},</if>
+			<if test="descM != null">DESC_M =#{descM,jdbcType=VARCHAR},</if>
+			<if test="code != null">CODE =#{code,jdbcType=VARCHAR},</if>
+			<if test="wechatActivityId != null">WECHAT_ACTIVITY_ID =#{wechatActivityId,jdbcType=VARCHAR},</if>
+			<if test="wechatActivitySignId != null">WECHAT_ACTIVITY_SIGN_ID =#{wechatActivitySignId,jdbcType=VARCHAR},</if>
+			<if test="userId != null">USER_ID =#{userId,jdbcType=VARCHAR},</if>
+			<if test="status != null">STATUS =#{status,jdbcType=INTEGER},</if>
+			<if test="createTime != null">CREATE_TIME =#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">UPDATE_TIME =#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="menuId != null">MENU_ID =#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID =#{parentMenuId,jdbcType=VARCHAR}</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xiaoshu.entity.WechatActivityWinning">
+		update
+		wechat_activity_winning
+		set
+		ID = #{id,jdbcType=VARCHAR},
+		DESC_M = #{descM,jdbcType=VARCHAR},
+		CODE = #{code,jdbcType=VARCHAR},
+		WECHAT_ACTIVITY_ID = #{wechatActivityId,jdbcType=VARCHAR},
+		WECHAT_ACTIVITY_SIGN_ID = #{wechatActivitySignId,jdbcType=VARCHAR},
+		USER_ID = #{userId,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		MENU_ID = #{menuId,jdbcType=VARCHAR},
+		PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap" resultType="java.util.List">
+		select
+		<include refid="Base_Column_List" />
+		from wechat_activity_winning
+		<where>
+			WECHAT_ACTIVITY_ID = #{id}
+
+			<if test="search != null">
+				AND (DESC_M LIKE concat('%',#{search},'%') OR CODE LIKE concat('%',#{search},'%'))
+			</if>
+			<if test="orderName != null and orderName !=''">
+				order by ${orderName} ${descAsc}
+			</if>
+			<if test="startRow !=null">
+				limit ${startRow},${pageSize}
+			</if>
+		</where>
+	</select>
+	<select id="selectCount" parameterType="com.xiaoshu.entity.WechatActivityWinning" resultType="int">
+		select count(*) from wechat_activity_winning
+		<where>
+			WECHAT_ACTIVITY_ID = #{id}
+
+			<if test="search != null">
+				AND (DESC_M LIKE concat('%',#{search},'%') OR CODE LIKE concat('%',#{search},'%'))
+			</if>
+		</where>
+	</select>
+</mapper>

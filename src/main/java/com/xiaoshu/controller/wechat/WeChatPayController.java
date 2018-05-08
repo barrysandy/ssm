@@ -322,7 +322,7 @@ public class WeChatPayController {
 			String err_code = map.get("err_code");
 			String err_code_des = map.get("err_code_des");
 			if(return_msg != null){
-				if("OK".equals(result_code) || "SUCCESS".equals(result_code)) {
+				if("OK".equals(result_code) || "SUCCESS".equals(result_code) || "FAIL".equals(result_code)) {
 					weChatPayRefund = new WeChatPayRefund(return_code, return_msg, appid, mch_id, nonce_str, sign, result_code, transaction_id, out_trade_no, out_refund_no,
 							refund_id, refund_channel, refund_fee, coupon_refund_fee, total_fee, cash_fee, coupon_refund_count, cash_refund_fee, err_code, err_code_des);
 					if(weChatPayRefund != null) {

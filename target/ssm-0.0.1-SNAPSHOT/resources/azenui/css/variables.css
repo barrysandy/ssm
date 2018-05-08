@@ -1,0 +1,245 @@
+.filterBlur {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+.color-blue {
+  background-color: #34b7f7;
+}
+.color-green {
+  background-color: #65c730;
+}
+.color-orange {
+  background-color: #ff6966;
+}
+.color-yellow {
+  background-color: #f0dd3a;
+}
+.t-line {
+  position: relative;
+}
+.t-line:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid rgba(207, 207, 207, 0.95);
+  color: rgba(207, 207, 207, 0.95);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.501);
+  transform: scaleY(0.501);
+}
+.r-line {
+  position: relative;
+}
+.r-line:before {
+  content: " ";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-right: 1px solid rgba(207, 207, 207, 0.95);
+  color: rgba(207, 207, 207, 0.95);
+  -webkit-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+  -webkit-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+}
+.b-line {
+  position: relative;
+}
+.b-line:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid rgba(207, 207, 207, 0.95);
+  color: rgba(207, 207, 207, 0.95);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.501);
+  transform: scaleY(0.501);
+}
+.l-line {
+  position: relative;
+}
+.l-line:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-left: 1px solid rgba(207, 207, 207, 0.95);
+  color: rgba(207, 207, 207, 0.95);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleX(0.501);
+  transform: scaleX(0.501);
+}
+.box-line {
+  position: relative;
+}
+.box-line:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  border: 1px solid rgba(207, 207, 207, 0.95);
+  border-radius: 0;
+  color: rgba(207, 207, 207, 0.95);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(0.501);
+  transform: scale(0.501);
+}
+.fullSize {
+  width: 100%;
+  height: 100%;
+}
+.devider {
+  display: -webkit-flex;
+  display: flex;
+  overflow: hidden;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 10px;
+  background: #f5f5f5;
+}
+.flexBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.itemCenter {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.contentCenter {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.car-bar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 49px;
+  z-index: 2;
+  background: #fff;
+}
+.car-bar:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid rgba(207, 207, 207, 0.95);
+  color: rgba(207, 207, 207, 0.95);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.501);
+  transform: scaleY(0.501);
+}
+.car-bar .shopping-car {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-left: 15px;
+}
+.car-bar .shopping-car .shopping-car-icon {
+  position: relative;
+}
+.car-bar .shopping-car .shopping-car-icon .icon-shopping-car {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: url("../images/icon-png/shopping-car.png") no-repeat;
+  background-size: 32px;
+}
+.car-bar .shopping-car .shopping-car-icon .car {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 8px;
+  font-size: 10px;
+  color: #fff;
+  background: #e84c3d;
+}
+.car-bar .shopping-car .total-price {
+  padding-left: 15px;
+  display: inline-block;
+}
+.car-bar .shopping-car .total-price .total-name {
+  font-size: 16px;
+  color: #333;
+}
+.car-bar .shopping-car .total-price .price {
+  font-size: 18px;
+  font-weight: 400;
+  color: #e84c3d;
+}
+.car-bar .shopping-car .shopping-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  padding: 12px 20px;
+  line-height: 25px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #fff;
+  background: #e84c3d;
+}
+.bottom-btn-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  padding: 5px 15px;
+  background: #fff;
+}
+.bottom-btn-bar:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid rgba(207, 207, 207, 0.95);
+  color: rgba(207, 207, 207, 0.95);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.501);
+  transform: scaleY(0.501);
+}
+.scroll {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+}

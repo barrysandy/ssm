@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.MessageTempleMapper">
+   <!-- 自定义返回结果集 -->
+   <resultMap id="MessageTemple" type="com.xiaoshu.entity.MessageTemple">
+		<id property="id" column="ID" javaType="java.lang.String"></id>
+		<result property="commodityId" column="COMMODITY_ID" javaType="java.lang.Integer"></result>
+		<result property="templeName" column="TEMPLE_NAME" javaType="java.lang.String"></result>
+		<result property="templeId" column="TEMPLE_ID" javaType="java.lang.Integer"></result>
+	    <result property="templeType" column="TEMPLE_TYPE" javaType="java.lang.String"></result>
+	    <result property="createTime" column="CREATE_TIME" javaType="java.lang.String"></result>
+	    <result property="updateTime" column="UPDATE_TIME" javaType="java.lang.String"></result>
+		<result property="descM" column="DESC_M" javaType="java.lang.String"></result>
+	    <result property="status" column="STATUS" javaType="java.lang.Integer"></result>
+	    <result property="sign" column="SIGN" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<!-- 按照模糊分页查询列表 -->
+	<select id="listByKey" parameterType="java.util.Map" resultMap="MessageTemple">
+   		SELECT * FROM  message_temple WHERE 1 = 1
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="commodityId != -1 ">
+			AND COMMODITY_ID = #{commodityId}
+		</if>
+		<if test="key != null and key != ''">
+			AND TEMPLE_NAME LIKE concat(concat('%',#{key}),'%')
+		</if>
+		ORDER BY TEMPLE_ID
+   		limit #{index},#{pageSize}
+	</select>
+	
+	<!-- 按照key统计个数 -->
+	<select id="countByKey" resultType="java.lang.Integer">
+		SELECT COUNT(ID) FROM  message_temple WHERE 1 = 1
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="commodityId != -1 ">
+			AND COMMODITY_ID = #{commodityId}
+		</if>
+		<if test="key != null and key != ''">
+			AND TEMPLE_NAME LIKE concat(concat('%',#{key}),'%')
+		</if>
+	</select>  
+
+
+</mapper>

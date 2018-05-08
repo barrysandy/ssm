@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../css/andyui.css">
+    <link rel="stylesheet" type="text/css" href="../../icon/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../../css/zTreeStyle/zTreeStyle.css">
+    <script src="../jquery.min.js"></script>
+    <script src="../andyui.js"></script>
+    <script src="../jquery.ztree.all-3.5.min.js"></script>
+    <script src="../selector/selector.js"></script>
+    <title>人员选择器</title>
+</head>
+<body>
+    <div class="g-layout f-b" id="selectorD">
+        <div class="layout-left f-b-r f-bg-light-lt m-panel panel-base" style="width:200px">
+        
+                <div class="panel-head f-b-b">
+                    <div class="panel-h-l">
+                        <strong class="title" treeTitle>部门结构</strong>
+                    </div>
+                </div>
+                <div class="panel-body g-h-max">
+                    <ul id="treeDemoCell" class="ztree"></ul>
+                </div>
+        
+        </div>
+
+        <div class="layout-center f-bg-light-lter f-b-r m-panel panel-base">
+        
+        
+                <div class="panel-head f-b-b">
+                    <div class="panel-h-r">
+                        <div class="panel-h-bot">
+                        <button class="u-btn sm texture f-right f-p-r-xs" choose>全选</button>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-h-l">
+                        <div class="panel-h-bot">
+                        <div class="u-group">
+                          <input class="u-group-left u-input" type="text" inputText>
+                          <span class="u-but-group u-group-right">搜索<button class="u-but-button" type="button" search></button></span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-body f-b-n">
+                    <div class="f-p-sm" center>
+                        <!-- 放入备选人员 -->
+                    </div>
+                </div>
+        
+        </div>
+
+        <div class="layout-right m-panel panel-base" style="width:210px">
+        
+           
+           
+           <div class="panel-head f-b-b">
+                    <div class="panel-h-r">
+                        <div class="panel-h-bot f-p-r-xs">
+                        <button class="u-btn sm texture f-right" cancel>全部取消</button>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="panel-body f-b-n g-h-max">
+                    <div class="f-p-sm" right>
+                        <!-- 放入备选人员 -->
+                    </div>
+                </div>
+                
+                
+                <div class="panel-foot">
+                    
+                        <button class="u-btn success" style="width:100%; border-radius:0" submit>确定</button>
+                    
+                </div>
+           
+        
+           
+        
+        
+        
+        
+            
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    var dialogReady = function (dialog, args) {
+        var options = args.data;
+        options.treeid ="treeDemoCell";
+        options.submit = function (data) {
+            if (options.callback) {
+                options.callback(data);
+            }
+            dialog.an_dialog("close");
+        };
+        $("#selectorD").an_selector(options);
+    };
+
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.OrderRefundMapper">
+   <!-- 自定义返回结果集 -->
+   <resultMap id="OrderRefund" type="com.xiaoshu.entity.OrderRefund">
+		<id property="id" column="ID" javaType="java.lang.String"></id>
+		<result property="transactionId" column="TRANSACTION_ID" javaType="java.lang.String"></result>
+		<result property="payType" column="PAY_TYPE" javaType="java.lang.String"></result>
+		<result property="orderNo" column="ORDER_NO" javaType="java.lang.String"></result>
+	    <result property="createTime" column="CREATE_TIME" javaType="java.lang.String"></result>
+	    <result property="handleTime" column="HANDLE_TIME" javaType="java.lang.String"></result>
+	    <result property="returnTime" column="RETURN_TIME" javaType="java.lang.String"></result>
+		<result property="descM" column="DESC_M" javaType="java.lang.String"></result>
+		<result property="orderMoney" column="ORDER_MONEY" javaType="java.lang.Integer"></result>
+		<result property="refundFee" column="REFUND_FEE" javaType="java.lang.Integer"></result>
+		<result property="refundFeeType" column="REFUND_FEE_TYPE" javaType="java.lang.String"></result>
+		<result property="refundDesc" column="REFUND_DESC" javaType="java.lang.String"></result>
+		<result property="refundAccount" column="REFUND_ACCOUNT" javaType="java.lang.String"></result>
+		<result property="orderName" column="ORDER_NAME" javaType="java.lang.String"></result>
+	    <result property="typeState" column="TYPE_STATE" javaType="java.lang.Integer"></result>
+	    <result property="status" column="STATUS" javaType="java.lang.Integer"></result>
+	    <result property="userId" column="USER_ID" javaType="java.lang.String"></result>
+	    <result property="sellerId" column="SELLER_ID" javaType="java.lang.Integer"></result>
+	    <result property="refundResult" column="REFUND_RESULT" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<!-- 按照模糊分页查询列表 -->
+	<select id="listByKeyAndTypeStateAndStatusAndUserIdAndSellerId" parameterType="java.util.Map" resultMap="OrderRefund">
+   		SELECT * FROM  order_refund WHERE CREATE_TIME &gt; #{date1 } AND CREATE_TIME &lt; #{date2 }
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="typeState != -1 ">
+			AND TYPE_STATE = #{typeState}
+		</if>
+		<if test="userId != null and userId != ''">
+			AND USER_ID = #{userId}
+		</if>
+		<if test="sellerId != -1 ">
+			AND SELLER_ID = #{sellerId}
+		</if>
+		<if test="key != null and key != ''">
+			AND ORDER_NO LIKE concat(concat('%',#{key}),'%')
+		</if>
+		ORDER BY CREATE_TIME DESC
+   		limit #{index},#{pageSize}
+	</select>
+	
+	<!-- 按照key统计个数 -->
+	<select id="countByKeyAndTypeStateAndStatusAndUserIdAndSellerId" resultType="java.lang.Integer">
+		SELECT COUNT(ID) FROM  order_refund WHERE CREATE_TIME &gt; #{date1 } AND CREATE_TIME &lt; #{date2 }
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="typeState != -1 ">
+			AND TYPE_STATE = #{typeState}
+		</if>
+		<if test="userId != null and userId != ''">
+			AND USER_ID = #{userId}
+		</if>
+		<if test="sellerId != -1 ">
+			AND SELLER_ID = #{sellerId}
+		</if>
+		<if test="key != null and key != ''">
+			AND ORDER_NO LIKE concat(concat('%',#{key}),'%')
+		</if>
+	</select>  
+
+
+</mapper>

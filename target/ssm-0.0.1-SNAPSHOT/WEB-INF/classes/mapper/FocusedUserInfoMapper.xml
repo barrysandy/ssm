@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.FocusedUserInfoMapper">
+	<resultMap id="BaseResultMap" type="com.xiaoshu.entity.FocusedUserInfo">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<id column="USER_NAME" jdbcType="VARCHAR" property="username" />
+		<id column="PASS_WORD" jdbcType="VARCHAR" property="password" />
+		<id column="USER_PHONE" jdbcType="VARCHAR" property="userphone" />
+		<id column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+		<id column="OPENID" jdbcType="VARCHAR" property="openid" />
+		<id column="UNIONID" jdbcType="VARCHAR" property="unionid" />
+		<id column="LANGUAGE" jdbcType="VARCHAR" property="language" />
+		<id column="COUNTRY" jdbcType="VARCHAR" property="country" />
+		<id column="PROVINCE" jdbcType="VARCHAR" property="province" />
+		<id column="CITY" jdbcType="VARCHAR" property="city" />
+		<id column="SEX" jdbcType="INTEGER" property="sex" />
+		<id column="HEAD_IMG_URL" jdbcType="VARCHAR" property="headImgUrl" />
+		<id column="SUBSCRIBE" jdbcType="INTEGER" property="subscribe" />
+		<id column="SUBSCRIBE_TIME" jdbcType="TIMESTAMP" property="subscribeTime" />
+		<id column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<id column="STATUS" jdbcType="INTEGER" property="status" />
+		<id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+		<id column="PARENT_MENU_ID" jdbcType="VARCHAR" property="parentMenuId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,
+		USER_NAME,
+		PASS_WORD,
+		USER_PHONE,
+		NICK_NAME,
+		OPENID,
+		UNIONID,
+		LANGUAGE,
+		COUNTRY,
+		PROVINCE,
+		CITY,
+		SEX,
+		HEAD_IMG_URL,
+		SUBSCRIBE,
+		SUBSCRIBE_TIME,
+		CREATE_TIME,
+		UPDATE_TIME,
+		STATUS,
+		MENU_ID,
+		PARENT_MENU_ID
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from focused_user_info where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from focused_user_info where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.xiaoshu.entity.FocusedUserInfo">
+		insert into focused_user_info
+		(ID,NICK_NAME,OPENID,UNIONID,LANGUAGE,COUNTRY,PROVINCE,CITY,SEX,HEAD_IMG_URL,SUBSCRIBE,SUBSCRIBE_TIME,CREATE_TIME,UPDATE_TIME,USER_NAME,PASS_WORD,USER_PHONE,STATUS,MENU_ID,PARENT_MENU_ID)
+		values
+		(#{id,jdbcType=VARCHAR},#{nickName,jdbcType=VARCHAR},#{openid,jdbcType=VARCHAR},#{unionid,jdbcType=VARCHAR},#{language,jdbcType=VARCHAR},#{country,jdbcType=VARCHAR},#{province,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{sex,jdbcType=INTEGER},#{headImgUrl,jdbcType=VARCHAR},#{subscribe,jdbcType=INTEGER},#{subscribeTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},
+		#{username,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{userphone,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},#{menuId,jdbcType=VARCHAR},#{parentMenuId,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.xiaoshu.entity.FocusedUserInfo">
+		insert into focused_user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="username != null">USER_NAME,</if>
+			<if test="password != null">PASS_WORD,</if>
+			<if test="userphone != null">USER_PHONE,</if>
+			<if test="nickName != null">NICK_NAME,</if>
+			<if test="openid != null">OPENID,</if>
+			<if test="unionid != null">UNIONID,</if>
+			<if test="language != null">LANGUAGE,</if>
+			<if test="country != null">COUNTRY,</if>
+			<if test="province != null">PROVINCE,</if>
+			<if test="city != null">CITY,</if>
+			<if test="sex != null">SEX,</if>
+			<if test="headImgUrl != null">HEAD_IMG_URL,</if>
+			<if test="subscribe != null">SUBSCRIBE,</if>
+			<if test="subscribeTime != null">SUBSCRIBE_TIME,</if>
+			<if test="createTime != null">CREATE_TIME,</if>
+			<if test="updateTime != null">UPDATE_TIME,</if>
+			<if test="status != null">STATUS,</if>
+			<if test="menuId != null">MENU_ID,</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=VARCHAR},</if>
+			<if test="username != null">#{username,jdbcType=VARCHAR},</if>
+			<if test="password != null">#{password,jdbcType=VARCHAR},</if>
+			<if test="userphone != null">#{userphone,jdbcType=VARCHAR},</if>
+			<if test="nickName != null">#{nickName,jdbcType=VARCHAR},</if>
+			<if test="openid != null">#{openid,jdbcType=VARCHAR},</if>
+			<if test="unionid != null">#{unionid,jdbcType=VARCHAR},</if>
+			<if test="language != null">#{language,jdbcType=VARCHAR},</if>
+			<if test="country != null">#{country,jdbcType=VARCHAR},</if>
+			<if test="province != null">#{province,jdbcType=VARCHAR},</if>
+			<if test="city != null">#{city,jdbcType=VARCHAR},</if>
+			<if test="sex != null">#{sex,jdbcType=INTEGER},</if>
+			<if test="headImgUrl != null">#{headImgUrl,jdbcType=VARCHAR},</if>
+			<if test="subscribe != null">#{subscribe,jdbcType=INTEGER},</if>
+			<if test="subscribeTime != null">#{subscribeTime,jdbcType=TIMESTAMP},</if>
+			<if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="status != null">#{status,jdbcType=INTEGER},</if>
+			<if test="menuId != null">#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">#{parentMenuId,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiaoshu.entity.FocusedUserInfo">
+		update focused_user_info
+		<set>
+			<if test="username != null">USER_NAME =#{username,jdbcType=VARCHAR},</if>
+			<if test="password != null">PASS_WORD =#{password,jdbcType=VARCHAR},</if>
+			<if test="userphone != null">USER_PHONE =#{userphone,jdbcType=VARCHAR},</if>
+			<if test="nickName != null">NICK_NAME =#{nickName,jdbcType=VARCHAR},</if>
+			<if test="openid != null">OPENID =#{openid,jdbcType=VARCHAR},</if>
+			<if test="unionid != null">UNIONID =#{unionid,jdbcType=VARCHAR},</if>
+			<if test="language != null">LANGUAGE =#{language,jdbcType=VARCHAR},</if>
+			<if test="country != null">COUNTRY =#{country,jdbcType=VARCHAR},</if>
+			<if test="province != null">PROVINCE =#{province,jdbcType=VARCHAR},</if>
+			<if test="city != null">CITY =#{city,jdbcType=VARCHAR},</if>
+			<if test="sex != null">SEX =#{sex,jdbcType=INTEGER},</if>
+			<if test="headImgUrl != null">HEAD_IMG_URL =#{headImgUrl,jdbcType=VARCHAR},</if>
+			<if test="subscribe != null">SUBSCRIBE =#{subscribe,jdbcType=INTEGER},</if>
+			<if test="subscribeTime != null">SUBSCRIBE_TIME =#{subscribeTime,jdbcType=TIMESTAMP},</if>
+			<if test="createTime != null">CREATE_TIME =#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime != null">UPDATE_TIME =#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="status != null">STATUS =#{status,jdbcType=INTEGER},</if>
+			<if test="menuId != null">MENU_ID =#{menuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID =#{parentMenuId,jdbcType=VARCHAR},</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.xiaoshu.entity.FocusedUserInfo">
+		update
+		focused_user_info
+		set
+
+		USER_NAME = #{username,jdbcType=VARCHAR},
+		PASS_WORD = #{password,jdbcType=VARCHAR},
+		USER_PHONE = #{userphone,jdbcType=VARCHAR},
+
+		NICK_NAME = #{nickName,jdbcType=VARCHAR},
+		OPENID = #{openid,jdbcType=VARCHAR},
+		UNIONID = #{unionid,jdbcType=VARCHAR},
+		LANGUAGE = #{language,jdbcType=VARCHAR},
+		COUNTRY = #{country,jdbcType=VARCHAR},
+		PROVINCE = #{province,jdbcType=VARCHAR},
+		CITY = #{city,jdbcType=VARCHAR},
+		SEX = #{sex,jdbcType=INTEGER},
+		HEAD_IMG_URL = #{headImgUrl,jdbcType=VARCHAR},
+		SUBSCRIBE = #{subscribe,jdbcType=INTEGER},
+		SUBSCRIBE_TIME = #{subscribeTime,jdbcType=TIMESTAMP},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=INTEGER},
+		MENU_ID = #{menuId,jdbcType=VARCHAR},
+		PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap" resultType="java.util.List">
+		select
+			*
+		from focused_user_info
+		<where>
+			1=1 and status = 1
+			<if test="search != null and search != ''">
+				<!-- AND NICK_NAME LIKE concat('%',#{search},'%') -->
+				AND NICK_NAME =#{search}
+			</if>
+			<if test="startDate!=null and endDate == null ">
+				AND CREATE_TIME &gt;=#{startDate}
+			</if>
+			<if test="startDate==null and endDate != null ">
+				AND CREATE_TIME &lt;=#{endDate}
+			</if>
+			<if test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
+				and (CREATE_TIME &gt;=#{startDate} and CREATE_TIME &lt;=#{endDate})
+			</if>
+			<if test="menuId != null">
+				AND MENU_ID = '${menuId}'
+			</if>
+			<if test="orderName != null and orderName !=''">
+				order by ${orderName} ${descAsc}
+			</if>
+			<if test="startRow !=null">
+				limit ${startRow},${pageSize}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectCount" parameterType="com.xiaoshu.entity.FocusedUserInfo" resultType="int">
+		select count(1) from
+		(
+		select
+			*
+		from focused_user_info
+		<where>
+			1=1 and status = 1
+			<if test="search != null and search != ''">
+				<!-- AND NICK_NAME LIKE concat('%',#{search},'%') -->
+				AND NICK_NAME =#{search}
+			</if>
+			<if test="startDate!=null and endDate == null ">
+				AND CREATE_TIME &gt;=#{startDate}
+			</if>
+			<if test="startDate==null and endDate != null ">
+				AND CREATE_TIME &lt;=#{endDate}
+			</if>
+			<if test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
+				and (CREATE_TIME &gt;=#{startDate} and CREATE_TIME &lt;=#{endDate})
+			</if>
+			<if test="menuId != null">
+				AND MENU_ID = '${menuId}'
+			</if>
+		</where>
+		) t
+	</select>
+</mapper>

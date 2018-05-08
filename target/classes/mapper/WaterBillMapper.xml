@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.WaterBillMapper">
+   <!-- 自定义返回结果集 -->
+   <resultMap id="map" type="com.xiaoshu.entity.WaterBill">
+		<id property="id" column="ID" javaType="java.lang.Integer"></id>
+		<result property="remarks" column="REMARKS" javaType="java.lang.String"></result>
+		<result property="orderNo" column="ORDER_NO" javaType="java.lang.String"></result>
+		<result property="createTime" column="CREATE_TIME" javaType="java.util.Date"></result>
+	    <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date"></result>
+	    <result property="money" column="MONEY" javaType="java.lang.Double"></result>
+		<result property="status" column="STATUS" javaType="java.lang.Integer"></result>
+		<result property="openid" column="OPENID" javaType="java.lang.String"></result>
+	    <result property="userId" column="USER_ID" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,
+		REMARKS,
+		ORDER_NO,
+		CREATE_TIME,
+		UPDATE_TIME,
+		MONEY,
+		STATUS,
+		OPENID,
+		USER_ID
+	</sql>
+
+	<select id="getListByKey" parameterType="java.util.Map" resultMap="map">
+		select <include refid="Base_Column_List" />  from water_bill
+		where 1 = 1
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="key != null and key != ''">
+			and ORDER_NO LIKE concat(concat('%',#{key}),'%')
+		</if>
+		ORDER BY CREATE_TIME DESC
+		limit #{index},#{pageSize}
+	</select>
+
+	<select id="getTotalListByKey" resultType="java.lang.Integer">
+		select count(ID) from water_bill
+		where 1 = 1
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="key != null and key != ''">
+			and ORDER_NO LIKE concat(concat('%',#{key}),'%')
+		</if>
+	</select>
+
+</mapper>

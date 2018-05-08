@@ -1,15 +1,19 @@
 package com.xiaoshu.controller.frontend.shop.order;
 
+import com.xgb.springrabbitmq.publish.DeadLetterPublishService;
 import com.xiaoshu.controller.BaseController;
+import com.xiaoshu.controller.admin.order.AdminOrderRefundFunctionController;
 import com.xiaoshu.entity.Order;
 import com.xiaoshu.entity.OrderRefund;
 import com.xiaoshu.enumeration.EnumsPayType;
 import com.xiaoshu.service.OrderRefundService;
 import com.xiaoshu.service.OrderService;
+import com.xiaoshu.service.SellerService;
 import com.xiaoshu.tools.ToolsDate;
 import com.xiaoshu.util.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +34,9 @@ public class OrderRefundController extends BaseController {
 
 	@Resource private OrderService orderService;
 	@Resource private OrderRefundService orderRefundService;
+	@Resource private SellerService sellerService;
+
+	@Autowired private DeadLetterPublishService deadLetterPublishService;
 
 	/**
 	 * 订单退款
@@ -69,6 +76,13 @@ public class OrderRefundController extends BaseController {
 							}
 						}else {
 							return JsonUtils.turnJson(false,"error" + "No TransactionId ",null);
+						}
+					}
+				}else if(order.getTypeState() == 5 ) { //发起重试
+					OrderRefund orderRefund = orderRefundService.getByOrderNo(order.getOrderNo());
+					if(orderRefund != null){
+						if(orderRefund.getTypeState() == 2){
+							AdminOrderRefundFunctionController.processPersistentMQ(orderRefundService, deadLetterPublishService , sellerService, orderRefund);
 						}
 					}
 				}

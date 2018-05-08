@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.SellerMapper">
+	<!-- 按照loginName、email、phone、qq模糊分页查询商家列表 -->
+	<select id="findAllSellerDao" parameterType="java.util.Map" resultType="com.xiaoshu.entity.Seller" >
+   		select * from  seller 
+        <if test="key != null and key != ''">
+        	where 
+        	sellerName LIKE concat(concat('%',#{key}),'%') 
+        	OR  loginName LIKE concat(concat('%',#{key}),'%') 
+        	OR  email LIKE concat(concat('%',#{key}),'%') 
+        	OR  phone LIKE concat(concat('%',#{key}),'%') 
+        	OR  phone LIKE concat(concat('%',#{key}),'%') 
+        	OR  qq LIKE concat(concat('%',#{key}),'%') 
+        </if>
+   		limit #{index},#{pageSize}
+	</select>
+	
+	<!-- 按照key统计商家个数 -->
+	<select id="totalSellerByKeyDao" resultType="java.lang.Integer">
+   		select COUNT(id) from  seller
+        <if test="key != null and key != ''">
+        	where 
+        	sellerName LIKE concat(concat('%',#{key}),'%') 
+        	OR  loginName LIKE concat(concat('%',#{key}),'%') 
+        	OR  email LIKE concat(concat('%',#{key}),'%') 
+        	OR  phone LIKE concat(concat('%',#{key}),'%') 
+        	OR  phone LIKE concat(concat('%',#{key}),'%') 
+        	OR  qq LIKE concat(concat('%',#{key}),'%')  
+        </if>
+	</select>  
+	
+</mapper>
