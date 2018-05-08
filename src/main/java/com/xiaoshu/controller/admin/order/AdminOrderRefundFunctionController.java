@@ -86,7 +86,7 @@ public class AdminOrderRefundFunctionController {
     public static void processPersistentMQ(OrderRefundService orderRefundService, DeadLetterPublishService deadLetterPublishService , SellerService sellerService,OrderRefund orderRefund){
         try{
             if(orderRefund != null) {
-                if (orderRefund.getTypeState() == 1 || orderRefund.getTypeState() == 3) { //已提交
+                if (orderRefund.getTypeState() == 1 || orderRefund.getTypeState() == 2) { //已提交
                     /** 换取商户的 绑定的服务号id*/
                     Seller seller = sellerService.findSellerByIdService(orderRefund.getSellerId());
                     String menuId = seller.getMenuId();

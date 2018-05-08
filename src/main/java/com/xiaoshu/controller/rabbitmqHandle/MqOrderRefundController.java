@@ -61,8 +61,6 @@ public class MqOrderRefundController extends BaseController {
 				OrderRefund orderRefund = orderRefundService.getByOrderNo(orderNo);
 				Order order = orderService.getByOrderNo(orderRefund.getOrderNo());
 				WeChatPayRefund weChatPayRefund = WeChatPayController.getWeChatPayRefundBean(refundResult);
-				System.out.println("RabbitMQ 更新OrderRefund退款结果描述 refundResult " + refundResult );
-				System.out.println("RabbitMQ 更新OrderRefund退款结果描述 weChatPayRefund " + weChatPayRefund );
 				String descM = "";
 				if(weChatPayRefund != null){
 					// TODO 退款失败

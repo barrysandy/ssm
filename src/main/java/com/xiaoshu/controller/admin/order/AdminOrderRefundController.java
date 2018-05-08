@@ -102,9 +102,7 @@ public class AdminOrderRefundController {
         try{
 
             OrderRefund orderRefund = orderRefundService.getById(id);
-            orderRefund.setTypeState(3);//重试
             AdminOrderRefundFunctionController.processPersistentMQ(orderRefundService, deadLetterPublishService , sellerService, orderRefund);
-            //AdminOrderRefundFunctionController.processPersistentMQ(request ,orderRefundService,persistentMessageQueueService ,sellerService,orderRefund,descM);
         }catch (Exception e){
             return JsonUtils.turnJson(false,"error"+e.getMessage(),e);
         }
