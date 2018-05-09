@@ -72,6 +72,7 @@ G:\Git\ssm\src\main\java\com\xiaoshu\controller\admin\activity\WechatActivityCon
 G:\Git\ssm\src\main\java\com\xiaoshu\service\WechatActivitySignService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\util\JsonUtils.java
 G:\Git\ssm\src\main\java\com\xgb\springrabbitmq\callback\ConfirmCallBackListener.java
+G:\Git\ssm\src\main\java\com\xiaoshu\service\MeetingSignServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\event\MenuEvent.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\request\ImageMessage.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\CommodityGroupService.java
@@ -102,6 +103,7 @@ G:\Git\ssm\src\main\java\com\xiaoshu\job\JobUtil.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\WechatMaterialService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\OrderRefund.java
 G:\Git\ssm\src\main\java\com\xiaoshu\controller\rabbitmqHandle\MqOrderController.java
+G:\Git\ssm\src\main\java\com\xiaoshu\entity\MeetingSign.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\Operation.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\WechatActivitySignSetServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\controller\admin\backstage\SysCodeController.java
@@ -114,6 +116,7 @@ G:\Git\ssm\src\main\java\com\xiaoshu\wechat\response\VideoMessage.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\ArtService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\OperationExample.java
 G:\Git\ssm\src\main\java\com\xiaoshu\dao\WechatActivityAnswerMapper.java
+G:\Git\ssm\src\main\java\com\xiaoshu\service\MeetingService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\PersistentMessageQueueServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\tools\ToolsDate.java
 G:\Git\ssm\src\main\java\com\xiaoshu\dao\PersistentMessageQueueMapper.java
@@ -159,6 +162,7 @@ G:\Git\ssm\src\main\java\com\xiaoshu\service\WechatActivityPrizeServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\event\QRCodeEvent.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\WechatActivityPrize.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\MessageTempleService.java
+G:\Git\ssm\src\main\java\com\xiaoshu\dao\MeetingMapper.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\MessageRecordServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\response\Video.java
 G:\Git\ssm\src\main\java\com\xiaoshu\dao\CommodityGroupMapper.java
@@ -185,10 +189,10 @@ G:\Git\ssm\src\main\java\com\xiaoshu\service\RecordWriteOffService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\pojo\WeixinMedia.java
 G:\Git\ssm\src\main\java\com\xiaoshu\tools\ToolsSendMessageService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\dao\OrderCodesMapper.java
-G:\Git\ssm\src\main\java\com\xiaoshu\service\WechatActivityWinningServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\CommodityGroupServiceImpl.java
-G:\Git\ssm\src\main\java\com\xiaoshu\wechat\pojo\WeixinUploadNews.java
+G:\Git\ssm\src\main\java\com\xiaoshu\service\WechatActivityWinningServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\KeyWordsService.java
+G:\Git\ssm\src\main\java\com\xiaoshu\wechat\pojo\WeixinUploadNews.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\pay\TenpayUtil.java
 G:\Git\ssm\src\main\java\com\xiaoshu\controller\admin\wechat\FocusedUserInfoController.java
 G:\Git\ssm\src\main\java\com\xiaoshu\po\UserClickGroupMap.java
@@ -267,6 +271,7 @@ G:\Git\ssm\src\main\java\com\xiaoshu\dao\CommodityOrderMapper.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\robot\FormatXmlProcess.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\event\SubscribeEvent.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\request\LocationMessage.java
+G:\Git\ssm\src\main\java\com\xiaoshu\dao\MeetingSignMapper.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\MenuExample.java
 G:\Git\ssm\src\main\java\com\xiaoshu\controller\frontend\user\RecordWriteoffController.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\pay\RequestHandler.java
@@ -292,6 +297,7 @@ G:\Git\ssm\src\main\java\com\xiaoshu\wechat\menu\ViewButton.java
 G:\Git\ssm\src\main\java\com\xgb\springrabbitmq\publish\PublishService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\dao\LogMapper.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\tools\HttpRequestUtil.java
+G:\Git\ssm\src\main\java\com\xiaoshu\service\MeetingServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\SysCodeServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\SysCodeService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\tools\WeixinSendCustomerMessage.java
@@ -323,10 +329,12 @@ G:\Git\ssm\src\main\java\com\xiaoshu\controller\admin\order\AdminWaterBillContro
 G:\Git\ssm\src\main\java\com\xiaoshu\tools\ssmImage\ToolsImage.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\WechatActivityTestQuestions.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\MessageTempleServiceImpl.java
+G:\Git\ssm\src\main\java\com\xiaoshu\controller\admin\meeting\AdminMeetingController.java
 G:\Git\ssm\src\main\java\com\xiaoshu\dao\WeChatMenuMapper.java
 G:\Git\ssm\src\main\java\com\xiaoshu\controller\admin\backstage\RoleController.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\SysCodeCategory.java
 G:\Git\ssm\src\main\java\com\xiaoshu\dao\RoleMapper.java
+G:\Git\ssm\src\main\java\com\xiaoshu\entity\Meeting.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\WechatActivityWinning.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\UserService.java
 G:\Git\ssm\src\main\java\com\xiaoshu\entity\CommodityGroupMember.java
@@ -371,3 +379,4 @@ G:\Git\ssm\src\main\java\com\xiaoshu\controller\frontend\shop\ShopController.jav
 G:\Git\ssm\src\main\java\com\xiaoshu\wechat\tools\MessageUtil.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\WaterBillServiceImpl.java
 G:\Git\ssm\src\main\java\com\xiaoshu\service\WechatActivitySignSetService.java
+G:\Git\ssm\src\main\java\com\xiaoshu\service\MeetingSignService.java

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.MeetingMapper">
+   <resultMap id="Meeting" type="com.xiaoshu.entity.Meeting">
+		<id property="id" column="ID" javaType="java.lang.String"></id>
+		<result property="title" column="TITLE" javaType="java.lang.String"></result>
+		<result property="image" column="IMAGE" javaType="java.lang.String"></result>
+		<result property="descM" column="DESC_M" javaType="java.lang.String"></result>
+	    <result property="name" column="NAME" javaType="java.lang.String"></result>
+	    <result property="phone" column="PHONE" javaType="java.lang.String"></result>
+	    <result property="createTime" column="CREATE_TIME" javaType="java.lang.String"></result>
+		<result property="updateTime" column="UPDATE_TIME" javaType="java.lang.String"></result>
+	    <result property="beginTime" column="BEGIN_TIME" javaType="java.lang.String"></result>
+	    <result property="endTime" column="END_TIME" javaType="java.lang.String"></result>
+	    <result property="signTotal" column="SIGN_TOTAL" javaType="java.lang.Integer"></result>
+	    <result property="status" column="STATUS" javaType="java.lang.Integer"></result>
+	</resultMap>
+
+	<!-- 按照模糊分页查询列表 -->
+	<select id="getListByKeyWord" parameterType="java.util.Map" resultMap="Meeting">
+		SELECT * FROM  t_meeting WHERE BEGIN_TIME &gt; #{date1 } AND END_TIME &lt; #{date2 }
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="keyword != null and keyword != ''">
+			AND TITLE LIKE concat(concat('%',#{keyword}),'%')
+		</if>
+		ORDER BY CREATE_TIME DESC
+		limit #{index},#{pageSize}
+	</select>
+	
+	<!-- 按照key统计个数 -->
+	<select id="getCountByKeyWord" resultType="java.lang.Integer">
+		SELECT COUNT(ID) FROM  t_meeting WHERE BEGIN_TIME &gt; #{date1 } AND END_TIME &lt; #{date2 }
+		<if test="status != -1 ">
+			AND STATUS = #{status}
+		</if>
+		<if test="keyword != null and keyword != ''">
+			AND TITLE LIKE concat(concat('%',#{keyword}),'%')
+		</if>
+	</select>  
+
+
+</mapper>

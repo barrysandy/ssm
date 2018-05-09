@@ -11,8 +11,6 @@ import com.xiaoshu.service.OrderService;
 import com.xiaoshu.service.SellerService;
 import com.xiaoshu.tools.ToolsDate;
 import com.xiaoshu.util.JsonUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,6 @@ import java.util.UUID;
 @Controller
 @RequestMapping(value = "/orderRefund")
 public class OrderRefundController extends BaseController {
-	private static Logger log = LoggerFactory.getLogger(OrderRefundController.class);
 
 	@Resource private OrderService orderService;
 	@Resource private OrderRefundService orderRefundService;

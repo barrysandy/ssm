@@ -26,6 +26,7 @@ com\xiaoshu\vo\MyGroup.class
 com\xiaoshu\base\dao\BaseMapper.class
 com\xiaoshu\service\OrderServiceImpl.class
 com\xiaoshu\service\OrderRefundServiceImpl.class
+com\xiaoshu\dao\MeetingSignMapper.class
 com\xgb\springrabbitmq\consumer\ReceiveConfirmTestListener.class
 com\xiaoshu\controller\rabbitmqHandle\MqJSSDKController.class
 com\xiaoshu\wechat\request\LinkMessage.class
@@ -84,12 +85,14 @@ com\xiaoshu\service\RecordWriteOffServiceImpl.class
 com\xiaoshu\controller\admin\backstage\OperationController.class
 com\xiaoshu\wechat\pojo\WeixinMedia.class
 com\xiaoshu\wechat\event\BaseEvent.class
+com\xiaoshu\service\MeetingSignService.class
 com\xiaoshu\tools\ToolsDate.class
 com\xiaoshu\wechat\menu\Menu.class
 com\xiaoshu\wechat\menu\Button.class
 com\xiaoshu\controller\frontend\shop\order\OrderGroupController.class
 com\xiaoshu\dao\WechatMaterialMapper.class
 com\xiaoshu\job\JobScan.class
+com\xiaoshu\service\MeetingServiceImpl.class
 com\xiaoshu\wechat\response\Music.class
 com\xiaoshu\dao\MessageRecordMapper.class
 com\xiaoshu\service\CommodityPriceListService.class
@@ -108,6 +111,7 @@ com\xiaoshu\enumeration\EnumsAutomaticReplyType.class
 com\xiaoshu\service\MessageTempleService.class
 com\xiaoshu\dao\CommodityGroupMapper.class
 com\xiaoshu\entity\Role.class
+com\xiaoshu\dao\MeetingMapper.class
 com\xiaoshu\service\TokenService.class
 com\xiaoshu\service\WechatActivityPrizeServiceImpl.class
 com\xiaoshu\controller\admin\wechat\ArtController.class
@@ -178,8 +182,8 @@ com\xiaoshu\entity\MenuExample$Criteria.class
 com\xiaoshu\wechat\tools\MessageUtil.class
 com\xiaoshu\dao\OrderWriteOffByUserMapper.class
 com\xiaoshu\service\CommodityGroupService.class
-com\xiaoshu\tools\ToolsPage.class
 com\xiaoshu\wechat\tools\CommonUtil.class
+com\xiaoshu\tools\ToolsPage.class
 com\xiaoshu\controller\wechat\WeChatPayController.class
 com\xiaoshu\dao\MenuMapper.class
 com\xiaoshu\entity\MenuExample.class
@@ -206,6 +210,7 @@ com\xiaoshu\wechat\tools\GetKey.class
 com\xiaoshu\entity\WechatActivityWinning.class
 com\xiaoshu\util\CodeUtil.class
 com\xiaoshu\dao\OrderRefundMapper.class
+com\xiaoshu\entity\Meeting.class
 com\xiaoshu\wechat\response\Image.class
 com\xiaoshu\wechat\pay\TenpayUtil.class
 com\xiaoshu\entity\MessageTemple.class
@@ -217,6 +222,7 @@ com\xiaoshu\dao\WechatActivitySignSetMapper.class
 com\xiaoshu\tools\sendMsg\IndustrySMS.class
 com\xiaoshu\entity\Seller.class
 com\xiaoshu\entity\RecordWriteOff.class
+com\xiaoshu\controller\admin\meeting\AdminMeetingController.class
 com\xiaoshu\dao\LogMapper.class
 com\xiaoshu\entity\WeChatMenu.class
 com\xiaoshu\wechat\tools\MenuUtil.class
@@ -248,6 +254,7 @@ com\xiaoshu\wechat\response\NewsMessage.class
 com\xiaoshu\api\Api.class
 com\xiaoshu\controller\admin\order\AdminOrderRefundFunctionController.class
 com\xiaoshu\controller\rabbitmqHandle\MqMapController.class
+com\xiaoshu\service\MeetingService.class
 com\xiaoshu\wechat\request\VoiceMessage.class
 com\xiaoshu\entity\WechatActivitySign.class
 com\xiaoshu\enumeration\FileType.class
@@ -258,6 +265,7 @@ com\xiaoshu\util\SpringContextUtil.class
 com\xiaoshu\util\TimeUtil.class
 com\xiaoshu\dao\SysCodeCategoryMapper.class
 com\xiaoshu\entity\AttachmentExample$Criterion.class
+com\xiaoshu\entity\MeetingSign.class
 com\xiaoshu\controller\admin\backstage\SysCodeController.class
 com\xiaoshu\dao\UserMapper.class
 com\xiaoshu\vo\JsonData.class
@@ -363,6 +371,7 @@ com\xiaoshu\wechat\response\VoiceMessage.class
 com\xiaoshu\entity\WechatActivitySignSet.class
 com\xiaoshu\wechat\request\CustomerMessage.class
 com\xiaoshu\entity\AttachmentExample$Criteria.class
+com\xiaoshu\service\MeetingSignServiceImpl.class
 com\xiaoshu\entity\User.class
 com\xiaoshu\tag\PrivilegeTag.class
 com\xiaoshu\po\UserClickGroupMap.class
