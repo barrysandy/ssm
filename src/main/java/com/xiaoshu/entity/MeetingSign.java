@@ -22,13 +22,6 @@ public class MeetingSign implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 *
-	 * ID, NAME, HEAD_IMAGE, PHONE, SIGN_CODE, COMPANY , PERSON_TYPE, POSITION, JOIN_DINNER, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS
-	 *
-	 * id, name, headImage, phone, signCode, company , personType, position, joinDinner, createTime, updateTime,descM,status
-	 */
-
 	@Id
 	@Column(name = "ID")
 	private String id;
@@ -68,6 +61,9 @@ public class MeetingSign implements Serializable {
 
 	@Column(name="STATUS")
 	private Integer status;//状态 0未签到 1 已签到 -1查询所有
+
+	@Column(name = "MEETING_ID")
+	private String meetingId; //所属会议ID。
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -177,9 +173,17 @@ public class MeetingSign implements Serializable {
 		this.status = status;
 	}
 
+	public String getMeetingId() {
+		return meetingId;
+	}
+
+	public void setMeetingId(String meetingId) {
+		this.meetingId = meetingId;
+	}
+
 	public MeetingSign() { }
 
-	public MeetingSign(String id, String name, String headImage, String phone, String signCode, String company, String personType, String position, Integer joinDinner, String createTime, String updateTime, String descM, Integer status) {
+	public MeetingSign(String id, String name, String headImage, String phone, String signCode, String company, String personType, String position, Integer joinDinner, String createTime, String updateTime, String descM, Integer status, String meetingId) {
 		this.id = id;
 		this.name = name;
 		this.headImage = headImage;
@@ -193,6 +197,7 @@ public class MeetingSign implements Serializable {
 		this.updateTime = updateTime;
 		this.descM = descM;
 		this.status = status;
+		this.meetingId = meetingId;
 	}
 
 	@Override
@@ -211,6 +216,7 @@ public class MeetingSign implements Serializable {
 				", updateTime='" + updateTime + '\'' +
 				", descM='" + descM + '\'' +
 				", status=" + status +
+				", meetingId='" + meetingId + '\'' +
 				'}';
 	}
 }

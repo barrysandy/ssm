@@ -8,13 +8,16 @@ import java.util.List;
 public  interface MeetingService {
 
 	/** save one */
-	Integer save(Meeting bean) throws Exception;
+	Integer save(Meeting bean,String oldImage) throws Exception;
 
 	/** update 状态 */
 	Integer updateResponseStatusById(Integer status,String updateTime,String id) throws Exception;
 
 	/** update all */
-	Integer updateAll(Meeting bean) throws Exception;
+	Integer updateAll(Meeting bean,String oldImage) throws Exception;
+
+	/** update excelPath */
+	Integer updateExcelById(String excelPath,String id) throws Exception;
 
 	/** delete ById */
 	Integer deleteById(String id) throws Exception;

@@ -55,9 +55,9 @@ public class InterfaceInfoServiceImpl implements InterfaceInfoService {
 	@Override
 	public InterfaceInfo selectByPrimaryKey(String id) {
 		InterfaceInfo bean = interfaceInfoMapper.selectByPrimaryKey(id);
-		if(bean.getUrl().indexOf(com.xiaoshu.api.Set.SYSTEM_URL) == -1 ){
-			bean.setUrl(com.xiaoshu.api.Set.SYSTEM_URL + bean.getUrl());
-		}
+//		if(bean.getUrl().indexOf(com.xiaoshu.api.Set.SYSTEM_URL) == -1 ){
+//			bean.setUrl(com.xiaoshu.api.Set.SYSTEM_URL + bean.getUrl());
+//		}
 		return bean;
 	}
 

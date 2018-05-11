@@ -1,30 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoshu.dao.MeetingSignMapper">
-	<resultMap id="MeetingSign" type="com.xiaoshu.entity.MeetingSign">
-		<id property="id" column="ID" javaType="java.lang.String"></id>
-		<result property="name" column="NAME" javaType="java.lang.String"></result>
-		<result property="headImage" column="HEAD_IMAGE" javaType="java.lang.String"></result>
-		<result property="phone" column="PHONE" javaType="java.lang.String"></result>
-	    <result property="signCode" column="SIGN_CODE" javaType="java.lang.String"></result>
-	    <result property="company" column="COMPANY" javaType="java.lang.String"></result>
-	    <result property="personType" column="POSITION" javaType="java.lang.String"></result>
-		<result property="position" column="UPDATE_TIME" javaType="java.lang.String"></result>
-	    <result property="joinDinner" column="JOIN_DINNER" javaType="java.lang.String"></result>
-	    <result property="createTime" column="CREATE_TIME" javaType="java.lang.String"></result>
-	    <result property="updateTime" column="UPDATE_TIME" javaType="java.lang.String"></result>
-		<result property="descM" column="DESC_M" javaType="java.lang.String"></result>
-		<result property="status" column="STATUS" javaType="java.lang.Integer"></result>
-	</resultMap>
 
 	<!-- 按照模糊分页查询列表 -->
-	<select id="getListByKeyWord" parameterType="java.util.Map" resultMap="MeetingSign">
-		SELECT * FROM  t_meeting_sign WHERE BEGIN_TIME &gt; #{date1 } AND END_TIME &lt; #{date2 }
+	<select id="getListByKeyWord" parameterType="java.util.Map" resultType="com.xiaoshu.entity.MeetingSign">
+		SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID
+		FROM  t_meeting_sign
+		WHERE MEETING_ID=#{id}
 		<if test="status != -1 ">
 			AND STATUS = #{status}
-		</if>
-		<if test="keyword != null and keyword != ''">
-			AND NAME LIKE concat(concat('%',#{keyword}),'%')
 		</if>
 		ORDER BY CREATE_TIME DESC
 		limit #{index},#{pageSize}
@@ -32,14 +16,20 @@
 	
 	<!-- 按照key统计个数 -->
 	<select id="getCountByKeyWord" resultType="java.lang.Integer">
-		SELECT COUNT(ID) FROM  t_meeting_sign WHERE BEGIN_TIME &gt; #{date1 } AND END_TIME &lt; #{date2 }
+		SELECT COUNT(ID)
+		FROM  t_meeting_sign
+		WHERE MEETING_ID=#{id}
 		<if test="status != -1 ">
 			AND STATUS = #{status}
 		</if>
-		<if test="keyword != null and keyword != ''">
-			AND NAME LIKE concat(concat('%',#{keyword}),'%')
-		</if>
-	</select>  
+	</select>
 
-
+	<!-- 插入集合 -->
+	<insert id ="saveList">
+		<foreach collection="list" item="list" separator=";">
+			INSERT INTO t_meeting_sign(ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID)
+			VALUES(#{list.id},#{list.name},#{list.headImage},#{list.phone},#{list.signCode},#{list.company},#{list.personType},#{list.position},#{list.joinDinner},
+			#{list.createTime},#{list.updateTime},#{list.descM},#{list.status},#{list.meetingId} )
+		</foreach>
+	</insert>
 </mapper>

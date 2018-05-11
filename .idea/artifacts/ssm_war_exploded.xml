@@ -7,7 +7,7 @@
           <element id="module-output" name="ssm" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.15" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.16" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.1" />
           <element id="library" level="project" name="Maven: tk.mybatis:mapper:3.4.3" />
           <element id="library" level="project" name="Maven: javax.persistence:persistence-api:1.0" />
@@ -82,6 +82,11 @@
           <element id="library" level="project" name="Maven: org.springframework.retry:spring-retry:1.1.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.amqp:spring-amqp:1.4.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-messaging:4.1.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:3.16" />
+          <element id="library" level="project" name="Maven: com.github.virtuald:curvesapi:1.04" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:3.16" />
+          <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" />
+          <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

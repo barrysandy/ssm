@@ -191,40 +191,6 @@
         }
 
 
-        /*function sendMsg(id) {
-            var url = "/messageRecord/interfaceSendMsg";
-            $.post(url,{'id':id,'type':'CONSUME'},function(result){
-                if(result.state) {
-                    layer.open({
-                        type: 1,
-                        title: '发送短信通知',
-                        skin: 'layui-layer-rim',
-                        area: ['400px', '200px'],
-                        content: '<div style="padding: 42px 112px; font-size: 16px; color: #808080;" >发送成功</div>',
-                        btn: ['关闭'],
-                        btn2: function(){
-                            layer.closeAll();
-                        },
-                        end: function () {
-                            location.reload();
-                        }
-                    });
-                }else{
-                    layer.open({
-                        type: 1,
-                        title: '发送短信通知',
-                        skin: 'layui-layer-rim',
-                        area: ['400px', '200px'],
-                        content: '<div style="padding: 42px 112px; font-size: 16px; color: #808080;" >发送失败,请重试！</div>',
-                        end: function () {
-                            location.reload();
-                        }
-                    });
-                }
-            }, "json");
-        }*/
-
-
         function getUserInfo(id) {
             layer.open({
                 type: 2,

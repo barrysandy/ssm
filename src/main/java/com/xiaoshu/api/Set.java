@@ -6,6 +6,9 @@ package com.xiaoshu.api;
  */
 public class Set {
 
+    /** 当前的环境 1 正式环境  0 测试环境*/
+    public static final int SYSTEM_ENVIRONMENTAL = 0;
+
     /**
      * 项目地址，用于接口前置地址，完整地址需要加上controller
      * http://w17b197823.iok.la/

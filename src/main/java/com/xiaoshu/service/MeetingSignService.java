@@ -1,30 +1,45 @@
 package com.xiaoshu.service;
 
-import com.xiaoshu.entity.Meeting;
+import com.xiaoshu.entity.MeetingSign;
 
 import java.util.List;
 
 /** 标准版 */
 public  interface MeetingSignService {
 
+	/** save list */
+	void saveList(List<MeetingSign> lsit) throws Exception;
+
 	/** save one */
-	Integer save(Meeting bean) throws Exception;
+	Integer save(MeetingSign bean) throws Exception;
 
 	/** update 状态 */
 	Integer updateResponseStatusById( Integer status, String updateTime, String id) throws Exception;
 
 	/** update all */
-	Integer updateAll(Meeting bean) throws Exception;
+	Integer updateAll(MeetingSign bean) throws Exception;
+
+	/** update join */
+	Integer updateJoinById(Integer joinDinner,String id) throws Exception;
 
 	/** delete ById */
 	Integer deleteById( String id) throws Exception;
 
 	/** select ById */
-	Meeting getById( String id) throws Exception;
+	MeetingSign getById( String id) throws Exception;
 
 	/** select List */
-	List<Meeting> getListByKeyWord( Integer index, Integer pageSize, String keyword, String date1, String date2) throws Exception;
+	List<MeetingSign> getListByKeyWord(String id,Integer status ,Integer index, Integer pageSize, String keyword) throws Exception;
 
 	/** Count List */
-	Integer getCountByKeyWord( String keyword, String date1,String date2) throws Exception;
+	Integer getCountByKeyWord(String id ,Integer status ,String keyword) throws Exception;
+
+	/** get SIGN_CODE */
+	String getSignCode() throws Exception;
+
+	/** Count SIGN_user */
+	Integer getCountUserByNameAndPhone( String name, String phone,String meetingId) throws Exception;
+
+	/** delete ByMeetingId */
+	Integer deleteByMeetingId(String meetingId) throws Exception;
 }
