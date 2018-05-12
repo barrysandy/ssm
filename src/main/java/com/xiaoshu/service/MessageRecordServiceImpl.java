@@ -6,6 +6,7 @@ import com.xiaoshu.dao.*;
 import com.xiaoshu.entity.*;
 import com.xiaoshu.tools.ToolsDate;
 import com.xiaoshu.tools.ToolsHttpRequest;
+import com.xiaoshu.tools.ToolsPage;
 import com.xiaoshu.tools.sendMsg.IndustrySMS;
 import com.xiaoshu.tools.sendMsg.MsgTemplate;
 import com.xiaoshu.util.JsonUtils;
@@ -29,8 +30,8 @@ public class MessageRecordServiceImpl implements MessageRecordService{
 	@Resource private MessageRecordMapper messageRecordMapper;
 	@Resource private CommodityMapper commodityMapper;
 	@Resource private CommodityPriceListMapper commodityPriceListMapper;
-
-
+	@Resource private MeetingMapper meetingMapper;
+	@Resource private MeetingSignMapper meetingSignMapper;
 
 	@Override
 	public Integer save(MessageRecord bean) throws Exception {
@@ -756,5 +757,79 @@ public class MessageRecordServiceImpl implements MessageRecordService{
 			e.printStackTrace();
 		}
 	}
+
+
+	/**
+	 * ID 11 :
+	 * 发送会议提醒短信
+	 * @param id 会议id
+	 * @param type 短信类型 MEETING_MSG_ALL
+	 * @throws Exception
+	 */
+	@Override
+	public Integer sendMeetingMsg(String id,String type) throws Exception {
+		Integer sendTotal = 0 ;
+		//TODO 【11 会议短信】会议提醒
+		String nowTime = ToolsDate.getStringDate(ToolsDate.simpleSecond);//当前时间
+		try{
+			if(id != null) {
+				Meeting meeting = meetingMapper.getById(id);
+				if(meeting != null) {
+					List<MessageTemple> listTemple = messageTempleMapper.getListByRefIdAndRefType(meeting.getId(),"meeting");
+					MessageTemple messageTemple = MsgTemplate.getMessageTemple( listTemple,type);
+					if(messageTemple != null){
+						int total = meetingSignMapper.getCountByKeyWord(id,-1,"");
+						System.out.println("   TOTAL : " + total);
+						int pageSize = 10;
+						int totalPage = ToolsPage.totalPage(total, pageSize);//总页数
+						if(totalPage > 0) {
+							for (int i = 0; i < totalPage; i++) {
+								int index = i * pageSize;
+								List<MeetingSign> list = meetingSignMapper.getListByKeyWord(id ,-1 ,index, pageSize,"");
+								Iterator<MeetingSign> iterator = list.iterator();
+								while (iterator.hasNext()) {
+									MeetingSign meetingSign = iterator.next();
+									String code = meetingSign.getId() + meetingSign.getPhone() + type;
+									int exit = messageRecordMapper.countByCode(code);
+									if(exit <= 0) {
+										log.info("------------ [LOG["+ nowTime +"]sendMeetingMsg] messageTemple : " + messageTemple + " ------------");
+										String content = MsgTemplate.getMsgTemplate(messageTemple.getTempleId());
+										//TODO 短信参数组装
+										String signName = meetingSign.getName();
+										String signPhone = meetingSign.getPhone();
+										String sign = messageTemple.getSign();
+										String meetingTitle = meeting.getTitle();
+										String meetingCode = meetingSign.getSignCode();
+										String meetingUserName = meeting.getName();
+										String meetingUserPhone = meeting.getPhone();
+										String meetingTime = meeting.getBeginTime() + " - " + meeting.getEndTime() ;
+										String address = meeting.getAddress();
+
+										//"您好+，+邀请你参加+会议，你的会议签到码为+，联系人：+ 联系人电话：+，会议地址+，会议时间+，感谢你准时参加。【+】";
+										String[] param = new String[]{signName,sign,meetingTitle,meetingCode,meetingUserName,meetingUserPhone,address,meetingTime,sign};
+										HashMap<String, Object> map = IndustrySMS.link(signPhone, content, "",param);
+										String status = (String) map.get("status");
+										String msg =  (String) map.get("msg");
+										String msgId = UUID.randomUUID().toString();
+										MessageRecord messageRecord = new MessageRecord(msgId, meetingUserPhone, sign, content,meetingSign.getId(), status, new Date(), new Date(), msg ,code, 1);
+										messageRecordMapper.save(messageRecord);
+										sendTotal ++;
+										log.info("------------ [LOG["+ nowTime +"]sendMeetingMsg] send Code: " + code + " ------------");
+									}else {
+										log.info("------------ [LOG["+ nowTime +"]sendMeetingMsg] HasSend Code: " + code + " ------------");
+									}
+								}
+							}
+						}
+					}
+
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return sendTotal;
+	}
+
 
 }

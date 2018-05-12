@@ -17,12 +17,24 @@ public class MessageTempleServiceImpl implements MessageTempleService{
 	/** save one */
 	@Override
 	public Integer save(MessageTemple bean) throws Exception {
-		int exit = mapper.countByTTypeAndCId(bean.getTempleType(),bean.getCommodityId());
-		if(exit == 0){
-			return mapper.save(bean);
+		//不允许重复插入 商品类型
+		if(bean.getRefId() == null || "".equals(bean.getRefId())){
+			int exit = mapper.countByTTypeAndCId(bean.getTempleType(),bean.getCommodityId());
+			if(exit == 0){
+				return mapper.save(bean);
+			}else{
+				return 0;
+			}
 		}else{
-			return 0;
+			//不允许重复插入 引用类型
+			int exit = mapper.countByRefIdAndType(bean.getTempleType(),bean.getRefId());
+			if(exit == 0){
+				return mapper.save(bean);
+			}else{
+				return 0;
+			}
 		}
+
 	}
 
 	/** update templeId */
@@ -84,4 +96,21 @@ public class MessageTempleServiceImpl implements MessageTempleService{
 		return mapper.countByTTypeAndCId(templeType,commodityId);
 	}
 
+	/** 按照 引用id 和引用类型查询 短信模板集合 */
+	@Override
+	public List<MessageTemple> getListByRefIdAndRefType(String commodityId,String refType) throws Exception{
+		return mapper.getListByRefIdAndRefType(commodityId,refType);
+	}
+
+	/** getListMeeting */
+	@Override
+	public List<MessageTemple> getMeetingListByKey(int index,int pageSize,String key,String refId,String refType) throws Exception{
+		return mapper.getMeetingListByKey(index,pageSize,key,refId,refType);
+	}
+
+	/** getCountMeeting */
+	@Override
+	public Integer getCountMeetingByKey(String key,String refId,String refType) throws Exception{
+		return mapper.getCountMeetingByKey(key,refId,refType);
+	}
 }

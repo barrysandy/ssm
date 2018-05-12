@@ -1,18 +1,16 @@
 package com.xiaoshu.controller.admin.middleKey;
 
 import com.xiaoshu.entity.Commodity;
+import com.xiaoshu.entity.Meeting;
 import com.xiaoshu.entity.MessageTemple;
 import com.xiaoshu.service.CommodityService;
-import com.xiaoshu.service.MessageRecordService;
+import com.xiaoshu.service.MeetingService;
 import com.xiaoshu.service.MessageTempleService;
-import com.xiaoshu.service.OrderService;
 import com.xiaoshu.tools.ToolsDate;
 import com.xiaoshu.tools.sendMsg.MsgTemplate;
 import com.xiaoshu.util.JsonUtils;
 import com.xiaoshu.util.Pager;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +24,9 @@ import java.util.*;
 @RequestMapping("/messageTemple")
 public class MessageTempleController {
 
-    private static Logger log = LoggerFactory.getLogger(MessageTempleController.class);
-
     @Resource private MessageTempleService messageTempleService;
     @Resource private CommodityService commodityService;
-
+    @Resource private MeetingService meetingService;
 
     /**
      * 分页查询
@@ -76,9 +72,9 @@ public class MessageTempleController {
      * @date 2018-04-08 14:15
      */
     @RequestMapping("/toEdit")
-    public String toEdit( Model model,String id, Integer commodityId){
+    public String toEdit( Model model,String id, Integer commodityId){//,String refId,String refType
         try{
-            MessageTemple bean = new MessageTemple("", commodityId, "", 0, "", "", "", "", 0,"");
+            MessageTemple bean = new MessageTemple("", commodityId, "", "", "", 0, "", "", "", "", 0, "");
             if(StringUtils.isNotBlank(id)){
                 bean = messageTempleService.getById(id);
             }
@@ -138,16 +134,16 @@ public class MessageTempleController {
             if(bean != null){
                 if(bean.getTypese() == 1){
                     //单一商品
-                    MessageTemple bean1 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【单一商品】购买",
+                    MessageTemple bean1 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【单一商品】购买",
                             0, "SINGLE_BUY", nowTime, null, "一键创建", 1, sign);
 
-                    MessageTemple bean2 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【单一商品】购买成团成功群发短信",
+                    MessageTemple bean2 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【单一商品】购买成团成功群发短信",
                             1, "SINGLE_BUY_GROUP_SUC_MASS", nowTime, null, "一键创建", 1, sign);
 
-                    MessageTemple bean3 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【单一商品】购买成团时组合购买短信",
+                    MessageTemple bean3 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【单一商品】购买成团时组合购买短信",
                             2, "SINGLE_BUY_GROUP_SUC_TOBUY", nowTime, null, "一键创建", 1, sign);
 
-                    MessageTemple bean4 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【单一商品】购买成团超时失败群发短信",
+                    MessageTemple bean4 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【单一商品】购买成团超时失败群发短信",
                             3, "SINGLE_BUY_GROUP_FIAL_MASS", nowTime, null, "一键创建", 1, sign);
                     messageTempleService.save(bean1);
                     messageTempleService.save(bean2);
@@ -157,16 +153,16 @@ public class MessageTempleController {
                 }
                 else if(bean.getTypese() == 2){
                     //组团商品
-                    MessageTemple bean1 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【组团商品】购买",
+                    MessageTemple bean1 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【组团商品】购买",
                             4, "GROUP_BUY", nowTime, null, "一键创建", 1, sign);
 
-                    MessageTemple bean2 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【组团商品】购买成团成功群发短信",
+                    MessageTemple bean2 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【组团商品】购买成团成功群发短信",
                             5, "GROUP_BUY_SUC_MASS", nowTime, null, "一键创建", 1, sign);
 
-                    MessageTemple bean3 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【组团商品】购买成团时组合购买短信",
+                    MessageTemple bean3 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【组团商品】购买成团时组合购买短信",
                             6, "GROUP_BUY_SUC_TOBUY", nowTime, null, "一键创建", 1, sign);
 
-                    MessageTemple bean4 = new MessageTemple(UUID.randomUUID().toString(), id, id + "【组团商品】购买成团超时失败群发短信",
+                    MessageTemple bean4 = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【组团商品】购买成团超时失败群发短信",
                             7, "GROUP_BUY_FIAL_MASS", nowTime, null, "一键创建", 1, sign);
                     messageTempleService.save(bean1);
                     messageTempleService.save(bean2);
@@ -174,7 +170,7 @@ public class MessageTempleController {
                     messageTempleService.save(bean4);
                 }
                 if(bean.getTypese() == 1 || bean.getTypese() == 2 ) {
-                    MessageTemple beanRefund = new MessageTemple(UUID.randomUUID().toString(), id, id + "【统一商品】统一退款模板",
+                    MessageTemple beanRefund = new MessageTemple(UUID.randomUUID().toString(),id, String.valueOf(id),"commodity", id + "【统一商品】统一退款模板",
                             8, "REFUND", nowTime, null, "一键创建", 1, sign);
                     messageTempleService.save(beanRefund);
                 }
@@ -185,7 +181,27 @@ public class MessageTempleController {
         return JsonUtils.turnJson(true,"success",null);
     }
 
-
+    /**
+     * 一键创建短信模板
+     * @author XGB
+     * @date 2018-05-12 19:35
+     */
+    @RequestMapping("/createAll2")
+    @ResponseBody
+    public String createAll2(String refId,String refType,String sign){
+        String nowTime = ToolsDate.getStringDate(ToolsDate.simpleSecond);
+        try{
+            Meeting bean = meetingService.getById(refId);
+            if(bean != null){
+                MessageTemple beans = new MessageTemple(UUID.randomUUID().toString(),0, refId,refType,  "【会议短信】会议提醒",
+                        11, "MEETING_MSG_ALL", nowTime, null, "一键创建", 1, sign);
+                messageTempleService.save(beans);
+            }
+        }catch(Exception e) {
+            return JsonUtils.turnJson(false,"error"+e.getMessage(),e);
+        }
+        return JsonUtils.turnJson(true,"success",null);
+    }
 
     /**
      * 删除

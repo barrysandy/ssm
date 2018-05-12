@@ -62,6 +62,9 @@ public class Meeting implements Serializable {
 	@Column(name="EXCEL_PATH")
 	private String excelPath;//导入的Excel路径
 
+	@Column(name="ADDRESS")
+	private String address;//会议地址
+
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
@@ -170,9 +173,17 @@ public class Meeting implements Serializable {
 		this.excelPath = excelPath;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Meeting() { }
 
-	public Meeting(String id, String image, String title, String descM, String name, String phone, String createTime, String updateTime, String beginTime, String endTime, Integer signTotal, int status, String excelPath) {
+	public Meeting(String id, String image, String title, String descM, String name, String phone, String createTime, String updateTime, String beginTime, String endTime, Integer signTotal, int status, String excelPath, String address) {
 		this.id = id;
 		this.image = image;
 		this.title = title;
@@ -186,6 +197,7 @@ public class Meeting implements Serializable {
 		this.signTotal = signTotal;
 		this.status = status;
 		this.excelPath = excelPath;
+		this.address = address;
 	}
 
 	@Override
@@ -204,6 +216,7 @@ public class Meeting implements Serializable {
 				", signTotal=" + signTotal +
 				", status=" + status +
 				", excelPath='" + excelPath + '\'' +
+				", address='" + address + '\'' +
 				'}';
 	}
 }

@@ -133,6 +133,11 @@
                         <td colspan="7"><input type="text" class="u-input" name="phone" value="${bean.phone}" maxlength="11"></td>
                     </tr>
                     <tr>
+                        <td class="table-header">会议地址<span style="color: red">*</span></td>
+                        <td colspan="7"><input type="text" class="u-input" name="address" value="${bean.address}" maxlength="200"></td>
+                    </tr>
+
+                    <tr>
                         <td class="table-header">是否启用<span style="color: red">*</span></td>
                         <td colspan="7">
                             <select id="status" name="status" class="u-input">

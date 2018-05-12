@@ -156,14 +156,67 @@
                     console.log('no');
                 }
             });
+        }
+        function CreateAllTemplates2(refId,refType) {
+            layer.open({
+                type: 1,
+                title: '一键创建短信模板',
+                skin: 'layui-layer-rim',
+                area: ['400px', '200px'],
+                content: '<div style="padding: 42px 112px; font-size: 16px; color: #808080;" >确认创建?</div>',
+                btn: ['确认','取消'],
+                yes: function(){
+                    layer.closeAll();
+                    sign = prompt("请输入短信模板的签名:","一个半小时旅游圈");
+                    if (sign != null){
+                        CreateAllTemplatesYes2(refId,refType,sign);
+                    }else{
+                        alert("你按了[取消]按钮");
+                    }
 
-
-
+                },
+                btn2: function(){
+                    console.log('no');
+                }
+            });
         }
 
         function CreateAllTemplatesYes(id,sign) {
             var url = "${path}/messageTemple/createAll";
             $.post(url,{ 'id':id ,'sign':sign },function(result){
+                if(result.state) {
+                    layer.open({
+                        type: 1,
+                        title: '提示',
+                        skin: 'layui-layer-rim',
+                        area: ['400px', '200px'],
+                        content: '<div style="padding: 42px 112px; font-size: 16px; color: #808080;" >创建成功</div>',
+                        btn: ['关闭'],
+                        btn2: function(){
+                            layer.closeAll();
+                        },
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                }else{
+                    layer.open({
+                        type: 1,
+                        title: '提示',
+                        skin: 'layui-layer-rim',
+                        area: ['400px', '200px'],
+                        content: '<div style="padding: 42px 112px; font-size: 16px; color: #808080;" >创建失败</div>',
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                }
+            }, "json");
+        }
+
+        function CreateAllTemplatesYes2(refId,refType,sign) {
+            var url = "${path}/messageTemple/createAll2";
+            $.post(url,{ 'refId':refId ,'refType':refType ,'sign':sign },function(result){
                 if(result.state) {
                     layer.open({
                         type: 1,
@@ -218,18 +271,27 @@
                                         <i class="iconfont">&#xe61f;</i> 新增
                                     </button>
                                 </div>
-                                <c:if test="${commodityId != -1 }">
-                                    <div class=" panel-head-btnbar">
-                                        <button class="u-btn sm success" type="button" onClick="CreateAllTemplates('${commodityId }')">
-                                            <i class="iconfont">&#xe6b6;</i> 一键创建模板
-                                        </button>
-                                    </div>
+                                <c:if test="${refId == null || refId == '' }">
+                                    <c:if test="${commodityId != -1 }">
+                                        <div class=" panel-head-btnbar">
+                                            <button class="u-btn sm success" type="button" onClick="CreateAllTemplates('${commodityId }')">
+                                                <i class="iconfont">&#xe6b6;</i> 一键创建模板
+                                            </button>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${commodityId == -1 }">
+                                        <div class=" panel-head-btnbar">
+                                            <a class="u-btn sm success" type="button" href="${path}/messageTemple/list">
+                                                <i class="iconfont">&#xe60b;</i> 刷新重载
+                                            </a>
+                                        </div>
+                                    </c:if>
                                 </c:if>
-                                <c:if test="${commodityId == -1 }">
+                                <c:if test="${refId != null && refId != '' }">
                                     <div class=" panel-head-btnbar">
-                                        <a class="u-btn sm success" type="button" href="${path}/messageTemple/list">
-                                            <i class="iconfont">&#xe60b;</i> 刷新重载
-                                        </a>
+                                        <button class="u-btn sm success" type="button" onClick="CreateAllTemplates2('${refId }','${refType}')">
+                                            <i class="iconfont">&#xe6b6;</i> 一键创建模板(new)
+                                        </button>
                                     </div>
                                 </c:if>
                                 <div class=" panel-head-btnbar">
@@ -254,6 +316,8 @@
                                         <th style="width:80px" align="center">模板ID</th>
                                         <th style="width:10%" align="center">模板签名</th>
                                         <th style="width:80px" align="center">模板所属商品ID</th>
+                                        <th style="width:10%;" align="center">模板引用ID</th>
+                                        <th style="width:10%;" align="center">模板引用类型</th>
                                         <th style="width:15%" align="center">模板名称</th>
                                         <th style="width:15%" align="center">模板类型</th>
                                         <th style="width:80px" align="center">描述</th>
@@ -268,6 +332,8 @@
                                             <td align="center">${bean.templeId}</td>
                                             <td align="center">${bean.sign}</td>
                                             <td align="center">${bean.commodityId}</td>
+                                            <td align="center">${bean.refId}</td>
+                                            <td align="center">${bean.refType}</td>
                                             <td align="center">${bean.templeName}</td>
                                             <td align="center">
                                                 <c:if test="${bean.templeType == 'SINGLE_BUY' }">
@@ -299,6 +365,9 @@
                                                 </c:if>
                                                 <c:if test="${bean.templeType == 'WINNING' }">
                                                     <span style="color: tomato;">【会话活动商品】中奖生成订单提醒</span>
+                                                </c:if>
+                                                <c:if test="${bean.templeType == 'MEETING_MSG_ALL' }">
+                                                    <span style="color: tomato;">【会议短信】会议提醒</span>
                                                 </c:if>
                                             </td>
                                             <td align="center">${bean.descM}</td>

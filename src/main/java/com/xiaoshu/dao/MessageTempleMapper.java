@@ -11,8 +11,8 @@ public interface MessageTempleMapper {
 
 
 	/** save one */
-	@Insert("INSERT INTO message_temple (ID,COMMODITY_ID,TEMPLE_NAME, TEMPLE_ID,TEMPLE_TYPE, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS ,SIGN) " +
-			"VALUES(#{id},#{commodityId},#{templeName},#{templeId},#{templeType},#{createTime},#{updateTime},#{descM},#{status},#{sign} )")
+	@Insert("INSERT INTO message_temple (ID,COMMODITY_ID,TEMPLE_NAME, TEMPLE_ID,TEMPLE_TYPE, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS ,SIGN,REF_ID,REF_TYPE) " +
+			"VALUES(#{id},#{commodityId},#{templeName},#{templeId},#{templeType},#{createTime},#{updateTime},#{descM},#{status},#{sign},#{refId},#{refType} )")
 	Integer save(MessageTemple bean);
 
 	/** update templeId */
@@ -21,7 +21,7 @@ public interface MessageTempleMapper {
 
 	/** update all */
 	@Update("UPDATE message_temple SET COMMODITY_ID=#{commodityId},TEMPLE_NAME=#{templeName},TEMPLE_ID=#{templeId},TEMPLE_TYPE=#{templeType},CREATE_TIME=#{createTime},UPDATE_TIME=#{updateTime},DESC_M=#{descM}," +
-			"STATUS=#{status},SIGN=#{sign} WHERE ID=#{id} ")
+			"STATUS=#{status},SIGN=#{sign},REF_ID=#{refId},REF_TYPE=#{refType} WHERE ID=#{id} ")
 	Integer updateAll(MessageTemple bean);
 
 	/** delete ById */
@@ -29,11 +29,18 @@ public interface MessageTempleMapper {
 	Integer deleteById(@Param("id") String id);
 
 	/** 按照 商品 id 查询 短信模板集合 */
-	@Select("SELECT * FROM message_temple WHERE COMMODITY_ID = #{commodityId}")
+	@Select("SELECT ID,COMMODITY_ID,TEMPLE_NAME, TEMPLE_ID,TEMPLE_TYPE, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS ,SIGN,REF_ID,REF_TYPE " +
+			"FROM message_temple WHERE COMMODITY_ID = #{commodityId}")
 	List<MessageTemple> listByCommodityId(@Param("commodityId") Integer commodityId);
 
+	/** 按照 引用id 和引用类型查询 短信模板集合 */
+	@Select("SELECT ID,COMMODITY_ID,TEMPLE_NAME, TEMPLE_ID,TEMPLE_TYPE, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS ,SIGN,REF_ID,REF_TYPE " +
+			"FROM message_temple WHERE REF_ID = #{refId} AND REF_TYPE = #{refType}")
+	List<MessageTemple> getListByRefIdAndRefType(@Param("refId") String refId,@Param("refType") String refType);
+
 	/** select ByID */
-	@Select("SELECT * FROM message_temple WHERE ID = #{id}")
+	@Select("SELECT ID,COMMODITY_ID,TEMPLE_NAME, TEMPLE_ID,TEMPLE_TYPE, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS ,SIGN,REF_ID,REF_TYPE " +
+			"FROM message_temple WHERE ID = #{id}")
 	MessageTemple getById(@Param("id") String id);
 
 	/**
@@ -56,5 +63,15 @@ public interface MessageTempleMapper {
 	/** 按照模板类型和商品ID统计模板数 用于查询某个类型的模板是否存在 */
 	@Select("SELECT COUNT(ID) FROM message_temple WHERE TEMPLE_TYPE = #{templeType} AND COMMODITY_ID = #{commodityId}")
 	Integer countByTTypeAndCId(@Param("templeType") String templeType, @Param("commodityId") Integer commodityId);
+
+	@Select("SELECT COUNT(ID) FROM message_temple WHERE TEMPLE_TYPE = #{templeType} AND REF_ID = #{refId}")
+	Integer countByRefIdAndType(@Param("templeType") String templeType, @Param("refId") String refId);
+
+	/** getListMeeting */
+	List<MessageTemple> getMeetingListByKey(@Param("index") int index,@Param("pageSize") int pageSize,@Param("key") String key,
+											@Param("refId") String refId,@Param("refType") String refType) throws Exception;
+
+	/** getCountMeeting */
+	Integer getCountMeetingByKey(@Param("key") String key,@Param("refId") String refId,@Param("refType") String refType) throws Exception;
 
 }

@@ -63,12 +63,23 @@ public interface EnumsTemplateType {
      * 短信模板ID：8
      * REFUND 退款
      */
-    String REFUND ="REFUND";
+    String REFUND = "REFUND";
 
     /**
      * 短信模板ID：9
+     * WINNING 中奖短信
+     */
+    String WINNING = "WINNING";
+
+    /**
+     * 短信模板ID：10
      * REFUND 退款失败
      */
-    String REFUND_FAIL ="REFUND_FAIL";
+    String REFUND_FAIL = "REFUND_FAIL";
 
+    /**
+     * 短信模板ID：11
+     * MEETING_MSG_ALL 发送会议通知短信
+     */
+    String MEETING_MSG_ALL = "MEETING_MSG_ALL";
 }

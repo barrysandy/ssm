@@ -45,10 +45,7 @@ public class WechatActivityDrawController extends BaseController {
 	@Resource private FocusedUserInfoService focusedUserInfoService;
 	@Resource private WechatActivityWinningService wechatActivityWinningService;
 	@Resource private WechatActivityPrizeService wechatActivityPrizeService;
-	@Resource private OrderService orderService;
-	@Resource private OrderCodesService orderCodesService;
 	@Resource private CommodityService commodityService;
-	@Resource private MessageRecordService messageRecordService;
 
 	@Autowired private DeadLetterPublishService publishService;
 
@@ -353,43 +350,5 @@ public class WechatActivityDrawController extends BaseController {
 		}
 		return JsonUtils.turnJson(true,"success",null);
 	}
-
-	private static int createOrder(String user_id,String userName,String userPhone,Commodity commodity,OrderService orderService,OrderCodesService orderCodesService,HttpServletResponse resp,MessageRecordService messageRecordService){
-		try {
-			String img = commodity.getImage();//封面图片
-			String time = ToolsDate.getStringDate(ToolsDate.simpleSecond);
-			Order order = new Order(0, commodity.getCommodityName(), "",time, null, "",  "", 0.00, 1, 0, user_id, userName, userPhone, "", commodity.getSellerId(), time, img, null,null,null,0,0,commodity.getId(),0,"");
-			String order_no = orderService.getOrderNumber();//生产订单编号 synchronize方法
-			if(!"".equals(order_no)){
-				order.setOrderNo(order_no);//订单
-				int i = orderService.save(order);//保存订单
-				if(i > 0){
-					String useCode = orderService.getOrderCode();
-					int exit = orderCodesService.countByUseCode(useCode);
-					while (exit > 0) {
-						/** 重新获取useCode */
-						useCode = orderService.getOrderCode();
-						exit = orderCodesService.countByUseCode(useCode);
-					}
-					OrderCodes ordecode = new OrderCodes(UUID.randomUUID().toString(), order.getId(), order.getOrderNo(), "", useCode, "", time, user_id, commodity.getId(), 0, 1);
-					int saveState = orderCodesService.save(ordecode);
-					if(saveState > 0){
-						log.info("------------ [System Message] : New Order_CODE = " + useCode + " time ：" + time + " ------------");
-					}
-					messageRecordService.sendWiningMsg(order.getId(),"WINNING");
-					resp.getWriter().print(order.getId());//下单成功
-				}else{
-					resp.getWriter().print(0);//0订单保存失败
-				}
-			}else{
-				resp.getWriter().print(-3);//-3生成订单编失败
-			}
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-
 
 }

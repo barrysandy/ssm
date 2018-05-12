@@ -89,6 +89,19 @@
                         <td colspan="7"><input type="text" class="u-input" name="commodityId" value="${bean.commodityId}"></td>
                     </tr>
                     <tr>
+                        <td class="table-header"><span>所属引用ID</span><span style="color: red">*</span></td>
+                        <td colspan="7"><input type="text" class="u-input" name="refId" value="${bean.refId}"></td>
+                    </tr>
+                    <tr>
+                        <td class="table-header"><span>所属引用类型</span><span style="color: red">*</span></td>
+                        <td colspan="7">
+                            <select class="u-input" name="templeType">
+                                <option value="commodity" selected="selected">商品类型</option>
+                                <option value="meeting">会议类型</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="table-header">模板类型<span style="color: red">*</span></td>
                         <td colspan="7">
                             <select class="u-input" name="templeType">
@@ -102,6 +115,7 @@
                                 <option value="GROUP_BUY_FIAL_MASS">【组团商品】购买成团超时失败群发短信</option>
                                 <option value="REFUND">【统一商品】统一退款模板</option>
                                 <option value="WINNING">【会话活动商品】中奖生成订单提醒</option>
+                                <option value="MEETING_MSG_ALL">【会议短信】会议提醒</option>
                             </select>
                         </td>
                     </tr>

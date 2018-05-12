@@ -45,4 +45,13 @@ public interface MessageTempleService {
 	/** 按照模板类型和商品ID统计模板数 用于查询某个类型的模板是否存在 */
 	Integer countByTTypeAndCId(String templeType,Integer commodityId) throws Exception;
 
+	/** 按照 引用id 和引用类型查询 短信模板集合 */
+	List<MessageTemple> getListByRefIdAndRefType(String commodityId,String refType) throws Exception;
+
+	/** getListMeeting */
+	List<MessageTemple> getMeetingListByKey(int index,int pageSize,String key,String refId,String refType) throws Exception;
+
+	/** getCountMeeting */
+	Integer getCountMeetingByKey(String key,String refId,String refType) throws Exception;
+
 }

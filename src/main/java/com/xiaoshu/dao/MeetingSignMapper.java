@@ -44,7 +44,8 @@ public interface MeetingSignMapper {
 	MeetingSign getById(@Param("id") String id) throws Exception;
 
 	/** select List */
-	List<MeetingSign> getListByKeyWord(@Param("id") String id ,@Param("status") Integer status ,@Param("index") Integer index, @Param("pageSize") Integer pageSize, @Param("keyword") String keyword ) throws Exception;
+	List<MeetingSign> getListByKeyWord(@Param("id") String id ,@Param("status") Integer status ,@Param("index") Integer index, @Param("pageSize") Integer pageSize,
+									   @Param("keyword") String keyword ) throws Exception;
 
 	/** Count List */
 	Integer getCountByKeyWord(@Param("id") String id ,@Param("status") Integer status ,@Param("keyword") String keyword ) throws Exception;
@@ -54,7 +55,7 @@ public interface MeetingSignMapper {
 	Integer getCountBySignCode(@Param("signCode") String signCode) throws Exception;
 
 	/** Count SIGN_user */
-	@Select("SELECT COUNT(ID) FROM t_meeting_sign WHERE NAME = #{name} AND PHONE = #{phone} AND MEETING_ID =#{}")
+	@Select("SELECT COUNT(ID) FROM t_meeting_sign WHERE NAME = #{name} AND PHONE = #{phone} AND MEETING_ID =#{meetingId }")
 	Integer getCountUserByNameAndPhone(@Param("name") String name,@Param("phone") String phone,@Param("meetingId") String meetingId) throws Exception;
 
 }

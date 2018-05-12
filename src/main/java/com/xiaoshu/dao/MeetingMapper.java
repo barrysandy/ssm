@@ -12,11 +12,11 @@ public interface MeetingMapper {
 	@Insert("INSERT INTO t_meeting (" +
 			"ID,IMAGE,TITLE,DESC_M,NAME," +
 			"PHONE,CREATE_TIME,UPDATE_TIME,BEGIN_TIME,END_TIME," +
-			"SIGN_TOTAL,STATUS,EXCEL_PATH) " +
+			"SIGN_TOTAL,STATUS,EXCEL_PATH,ADDRESS) " +
 			"VALUES(" +
 			"#{id},#{image},#{title},#{descM},#{name}," +
 			"#{phone},#{createTime},#{updateTime},#{beginTime},#{endTime}," +
-			"#{signTotal},#{status},#{excelPath} )")
+			"#{signTotal},#{status},#{excelPath}，#{address} )")
 	Integer save(Meeting bean) throws Exception;
 
 	/** update 状态 */
@@ -30,7 +30,7 @@ public interface MeetingMapper {
 
 	/** update all */
 	@Update("UPDATE t_meeting SET TITLE=#{title},IMAGE=#{image},DESC_M=#{descM},NAME=#{name},PHONE=#{phone},CREATE_TIME=#{createTime}," +
-			"UPDATE_TIME=#{updateTime},BEGIN_TIME=#{beginTime},END_TIME=#{endTime},SIGN_TOTAL=#{signTotal},STATUS=#{status},EXCEL_PATH=#{excelPath} WHERE ID=#{id} ")
+			"UPDATE_TIME=#{updateTime},BEGIN_TIME=#{beginTime},END_TIME=#{endTime},SIGN_TOTAL=#{signTotal},STATUS=#{status},EXCEL_PATH=#{excelPath},ADDRESS=#{address} WHERE ID=#{id} ")
 	Integer updateAll(Meeting bean) throws Exception;
 
 	/** delete ById */
@@ -38,7 +38,7 @@ public interface MeetingMapper {
 	Integer deleteById(@Param("id") String id) throws Exception;
 
 	/** select ById */
-	@Select("SELECT ID,TITLE,IMAGE,DESC_M,NAME,PHONE,CREATE_TIME,UPDATE_TIME,BEGIN_TIME,END_TIME,SIGN_TOTAL,STATUS,EXCEL_PATH FROM t_meeting WHERE ID=#{id}")
+	@Select("SELECT ID,TITLE,IMAGE,DESC_M,NAME,PHONE,CREATE_TIME,UPDATE_TIME,BEGIN_TIME,END_TIME,SIGN_TOTAL,STATUS,EXCEL_PATH,ADDRESS FROM t_meeting WHERE ID=#{id}")
 	Meeting getById(@Param("id") String id) throws Exception;
 
 	/** select List */

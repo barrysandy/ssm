@@ -96,6 +96,12 @@ public class MsgTemplate {
 
 
 	/**
+	 * 短信模板ID：11
+	 * MEETING_MSG_ALL 发送会议通知短信
+	 */
+	public static String MEETING_MSG_ALL = "+您好，+邀请你参加+会议，你的会议签到码为+，联系人：+ 联系人电话：+，会议地址+，会议时间+，感谢你准时参加。【+】";
+
+	/**
 	 * 获取模板
 	 * @param id
 	 * @return
@@ -133,6 +139,8 @@ public class MsgTemplate {
 			template = WINNING;
 		}if(id == 10){
 			template = REFUND_FAIL;
+		}if(id == 11){
+			template = MEETING_MSG_ALL;
 		}
 		return template;
 	}
@@ -151,6 +159,7 @@ public class MsgTemplate {
 		list.add(getMsgTemplate(8));
 		list.add(getMsgTemplate(9));
 		list.add(getMsgTemplate(10));
+		list.add(getMsgTemplate(11));
 		return list;
 	}
 

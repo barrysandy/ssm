@@ -44,6 +44,11 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="table-header">会议地址</td>
+                    <td colspan="7">&nbsp;${bean.address}</td>
+                </tr>
+
+                <tr>
                     <td class="table-header">启用状态</td>
                     <td colspan="7">
                         <c:if test="${bean.status == 0}"><span style="color: red;">未启用</span></c:if>

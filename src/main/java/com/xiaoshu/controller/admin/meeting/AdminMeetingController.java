@@ -5,6 +5,7 @@ import com.xiaoshu.entity.Meeting;
 import com.xiaoshu.entity.MeetingSign;
 import com.xiaoshu.service.MeetingService;
 import com.xiaoshu.service.MeetingSignService;
+import com.xiaoshu.service.MessageRecordService;
 import com.xiaoshu.tools.*;
 import com.xiaoshu.tools.ssmImage.ToolsImage;
 import com.xiaoshu.util.JsonUtils;
@@ -25,6 +26,7 @@ import java.util.*;
 public class AdminMeetingController {
     @Resource private MeetingService meetingService;
     @Resource private MeetingSignService meetingSignService;
+    @Resource private MessageRecordService messageRecordService;
     /**
      * 分页查询
      * @param pager 分页
@@ -34,7 +36,7 @@ public class AdminMeetingController {
      * @date 2018-05-9 17:22
      */
     @RequestMapping("/list")
-    public String list(Pager pager, Model model, String search, String menuid,String date1,String date2,Integer status) {
+    public String list(String menuid,String parentId,Pager pager, Model model, String search, String date1,String date2,Integer status) {
         try{
             if(pager == null){ pager = new Pager(10); }
             if(status == null){ status = -1;}
@@ -111,7 +113,7 @@ public class AdminMeetingController {
         System.out.println("id: " + id );
         String imageShare = "";
         try{
-            Meeting bean =  new Meeting("-1", "", "", "", "", "", "", "", "", "", 0, 0,"");
+            Meeting bean =  new Meeting("-1", "", "", "", "", "", "", "", "", "", 0, 0,"","");
             System.out.println("bean: " + bean );
             if(id != null){
                 if(StringUtils.isNotBlank(id) && !"-1".equals(id)){
@@ -322,6 +324,25 @@ public class AdminMeetingController {
             }
         }
         return null ;
+    }
+
+
+    /**
+     * 发送群发短信
+     * @author XGB
+     * @date 2018-05-12 19:35
+     */
+    @RequestMapping("/sendMeetingMessage")
+    @ResponseBody
+    public String sendMeetingMessage(String id){
+        int total = 0;
+        try{
+            total = messageRecordService.sendMeetingMsg(id,"MEETING_MSG_ALL");
+        }catch(Exception e) {
+            e.printStackTrace();
+            return "-1";
+        }
+        return String.valueOf(total);
     }
 
 

@@ -35,6 +35,12 @@ public class MessageTemple implements Serializable {
 	@Column(name="COMMODITY_ID")
 	private Integer commodityId;//商品id -1查询全部
 
+	@Column(name="REF_ID")
+	private String refId;//引用id -1查询全部
+
+	@Column(name="REF_TYPE")
+	private String refType;//引用类型 commodity 商品 meeting 会议
+
 	@Column(name="TEMPLE_NAME")
 	private String templeName;//模板名称
 
@@ -59,10 +65,6 @@ public class MessageTemple implements Serializable {
 	@Column(name="SIGN")
 	private String sign;//模板签名
 
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -77,6 +79,22 @@ public class MessageTemple implements Serializable {
 
 	public void setCommodityId(Integer commodityId) {
 		this.commodityId = commodityId;
+	}
+
+	public String getRefId() {
+		return refId;
+	}
+
+	public void setRefId(String refId) {
+		this.refId = refId;
+	}
+
+	public String getRefType() {
+		return refType;
+	}
+
+	public void setRefType(String refType) {
+		this.refType = refType;
 	}
 
 	public String getTempleName() {
@@ -143,11 +161,14 @@ public class MessageTemple implements Serializable {
 		this.sign = sign;
 	}
 
-	public MessageTemple() { }
+	public MessageTemple() {
+	}
 
-	public MessageTemple(String id, Integer commodityId, String templeName, Integer templeId, String templeType, String createTime, String updateTime, String descM, int status, String sign) {
+	public MessageTemple(String id, Integer commodityId, String refId, String refType, String templeName, Integer templeId, String templeType, String createTime, String updateTime, String descM, int status, String sign) {
 		this.id = id;
 		this.commodityId = commodityId;
+		this.refId = refId;
+		this.refType = refType;
 		this.templeName = templeName;
 		this.templeId = templeId;
 		this.templeType = templeType;
@@ -163,6 +184,8 @@ public class MessageTemple implements Serializable {
 		return "MessageTemple{" +
 				"id='" + id + '\'' +
 				", commodityId=" + commodityId +
+				", refId='" + refId + '\'' +
+				", refType='" + refType + '\'' +
 				", templeName='" + templeName + '\'' +
 				", templeId=" + templeId +
 				", templeType='" + templeType + '\'' +

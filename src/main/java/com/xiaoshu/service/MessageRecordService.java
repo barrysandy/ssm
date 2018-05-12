@@ -139,4 +139,12 @@ public  interface MessageRecordService {
 	 */
 	void sendRefundFailMsg(Integer id,String type,String sign,String errCodeDes) throws Exception;
 
+	/**
+	 * ID 11 :
+	 * 发送会议提醒短信
+	 * @param id 会议id
+	 * @param type 短信类型 MEETING_MSG_ALL
+	 * @throws Exception
+	 */
+	Integer sendMeetingMsg(String id,String type) throws Exception;
 }

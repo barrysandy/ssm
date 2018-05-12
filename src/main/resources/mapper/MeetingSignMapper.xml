@@ -10,6 +10,9 @@
 		<if test="status != -1 ">
 			AND STATUS = #{status}
 		</if>
+		<if test="keyword != null and keyword != ''">
+			AND NAME LIKE concat(concat('%',#{keyword}),'%')
+		</if>
 		ORDER BY CREATE_TIME DESC
 		limit #{index},#{pageSize}
 	</select>
@@ -21,6 +24,9 @@
 		WHERE MEETING_ID=#{id}
 		<if test="status != -1 ">
 			AND STATUS = #{status}
+		</if>
+		<if test="keyword != null and keyword != ''">
+			AND NAME LIKE concat(concat('%',#{keyword}),'%')
 		</if>
 	</select>
 

@@ -140,6 +140,41 @@
             LayuiUtil.msg(data);
         }
 
+        function msgTempleas(refId) {
+            layer.open({
+                type: 2,
+                title: '会议短信模板管理',
+                skin: 'layui-layer-rim',
+                area: ['95%', '95%'],
+                content: "${path}/messageTemple/listMeeting?search=&refId="+refId + "&refType=meeting"
+            });
+        }
+
+
+        function sendMeetingMessage(id) {
+            layer.open({
+                type: 1,
+                title: '开始群发短信嘛',
+                skin: 'layui-layer-rim',
+                area: ['400px', '200px'],
+                content: '<div style="padding: 42px 112px; font-size: 16px; color: #808080;" >确认发送?</div>',
+                btn: ['确认','取消'],
+                yes: function(){
+                    layer.closeAll();
+                    sendMeetingMessageYes(id);
+                },
+                btn2: function(){
+                    console.log('no');
+                }
+            });
+        }
+        function sendMeetingMessageYes(id) {
+            var url = "${path}/meeting/sendMeetingMessage";
+            $.get(url,{'id':id},function(result){
+                layuiUtilMsg("发送短信:" + result + "条");
+            });
+        }
+        
         /**
          *提交表单
          */
@@ -221,6 +256,12 @@
                                                 <button class="u-btn sm texture f-m-l-xs" title="查看参会人员" type="button"
                                                         onClick="viewMeetingSign('${bean.id}')">
                                                     <i class="iconfont" style="color: deeppink">&#xe785;</i>
+                                                </button>
+                                                <button class="u-btn sm texture f-m-l-xs" title="会议短信模板管理" type="button" onClick="msgTempleas('${bean.id}')" style="color: green;">
+                                                    <i class="iconfont">&#xe6ee;</i>
+                                                </button>
+                                                <button class="u-btn sm texture f-m-l-xs" title="向所有参会人员发送提醒信息" type="button" onClick="sendMeetingMessage('${bean.id}')" style="color: red;">
+                                                    <i class="iconfont">&#xe6ee;</i>
                                                 </button>
                                                 <button class="u-btn sm texture f-m-l-xs" title="查看" type="button"
                                                         onClick="view('${bean.id}')">
