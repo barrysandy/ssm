@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td class="table-header">帐号类型</td>
-                    <td colspan="3">&nbsp;${bean.accountTypeStr}</td>
+                    <td colspan="3">&nbsp;${bean.accountType}</td>
                     <td class="table-header">是否启用</td>
                     <td colspan="3">&nbsp;${bean.usableStr}</td>
                 </tr>

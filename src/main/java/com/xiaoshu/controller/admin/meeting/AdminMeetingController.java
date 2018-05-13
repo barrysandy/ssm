@@ -221,7 +221,7 @@ public class AdminMeetingController {
             if(x == null || x == 0){x = 7;}//设置默认解析标题数
             if(y == null || y == 0){y = 10;}//设置默认解析记录条数（包含标题行）
             if(tableName == null || "".equals(tableName)){tableName = "Sheet1";}//设置默认解析表名称
-            String filePath;//文件地址
+            String filePath = null;//文件地址
             if(y == null || y == 0){y = 10;}
             int maxX = x;
             if(type == 0){

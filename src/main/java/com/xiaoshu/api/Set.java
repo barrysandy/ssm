@@ -7,7 +7,7 @@ package com.xiaoshu.api;
 public class Set {
 
     /** 当前的环境 1 正式环境  0 测试环境*/
-    public static final int SYSTEM_ENVIRONMENTAL = 0;
+    public static final int SYSTEM_ENVIRONMENTAL = 1;
 
     /**
      * 项目地址，用于接口前置地址，完整地址需要加上controller
@@ -16,7 +16,7 @@ public class Set {
      * http://www.daxi51.com/ssm/
      * http://118.24.118.23/ssm/
      */
-    public static final String SYSTEM_URL = "http://w17b197823.iok.la/ssm/";
+    public static final String SYSTEM_URL = "http://www.daxi51.com/ssm/";
 
 
     /**
