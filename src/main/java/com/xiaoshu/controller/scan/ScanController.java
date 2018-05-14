@@ -4,20 +4,25 @@ import com.xiaoshu.controller.frontend.shop.order.OrderApiController;
 import com.xiaoshu.entity.Commodity;
 import com.xiaoshu.entity.CommodityGroup;
 import com.xiaoshu.entity.FocusedUserInfo;
+import com.xiaoshu.entity.Log;
 import com.xiaoshu.service.*;
 import com.xiaoshu.tools.*;
 import com.xiaoshu.tools.sendMsg.EnumsTemplateType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
 @RequestMapping("/scan")
 public class ScanController {
+    private final Logger log = LoggerFactory.getLogger(ScanController.class);
 
     @Resource private CommodityService commodityService;
     @Resource private CommodityGroupService commodityGroupService;
@@ -25,6 +30,7 @@ public class ScanController {
     @Resource private OrderService orderService;
     @Resource private FocusedUserInfoService focusedUserInfoService;
     @Resource private PublicAccountInfoService publicAccountInfoService;
+    @Resource private LogService logService;
 
     /**
      * 接口扫描商品状态，并更新过期商品
@@ -84,6 +90,7 @@ public class ScanController {
             System.out.println("---------------------- InterfaceScanUpdateTimeStatus ----------------");
             System.out.println("---------------------- Scan_TotalPage: " + totalPage);
             System.out.println("---------------------- Scan_Total: " + scanTotal);
+            log.info("InterfaceScanUpdateTimeStatus  Scan_Total: " + scanTotal);
             System.out.println("---------------------- Update has overdue total: " + updateTotal);
             System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
@@ -154,6 +161,7 @@ public class ScanController {
             System.out.println("---------------------- InterfaceScanGroup ----------------------------");
             System.out.println("---------------------- Scan_TotalPage: " + totalPage);
             System.out.println("---------------------- Scan_Total: " + scanTotal);
+            log.info("InterfaceScanGroup  Scan_Total: " + scanTotal);
             System.out.println("---------------------- Update has overdue total: " + updateTotal);
             System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
@@ -214,6 +222,7 @@ public class ScanController {
             System.out.println("---------------------- interfaceScanUpdateUserInfo ----------------");
             System.out.println("---------------------- Scan_TotalPage: " + totalPage);
             System.out.println("---------------------- Scan_Total: " + scanTotal);
+            log.info("interfaceScanUpdateUserInfo  Scan_Total: " + scanTotal);
             System.out.println("---------------------- Update User total: " + updateTotal);
             System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
@@ -221,6 +230,36 @@ public class ScanController {
             e.printStackTrace();
         }
         return "总共扫描：【" + scanTotal + "】条，更新数据：【" + updateTotal +"】条。";
+    }
+
+
+    /**
+     * scan/interfaceScanLogInvalid
+     * 接口扫描清理失效日志
+     * @return String
+     * @author XGB
+     * @date 2018-04-25 11:59
+     */
+    @RequestMapping("/interfaceScanLogInvalid")
+    @ResponseBody
+    public String interfaceScanLogInvalid(){
+        Integer total = 0;
+        try{
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date());
+            c.add(Calendar.MONTH, -1);//过去一月
+            Date dateOneMonthAgo = c.getTime();
+            total = logService.deleteInvalidLog(dateOneMonthAgo);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        System.out.println("---------------------- interfaceScanLogInvalid ----------------");
+        System.out.println("---------------------- Scan_Delete_Total: " + total);
+        log.info("interfaceScanLogInvalid  Scan_Delete_Total: " + total);
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        return null;
     }
 
 }

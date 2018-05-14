@@ -423,5 +423,15 @@
 			<version>2.6.0</version>
 		</dependency>
 
+		<!-- JBarCode -->
+		<dependency>
+			<groupId>JBarCode</groupId>
+			<artifactId>jbar-code</artifactId>
+			<version>0.2.8</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jbarcode-0.2.8.jar
+			</systemPath>
+		</dependency>
+
 	</dependencies>
 </project>

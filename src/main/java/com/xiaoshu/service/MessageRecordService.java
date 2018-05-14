@@ -23,6 +23,7 @@ public  interface MessageRecordService {
 	/** select ById */
 	MessageRecord getById(String id) throws Exception;
 
+
 	/** 按照签名或者短信内容查询消息记录集合 */
 	List<MessageRecord> listByKeyWord(Integer index,Integer pageSize,String keyword,String date1, String date2) throws Exception;
 

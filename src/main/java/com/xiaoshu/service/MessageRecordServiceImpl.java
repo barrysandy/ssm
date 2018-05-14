@@ -1,7 +1,7 @@
 package com.xiaoshu.service;
 
 
-import com.xiaoshu.api.Api;
+import com.xiaoshu.api.*;
 import com.xiaoshu.dao.*;
 import com.xiaoshu.entity.*;
 import com.xiaoshu.tools.ToolsDate;
@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.net.URLEncoder;
 import java.util.*;
 
 /** 标准版 */
@@ -55,11 +56,10 @@ public class MessageRecordServiceImpl implements MessageRecordService{
 		return mapper.deleteById(id);
 	}
 
-
+	@Override
 	public MessageRecord getById(String id) throws Exception {
 		return mapper.getById(id);
 	}
-
 
 	@Override
 	public List<MessageRecord> listByKeyWord(Integer index,Integer pageSize,String keyword,String date1, String date2) throws Exception {
@@ -799,7 +799,9 @@ public class MessageRecordServiceImpl implements MessageRecordService{
 										String signPhone = meetingSign.getPhone();
 										String sign = messageTemple.getSign();
 										String meetingTitle = meeting.getTitle();
-										String meetingCode = meetingSign.getSignCode();
+										String meetingCode = com.xiaoshu.api.Set.SYSTEM_URL + "meeting/interfaceMyCode?id=" + id + "&code=" + meetingSign.getSignCode();
+										//
+										// meetingCode = URLEncoder.encode(meetingCode ,"utf-8");
 										String meetingUserName = meeting.getName();
 										String meetingUserPhone = meeting.getPhone();
 										String meetingTime = meeting.getBeginTime() + " - " + meeting.getEndTime() ;

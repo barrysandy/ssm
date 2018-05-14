@@ -253,6 +253,10 @@
                                                 <c:if test="${bean.status == 0}"><span style="color: red;">未启用</span></c:if>
                                             </td>
                                             <td align="center">
+                                                <a class="u-btn sm texture f-m-l-xs" title="开始签到" type="button"
+                                                        href="https://www.baidu.com/" target="_blank">
+                                                    <i class="iconfont" style="color: green">&#xe62f;</i>
+                                                </a>
                                                 <button class="u-btn sm texture f-m-l-xs" title="查看参会人员" type="button"
                                                         onClick="viewMeetingSign('${bean.id}')">
                                                     <i class="iconfont" style="color: deeppink">&#xe785;</i>

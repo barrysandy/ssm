@@ -93,7 +93,7 @@
         }
 
         function deleted(id) {
-            var url = "${path}/meeting/del";
+            var url = "${path}/meetingSign/del";
             $.post(url,{'id':id},function(result){
                 if(result.state) {
                     layer.open({

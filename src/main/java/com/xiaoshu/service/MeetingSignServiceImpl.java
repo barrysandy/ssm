@@ -67,6 +67,12 @@ public class MeetingSignServiceImpl implements MeetingSignService{
 		return mapper.getById(id);
 	}
 
+	/** select BySignCode */
+	@Override
+	public MeetingSign getBySignCode( String signCode) throws Exception {
+		return mapper.getSignCode(signCode);
+	}
+
 	/** select List */
 	@Override
 	public List<MeetingSign> getListByKeyWord(String id ,Integer status , Integer index, Integer pageSize, String keyword) throws Exception {
@@ -100,9 +106,21 @@ public class MeetingSignServiceImpl implements MeetingSignService{
 		return mapper.getCountUserByNameAndPhone(name,phone,meetingId);
 	}
 
+	/** Count byMeetingId */
+	@Override
+	public Integer getCountByMeetingId( String meetingId) throws Exception {
+		return mapper.getCountByMeetingId(meetingId);
+	}
+
 	/** delete ByMeetingId */
 	@Override
 	public Integer deleteByMeetingId(String meetingId) throws Exception {
 		return mapper.deleteByMeetingId(meetingId);
+	}
+
+	/** select getListByMeetingId */
+	@Override
+	public List<MeetingSign> getListByMeetingId(Integer index,Integer pageSize,String meetingId) throws Exception{
+		return mapper.getListByMeetingId(index,pageSize,meetingId);
 	}
 }

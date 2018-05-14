@@ -1,8 +1,11 @@
 package com.xiaoshu.controller.admin.meeting;
 
+import com.xgb.springrabbitmq.dto.DtoMessage;
+import com.xgb.springrabbitmq.publish.DeadLetterPublishService;
 import com.xiaoshu.api.Set;
 import com.xiaoshu.entity.Meeting;
 import com.xiaoshu.entity.MeetingSign;
+import com.xiaoshu.enumeration.EnumsMQName;
 import com.xiaoshu.service.MeetingService;
 import com.xiaoshu.service.MeetingSignService;
 import com.xiaoshu.service.MessageRecordService;
@@ -11,6 +14,7 @@ import com.xiaoshu.tools.ssmImage.ToolsImage;
 import com.xiaoshu.util.JsonUtils;
 import com.xiaoshu.util.Pager;
 import com.xiaoshu.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,8 @@ import java.util.*;
 @Controller
 @RequestMapping("/meeting")
 public class AdminMeetingController {
+
+    @Autowired private DeadLetterPublishService deadLetterPublishService;
     @Resource private MeetingService meetingService;
     @Resource private MeetingSignService meetingSignService;
     @Resource private MessageRecordService messageRecordService;
@@ -85,6 +91,7 @@ public class AdminMeetingController {
      * @date 2018-05-10 9:42
      */
     @RequestMapping("/toView")
+//    @ArchivesLog(operationType="查询操作:",operationName="单个查询会议")
     public String toView(String id, Model model, String menuid){
         try{
             if(id != null){
@@ -328,7 +335,7 @@ public class AdminMeetingController {
 
 
     /**
-     * 发送群发短信
+     * 发送群发短信/生成条码
      * @author XGB
      * @date 2018-05-12 19:35
      */
@@ -337,7 +344,16 @@ public class AdminMeetingController {
     public String sendMeetingMessage(String id){
         int total = 0;
         try{
+            //发送短信
             total = messageRecordService.sendMeetingMsg(id,"MEETING_MSG_ALL");
+            //TODO 使用消息队列处理条码生成功能-异步处理
+            String url =  Set.SYSTEM_URL + "interfaceMqMeeting/createBarCode";
+            String params = "meetingId=" + id ;
+            DtoMessage dtoMessage = new DtoMessage(UUID.randomUUID().toString(), url, "get" ,params , null);
+            String message = DtoMessage.transformationToJson(dtoMessage);
+            System.out.println("=================" + message);
+            deadLetterPublishService.send(EnumsMQName.DEAD_LETTER,message);
+
         }catch(Exception e) {
             e.printStackTrace();
             return "-1";
@@ -345,5 +361,22 @@ public class AdminMeetingController {
         return String.valueOf(total);
     }
 
+    /**
+     * meeting/interfaceAddCodeToMap?code=
+     * 添加条形码
+     * @author XGB
+     * @date 2018-05-14 15:16
+     */
+    @RequestMapping("/interfaceAddCodeToMap")
+    @ResponseBody
+    public String interfaceAddCodeToMap(String code){
+        System.out.println(" code : " + code );
+        try{
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

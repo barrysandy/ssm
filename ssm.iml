@@ -132,5 +132,14 @@
     <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.16" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
     <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: JBarCode:jbar-code:0.2.8">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/webapp/WEB-INF/lib/jbarcode-0.2.8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

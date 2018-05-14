@@ -20,8 +20,7 @@ import com.xiaoshu.util.TimeUtil;
 @Service
 public class LogService {
 	
-	@Autowired
-	LogMapper logMapper;
+	@Autowired LogMapper logMapper;
 
 	public void insertLog(Log t) throws Exception {
 		logMapper.insert(t);
@@ -76,4 +75,11 @@ public class LogService {
 	public List<Log> findLog(Log log) {
 		return logMapper.select(log);
 	};
+
+
+	/** 清理失效日志*/
+	public Integer deleteInvalidLog(Date date) throws Exception {
+		return logMapper.deleteInvalidLogByDate(date);
+	}
+
 }

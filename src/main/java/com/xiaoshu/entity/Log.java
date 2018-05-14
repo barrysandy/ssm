@@ -172,6 +172,18 @@ public class Log implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
+    public Log() { }
+
+    public Log(Long logid, String username, Date createtime, String operation, String ip, String module, String content) {
+        this.logid = logid;
+        this.username = username;
+        this.createtime = createtime;
+        this.operation = operation;
+        this.ip = ip;
+        this.module = module;
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

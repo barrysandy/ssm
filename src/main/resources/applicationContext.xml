@@ -1,121 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	   xmlns:mvc="http://www.springframework.org/schema/mvc"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	        http://www.springframework.org/schema/context
+		    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		    http://www.springframework.org/schema/mvc
+		    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
-	<!-- spring自动扫描 -->
-	<context:component-scan base-package="com.xiaoshu">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
+    <!-- spring自动扫描 -->
+    <context:component-scan base-package="com.xiaoshu">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
-	<context:component-scan base-package="com.xgb.springrabbitmq"/>
+    <context:component-scan base-package="com.xgb.springrabbitmq"/>
 
 
-	<!-- Spring的配置文件，这里主要配置和业务逻辑有关的 -->
-	<!--=================== 数据源，事务控制，xxx ================ -->
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-   		<property name="ignoreUnresolvablePlaceholders" value="true"/>
-		<property name="locations">
-			<list>
-				<value>classpath:config.properties</value>
-				<value>classpath:dbconfig.properties</value>
-				<value>classpath:rabbitmq.properties</value>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="com.xiaoshu.config.util.ConfigUtil">
-		<property name="pageSize" value="${system.pageSize}"/>
-	</bean>
+    <!-- Spring的配置文件，这里主要配置和业务逻辑有关的 -->
+    <!--=================== 数据源，事务控制，xxx ================ -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+                <value>classpath:dbconfig.properties</value>
+                <value>classpath:rabbitmq.properties</value>
+            </list>
+        </property>
+    </bean>
 
-	<!-- 配置数据源 -->
-	<!--<bean id="pooledDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-		<!--<property name="driverClassName" value="${jdbc.driverClass}"></property>-->
-		<!--<property name="url" value="${jdbc.jdbcUrl}"></property>-->
-		<!--<property name="username" value="${jdbc.user}"></property>-->
-		<!--<property name="password" value="${jdbc.password}"></property>-->
-	<!--</bean>-->
+    <bean class="com.xiaoshu.config.util.ConfigUtil">
+        <property name="pageSize" value="${system.pageSize}"/>
+    </bean>
 
-	<!-- c3p0数据源 -->
-	<bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
-		<property name="driverClass" value="${jdbc.driverClass}"/>
-		<property name="user" value="${jdbc.user}"/>
-		<property name="password" value="${jdbc.password}"/>
+    <!-- 配置数据源 -->
+    <!--<bean id="pooledDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--<property name="driverClassName" value="${jdbc.driverClass}"></property>-->
+    <!--<property name="url" value="${jdbc.jdbcUrl}"></property>-->
+    <!--<property name="username" value="${jdbc.user}"></property>-->
+    <!--<property name="password" value="${jdbc.password}"></property>-->
+    <!--</bean>-->
 
-		<!--当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出 SQLException,如设为0则无限期等待。单位毫秒。Default:
-			0 -->
-		<property name="checkoutTimeout" value="${jdbc.checkoutTimeout}"/>
+    <!-- c3p0数据源 -->
+    <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
 
-		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
-		<property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
+        <!--当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出 SQLException,如设为0则无限期等待。单位毫秒。Default:
+            0 -->
+        <property name="checkoutTimeout" value="${jdbc.checkoutTimeout}"/>
 
-		<!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
-		<property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"/>
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
 
-		<!--两次连接中间隔时间，单位毫秒。Default: 1000 -->
-		<property name="acquireRetryDelay" value="${jdbc.acquireRetryDelay}"/>
+        <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+        <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"/>
 
-		<!--连接关闭时默认将所有未提交的操作回滚。Default: false -->
-		<property name="autoCommitOnClose" value="${jdbc.autoCommitOnClose}"/>
+        <!--两次连接中间隔时间，单位毫秒。Default: 1000 -->
+        <property name="acquireRetryDelay" value="${jdbc.acquireRetryDelay}"/>
 
-		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
-		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}"/>
+        <!--连接关闭时默认将所有未提交的操作回滚。Default: false -->
+        <property name="autoCommitOnClose" value="${jdbc.autoCommitOnClose}"/>
 
-		<!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。初始化连接大小Default: 3 -->
-		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+        <property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}"/>
 
-		<!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
-		<property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
+        <!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。初始化连接大小Default: 3 -->
+        <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
 
-		<!--连接池中保留的最大连接数。Default: 15 -->
-		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
-	</bean>
+        <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
 
-	<!--================== 配置和MyBatis的整合=============== -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 指定mybatis全局配置文件的位置 -->
-		<property name="configLocation" value="classpath:mybatis-config.xml"/>
-		<property name="dataSource" ref="pooledDataSource"/>
-		<!-- 指定mybatis，mapper文件的位置 -->
-		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
-	</bean>
+        <!--连接池中保留的最大连接数。Default: 15 -->
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+    </bean>
 
-	<!-- 配置扫描器，将mybatis接口的实现加入到ioc容器中 -->
-	<!-- 通用Mapper用tk,一般用org -->
-	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-		<!--扫描所有dao接口的实现，加入到ioc容器中 -->
-		<property name="basePackage" value="com.xiaoshu.dao"/>
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-		<!-- 通用Mapper -->
-		<property name="properties">
-			<value>
-				mappers=tk.mybatis.mapper.common.Mapper
-			</value>
-		</property>
-	</bean>
+    <!--================== 配置和MyBatis的整合=============== -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定mybatis全局配置文件的位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="pooledDataSource"/>
+        <!-- 指定mybatis，mapper文件的位置 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
 
-	<!-- 配置一个可以执行批量的sqlSession -->
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
-		<constructor-arg name="executorType" value="BATCH"/>
-	</bean>
+    <!-- 配置扫描器，将mybatis接口的实现加入到ioc容器中 -->
+    <!-- 通用Mapper用tk,一般用org -->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描所有dao接口的实现，加入到ioc容器中 -->
+        <property name="basePackage" value="com.xiaoshu.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 通用Mapper -->
+        <property name="properties">
+            <value>
+                mappers=tk.mybatis.mapper.common.Mapper
+            </value>
+        </property>
+    </bean>
 
-	<!-- ===============事务控制的配置 ================ -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<!--控制住数据源 -->
-		<property name="dataSource" ref="pooledDataSource"/>
-	</bean>
+    <!-- 配置一个可以执行批量的sqlSession -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <constructor-arg name="executorType" value="BATCH"/>
+    </bean>
 
-	<mvc:annotation-driven/>
+    <!-- ===============事务控制的配置 ================ -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--控制住数据源 -->
+        <property name="dataSource" ref="pooledDataSource"/>
+    </bean>
 
-	<import resource="spring-task.xml" />
-	<!-- 加载spring-rabbit.xml配置文件 -->
-	<import resource="classpath*:spring-rabbit.xml" />
+    <mvc:annotation-driven/>
+
+    <import resource="spring-task.xml"/>
+    <!-- 加载spring-rabbit.xml配置文件 -->
+    <import resource="classpath*:spring-rabbit.xml"/>
+
+<!--    &lt;!&ndash; Spring AOP 添加日志操作 &ndash;&gt;
+    <aop:config proxy-target-class="true"/>
+    <aop:config>
+        &lt;!&ndash;定义切面&ndash;&gt;
+        <aop:aspect id="adminLog" ref=""/>
+        &lt;!&ndash; 定义切入点 (配置在com.gray.user.controller下所有的类在调用之前都会被拦截)&ndash;&gt;
+        <aop:pointcut expression="execution(* com.xiaoshu.service.*ServiceImpl(..))" id="adminLogPointCut"/>
+        &lt;!&ndash;方法执行之前被调用执行的&ndash;&gt;
+        <aop:before method="before" pointcut-ref="logPointCut"/>&lt;!&ndash;一个切入点的引用&ndash;&gt;
+        <aop:after method="after" pointcut-ref="logPointCut"/>&lt;!&ndash;一个切入点的引用&ndash;&gt;
+
+    </aop:config>-->
+
+    <!--将日志类注入到bean中。-->
+    <bean id="logAspect" class="com.xiaoshu.interceptor.ArchivesLogAspect"></bean>
+    <aop:config>
+        <!--调用日志类-->
+        <aop:aspect id="LogAspect" ref="logAspect">
+            <!--配置在controller包下所有的类在调用之前都会被拦截-->
+            <aop:pointcut id="log" expression="execution(* com.xiaoshu.controller.admin.*.*Controller.*(..))"/>
+            <!-- 方法前触发 --><aop:before pointcut-ref="log" method="before"/>
+            <!-- 方法后触发 --><aop:after pointcut-ref="log" method="after"/>
+            <!-- 环绕触发  <aop:around pointcut-ref="log" method="around"/>  -->
+        </aop:aspect>
+    </aop:config>
 </beans>

@@ -1,6 +1,7 @@
 package com.xiaoshu.job;
 
 import com.xiaoshu.api.Api;
+import com.xiaoshu.api.Set;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,13 @@ public class JobScan {
     @Scheduled(cron = "0 0/3 * * * ? ")
     public void sacn(){
         //设置第一次不执行
+
+
         count++;
+        if(count % 3 == 1 && count != 0){
+            //清理日志
+            sendGet(Set.SYSTEM_URL + "scan/interfaceScanLogInvalid",null);
+        }
         if(count % 10 == 1 && count != 0){
             //刷新商品的状态
             sendGet(Api.SCAN_COMMODITY_STATE,null);
@@ -35,6 +42,7 @@ public class JobScan {
         }
 
     }
+
 
 
 }
