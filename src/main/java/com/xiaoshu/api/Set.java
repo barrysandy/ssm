@@ -16,8 +16,8 @@ public class Set {
      * http://www.daxi51.com/ssm/
      * http://118.24.118.23/ssm/
      */
-    public static final String SYSTEM_URL = "http://w17b197823.iok.la/ssm/";
-
+    public static String SYSTEM_URL = "http://www.daxi51.com/ssm/";
+//    public static String SYSTEM_URL = "http://w17b197823.iok.la/ssm/";
 
     /**
      * 文件系统项目地址

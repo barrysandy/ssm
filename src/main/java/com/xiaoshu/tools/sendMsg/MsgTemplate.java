@@ -99,7 +99,7 @@ public class MsgTemplate {
 	 * 短信模板ID：11
 	 * MEETING_MSG_ALL 发送会议通知短信
 	 */
-	public static String MEETING_MSG_ALL = "+您好，+邀请你参加+会议，你的会议签到码为+，联系人：+ 联系人电话：+，会议地址+，会议时间+，感谢你准时参加。【+】";
+	public static String MEETING_MSG_ALL = "+先生/女生您好，+邀请你参加+会议，你的会议签到码为+，联系人：+ 联系人电话：+，会议地址+，会议时间+，感谢你准时参加。【+】";
 
 	/**
 	 * 获取模板

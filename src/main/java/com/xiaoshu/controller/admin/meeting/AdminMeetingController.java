@@ -10,6 +10,7 @@ import com.xiaoshu.service.MeetingService;
 import com.xiaoshu.service.MeetingSignService;
 import com.xiaoshu.service.MessageRecordService;
 import com.xiaoshu.tools.*;
+import com.xiaoshu.tools.single.MapMeetingCache;
 import com.xiaoshu.tools.ssmImage.ToolsImage;
 import com.xiaoshu.util.JsonUtils;
 import com.xiaoshu.util.Pager;
@@ -18,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
@@ -163,6 +166,13 @@ public class AdminMeetingController {
                 }else{
                     meetingService.save(bean,oldImage);
                 }
+                Map map = MapMeetingCache.getInstance().getMap();
+                if(bean.getImage() != null){
+                    String url = ToolsImage.getImageUrlByServer(bean.getImage());
+                    bean.setImage(url);
+                }
+                map.put(bean.getId(),bean);
+                System.out.println(" Update it !!!" + bean);
             }
         }catch(Exception e){
             return JsonUtils.turnJson(false,"error" + e.getMessage(),e);
@@ -258,10 +268,13 @@ public class AdminMeetingController {
                             Object listObject = list.get(i);
                             MeetingSign meetingSign = (MeetingSign)listObject;
                             if(meetingSign.getName() != null && meetingSign.getPhone()!= null){
-                                meetingSign.setId(UUID.randomUUID().toString());
-                                String phone = meetingSign.getPhone();
+                                //电话号码处理
+                                String phone = meetingSign.getPhone().trim();
                                 phone = phone.replaceAll("\\.","");
                                 phone = phone.replaceAll("E10","");
+
+                                meetingSign.setId(UUID.randomUUID().toString());
+                                meetingSign.setName(meetingSign.getName().trim());
                                 meetingSign.setPhone(phone);
                                 meetingSign.setCreateTime(nowTime);
                                 meetingSign.setJoinDinner(0);
@@ -352,7 +365,7 @@ public class AdminMeetingController {
             DtoMessage dtoMessage = new DtoMessage(UUID.randomUUID().toString(), url, "get" ,params , null);
             String message = DtoMessage.transformationToJson(dtoMessage);
             System.out.println("=================" + message);
-            deadLetterPublishService.send(EnumsMQName.DEAD_LETTER,message);
+            deadLetterPublishService.send(EnumsMQName.DEAD_ORDER_CHECK,message);
 
         }catch(Exception e) {
             e.printStackTrace();
@@ -361,18 +374,125 @@ public class AdminMeetingController {
         return String.valueOf(total);
     }
 
+
     /**
-     * meeting/interfaceAddCodeToMap?code=
-     * 添加条形码
+     * 签到首页页面
+     * @param id 主键ID
+     * @return view
+     * @author XGB
+     * @date 2018-5-15 9:42
+     */
+    @RequestMapping("/signIndex")
+    public String signIndex( Model model,String id){
+        System.out.println("id: " + id );
+        try{
+            Meeting bean =  meetingService.getById(id);
+            Integer total = meetingSignService.getCountStatusByMeetingId(id,1);
+            model.addAttribute("bean", bean);
+            model.addAttribute("id", id);
+            model.addAttribute("total", total);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return "admin/meeting/meetingSign/main";
+    }
+
+
+
+    /**
+     * meeting/interfaceGetMeetingUser?signCode=
+     * 签到条形码查询
      * @author XGB
      * @date 2018-05-14 15:16
      */
-    @RequestMapping("/interfaceAddCodeToMap")
+    @RequestMapping(value = "/interfaceGetMeetingUser", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String interfaceAddCodeToMap(String code){
-        System.out.println(" code : " + code );
+    public String interfaceGetMeetingUser(String signCode,String id){
+        System.out.println("signCode00000: " + signCode);
+        if(signCode != null && id != null){
+            if("".equals(signCode) || "".equals(id)){
+                return "0";
+            }
+        }
         try{
+            MeetingSign meetingSign = null;
+            if(signCode.length() == 6){
+                System.out.println("signCode00000: 6");
+                meetingSign = meetingSignService.getBySignCode(signCode,id);
+            }
+            else if(signCode.length() == 11){
+                meetingSign = meetingSignService.getByPone(signCode,id);
+            }
+            else if(signCode.length() == 13){
+                signCode = signCode.substring(0,6);
+                meetingSign = meetingSignService.getBySignCode(signCode,id);
+            }
+            if(meetingSign != null){
+                String json = JSONUtils.toJSONString(meetingSign);
+                json = ToolsString.getStrRemoveBracket(json);
+                System.out.println("json: " + json);
+                return json;
+            }else if(meetingSign == null){
+                return "0";
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+
+
+    /**
+     * 预览签到人信息
+     * @param signCode
+     * @return
+     * @author XGB
+     * @date 2018-05-15 10:50
+     */
+    @RequestMapping("/toSignCodeView")
+    public String toSignCodeView(String signCode,String id, HttpServletRequest request){
+        System.out.println("SignCode: " + signCode);
+        try{
+            if(signCode != null){
+                MeetingSign bean = null;
+                if(signCode.length() == 6){
+                    bean = meetingSignService.getBySignCode(signCode,id);
+                }
+                else if(signCode.length() == 11){
+                    bean = meetingSignService.getByPone(signCode,id);
+                }
+                else if(signCode.length() == 13){
+                    signCode = signCode.substring(0,6);
+                    bean = meetingSignService.getBySignCode(signCode,id);
+                }
+                request.setAttribute("bean", bean);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "admin/meeting/meetingSign/meetingSignCode_view";
+    }
+
+
+    /**
+     * meeting/interfaceGetMeetingUpdateStatus?signCode=
+     * 更新签到状态
+     * @author XGB
+     * @date 2018-05-15 11:10
+     */
+    @RequestMapping("/interfaceGetMeetingUpdateStatus")
+    @ResponseBody
+    public String interfaceGetMeetingUpdateStatus(String id){
+        if(id != null){
+            if("".equals(id)){
+                return "0";
+            }
+        }
+        try{
+            int i = meetingSignService.updateResponseStatusById(1,ToolsDate.getStringDate(ToolsDate.simpleSecond),id);
+            Integer total = meetingSignService.getCountStatusByMeetingId(id,1);
+            return i + "," + total;
         }catch(Exception e) {
             e.printStackTrace();
         }

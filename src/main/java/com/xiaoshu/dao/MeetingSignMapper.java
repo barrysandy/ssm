@@ -45,8 +45,21 @@ public interface MeetingSignMapper {
 
 	/** select BySignCode */
 	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID " +
-			"FROM t_meeting_sign WHERE SIGN_CODE=#{signCode}")
-	MeetingSign getSignCode(@Param("signCode") String signCode) throws Exception;
+			"FROM t_meeting_sign WHERE SIGN_CODE=#{signCode} AND MEETING_ID=#{id} ")
+	MeetingSign getSignCode(@Param("signCode") String signCode,@Param("id") String id) throws Exception;
+
+
+	/** select BySignCode */
+	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID " +
+			"FROM t_meeting_sign WHERE PHONE=#{phone} AND MEETING_ID=#{id} ")
+	MeetingSign getByPone(@Param("phone") String phone,@Param("id") String id) throws Exception;
+
+
+
+	/** select getStatusBySignCode */
+	@Select("SELECT STATUS FROM t_meeting_sign WHERE SIGN_CODE=#{signCode} AND MEETING_ID=#{id} ")
+	Integer getStatusBySignCode(@Param("signCode") String signCode,@Param("id") String id) throws Exception;
+
 
 	/** select List */
 	List<MeetingSign> getListByKeyWord(@Param("id") String id ,@Param("status") Integer status ,@Param("index") Integer index, @Param("pageSize") Integer pageSize,
@@ -70,4 +83,8 @@ public interface MeetingSignMapper {
 	/** select getListByMeetingId */
 	List<MeetingSign> getListByMeetingId(@Param("index") Integer index, @Param("pageSize") Integer pageSize,
 									   @Param("meetingId") String meetingId ) throws Exception;
+
+	/** Count getCountStatusByMeetingId */
+	@Select("SELECT COUNT(ID) FROM t_meeting_sign WHERE MEETING_ID =#{meetingId } AND STATUS=#{status} ")
+	Integer getCountStatusByMeetingId(@Param("meetingId") String meetingId,@Param("status") Integer status);
 }

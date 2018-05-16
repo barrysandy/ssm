@@ -69,8 +69,19 @@ public class MeetingSignServiceImpl implements MeetingSignService{
 
 	/** select BySignCode */
 	@Override
-	public MeetingSign getBySignCode( String signCode) throws Exception {
-		return mapper.getSignCode(signCode);
+	public MeetingSign getBySignCode( String signCode,String id) throws Exception {
+		return mapper.getSignCode(signCode,id);
+	}
+
+	/** select ByPone */
+	@Override
+	public MeetingSign getByPone( String phone,String id) throws Exception {
+		return mapper.getByPone(phone,id);
+	}
+	/** select StatusBySignCode */
+	@Override
+	public Integer getStatusBySignCode( String signCode,String id) throws Exception {
+		return mapper.getStatusBySignCode(signCode,id);
 	}
 
 	/** select List */
@@ -122,5 +133,11 @@ public class MeetingSignServiceImpl implements MeetingSignService{
 	@Override
 	public List<MeetingSign> getListByMeetingId(Integer index,Integer pageSize,String meetingId) throws Exception{
 		return mapper.getListByMeetingId(index,pageSize,meetingId);
+	}
+
+	/** Count getCountStatusByMeetingId */
+	@Override
+	public Integer getCountStatusByMeetingId(String meetingId,Integer status) throws Exception{
+		return mapper.getCountStatusByMeetingId(meetingId,status);
 	}
 }

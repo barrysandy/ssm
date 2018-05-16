@@ -5,10 +5,12 @@ import com.xiaoshu.dao.MenuMapper;
 import com.xiaoshu.entity.PublicAccountInfo;
 import com.xiaoshu.job.JobPublicAccount;
 import com.xiaoshu.service.PublicAccountInfoService;
-import com.xiaoshu.tools.JSONUtils;
+import com.xiaoshu.tools.single.MapPublicNumber;
 import com.xiaoshu.util.JsonUtils;
 import com.xiaoshu.util.Pager;
 import com.xiaoshu.util.StochasticUtil;
+import com.xiaoshu.wechat.pojo.AccessToken;
+import com.xiaoshu.wechat.tools.WeixinUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -258,11 +260,36 @@ public class PublicAccountInfoController extends BaseController {
 	public String interfaceGetAll(int usable) {
 		try {
 			List<PublicAccountInfo> bean = publicAccountInfoService.selectListAll(usable);
-			if (bean != null) {
-				return JSONUtils.toJSONString(bean);
-			} else {
-				return "0";
+			System.out.println("======================ToRefreshMapJobPublicAccount()  bean ：" + bean);
+			if(bean!=null){
+				//将启用的公众号参数加入Map中
+				MapPublicNumber mapPublicNumber = MapPublicNumber.getInstance();
+				Map<String, String> map = mapPublicNumber.getMap();
+				map.clear();//清空Map并更新Map
+				Iterator<PublicAccountInfo> iterator =  bean.iterator();
+				while (iterator.hasNext()){
+					PublicAccountInfo publicAccountInfo = iterator.next();
+					String parentId = publicAccountInfo.getParentMenuId();
+					map.put("appId"+ parentId ,publicAccountInfo.getAppId());
+					map.put("appSecret"+ parentId ,publicAccountInfo.getAppSecret());
+					map.put("token"+ parentId ,publicAccountInfo.getToken());
+					map.put("openPlatform"+ parentId ,publicAccountInfo.getOpenPlatform());//绑定的公众平台
+					map.put("mchId"+ parentId ,publicAccountInfo.getMchId());//支付的商户号
+					map.put("mchKey"+ parentId ,publicAccountInfo.getMchKey());//支付的秘钥
+					map.put("notifyUrl"+ parentId ,publicAccountInfo.getNotifyUrl());//支付成功通知地址
+					map.put("notifyErrorUrl"+ parentId ,publicAccountInfo.getNotifyErrorUrl());//支付失败通知地址
+					map.put("accountType"+ parentId ,publicAccountInfo.getAccountType()+"");//公众号类型
+					map.put("effectiveTime"+ parentId ,publicAccountInfo.getEffectiveTime()+"");//公众号AccessToken刷新时间
+					//获取accessToken
+					AccessToken accessToken = WeixinUtil.getAccessToken(publicAccountInfo.getAppId(),publicAccountInfo.getAppSecret());
+					if(accessToken != null){
+						//put accessToken
+						map.put("accessToken"+ parentId ,accessToken.getAccessToken());//accessToken
+						System.out.println("------------ [log.info System Message] : AccessToken By PublicAccountInfo menuId = " + parentId + " AccessToken is " + accessToken.getAccessToken() +" ------------");
+					}
+				}
 			}
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}

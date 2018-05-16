@@ -13,6 +13,7 @@
         <div class="col-sm-12">
             <blockquote class="text-warning" style="font-size:14px">
                 <h4 class="text-danger">更新日志...</h4>
+                <span style="margin-bottom: 5px;">[2018-05-16 11:30]新增会议模块，新增管理员操作日志切面。</span><br>
                 <span style="margin-bottom: 5px;">[2018-04-27 17:30]新增会话类型活动，即公众号会话界面报名，新增奖品绑定商品，在抽奖确认时自动生成相应的商品订单。</span><br>
                 <span style="margin-bottom: 5px;">[2018-04-23 23:55]新增组团业务模块，个人中心优化以及升级，商品短信模块新增一键短信模板功能。</span><br>
                 <span style="margin-bottom: 5px;">[2018-04-16 11:00]更新图片上传服务器上传功能，添加大图片压缩功能。</span><br>

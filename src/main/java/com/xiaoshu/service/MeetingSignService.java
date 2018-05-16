@@ -29,7 +29,13 @@ public  interface MeetingSignService {
 	MeetingSign getById( String id) throws Exception;
 
 	/** select BySignCode */
-	MeetingSign getBySignCode( String signCode) throws Exception;
+	MeetingSign getBySignCode( String signCode,String id) throws Exception;
+
+	/** select ByPone */
+	MeetingSign getByPone( String phone,String id) throws Exception;
+
+	/** select StatusBySignCode */
+	Integer getStatusBySignCode( String signCode,String id) throws Exception;
 
 	/** select List */
 	List<MeetingSign> getListByKeyWord(String id,Integer status ,Integer index, Integer pageSize, String keyword) throws Exception;
@@ -51,5 +57,8 @@ public  interface MeetingSignService {
 
 	/** select getListByMeetingId */
 	List<MeetingSign> getListByMeetingId(Integer index,Integer pageSize,String meetingId) throws Exception;
+
+	/** Count getCountStatusByMeetingId */
+	Integer getCountStatusByMeetingId(String meetingId,Integer status) throws Exception;
 
 }

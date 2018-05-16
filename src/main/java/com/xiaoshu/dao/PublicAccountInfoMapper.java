@@ -33,8 +33,8 @@ public interface PublicAccountInfoMapper {
     @Select("select * from public_account_info where PARENT_MENU_ID = #{parentMenuId}")
     PublicAccountInfo getByParentMenuId(String parentMenuId);
 
-    @Select("select * from public_account_info where USABLE = 1")
-    List<PublicAccountInfo> selectListAll(int usable);
+    @Select("select * from public_account_info where USABLE = #{usable}")
+    List<PublicAccountInfo> selectListAll(@Param("usable") int usable);
 
     @Select("select PARENT_MENU_ID from public_account_info where OPEN_PLATFORM = #{openPlatform} AND PARENT_MENU_ID != #{parentMenuId}")
     String getParentMenuIdByOpenPlatform(@Param("openPlatform") String openPlatform, @Param("parentMenuId") String parentMenuId);

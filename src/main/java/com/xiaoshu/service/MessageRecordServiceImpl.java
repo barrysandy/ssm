@@ -799,11 +799,11 @@ public class MessageRecordServiceImpl implements MessageRecordService{
 										String signPhone = meetingSign.getPhone();
 										String sign = messageTemple.getSign();
 										String meetingTitle = meeting.getTitle();
-										String meetingCode = com.xiaoshu.api.Set.SYSTEM_URL + "meeting/interfaceMyCode?id=" + id + "&code=" + meetingSign.getSignCode();
+										String meetingCode = com.xiaoshu.api.Set.SYSTEM_URL + "meeting/interfaceMyCodeNoUser?id=" + id + "&code=" + meetingSign.getSignCode();
 										//
 										// meetingCode = URLEncoder.encode(meetingCode ,"utf-8");
-										String meetingUserName = meeting.getName();
-										String meetingUserPhone = meeting.getPhone();
+										String meetingUserName = meetingSign.getName();
+										String meetingUserPhone = meetingSign.getPhone();
 										String meetingTime = meeting.getBeginTime() + " - " + meeting.getEndTime() ;
 										String address = meeting.getAddress();
 

@@ -12,53 +12,86 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<title></title>
 	<%@ include file="/WEB-INF/common_andy.jsp" %>
+	<script src="${path }/resources/js/plugins/layer/layer.min.js"></script>
+	<script src="${path }/resources/layui/layui.js"></script>
+	<script src="${path }/resources/layui/layuiUtil.js"></script>
+
 	<script src="${path}/resources/js/jquery-1.8.3.min.js"></script>
-	<title>我的会议签到码</title>
-	<link rel="stylesheet" type="text/css" href="${path}/resources/azenui/css/ui.css">
-	<!--=========引入Alert=========-->
-	<script type="text/javascript" src="${path}/resources/alert/1.1/alertPopShow.js"></script>
-	<script type="text/javascript" src="${path}/resources/alert/1.1/jquery-1.10.1.min.js"></script>
-	<link rel="stylesheet" href="${path}/resources/alert/1.1/common.css">
+	<title>签到码</title>
 </head>
 <body>
-<div class="aui-container">
-	<div class="aui-page">
-		<div class="aui-t-header">
-			<div class="header">
-				<div class="header-background"></div>
-				<div class="toolbar statusbar-padding">
-					<div class="header-title">
-						<div class="title">${meeting.title }</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="aui-s-title b-line"></div>
-		<div class="aui-s-title b-line">
-			<div class="aui-s-content" style="margin-top: -3em;">
-				<div align="center">
-					<h2>签到编码：${meetingSign.signCode }</h2>
-					<c:if test="${order.typeState eq '1'}">
-						<br>
-						<span style="color: red;font-size: 1.6rem;">条形码</span>
-						<br>
-						<br>
-						<c:if test="${code ne '' && code ne null }">
-							<img src="http://qr.liantu.com/api.php?text=${code}" width="45%"/>
-							<br>
-							<br>
-						</c:if>
-					</c:if>
-				</div>
-			</div>
 
+<div align="center">
+	<h4 style="margin-top: 2rem;color: green;font-size: 1.4rem;">${meeting.title }</h4>
+	<div align="center">
+		<h2 style="color: red;font-size: 1.4rem;">签到码：${meetingSign.signCode }</h2>
+		<h2 style="color: black;font-size: 1rem;">也可以使用你的电话号码进行签到</h2>
+		<img style="margin-top: 2rem;" src="${code}" width="80%"/>
+		<h2 id="status0" style="color: grey;font-size: 1.4rem;">等待扫描</h2>
+		<div  id="status1" style="display: none;">
+			<h2 style="color: green;font-size: 1.4rem;">签到成功</h2>
+			<img style="margin-top: 0rem;" src="${path}/resources/img/icon/yes.png" width=8%"/>
+		</div>
+		<div  id="status2" style="display: none;">
+			<h2 style="color: green;font-size: 1.4rem;">已签到</h2>
+			<img style="margin-top: 0rem;" src="${path}/resources/img/icon/yes.png" width=8%"/>
 		</div>
 
-		<input id="meetingId" type="text" value="${meeting.id }"/>
-		<input id="meetingSignId" type="text" value="${meetingSign.id }"/>
 	</div>
 </div>
+
+<input id="meetingId" type="hidden" value="${meeting.id }"/>
+<input id="meetingSignId" type="hidden" value="${meetingSign.id }"/>
+<input id="signCode" type="hidden" value="${meetingSign.signCode }"/>
+<input id="idStatus" type="hidden" value="${meetingSign.status }"/>
+<script>
+	var status = $("#idStatus").val();
+    function layuiUtilMsg(data) {
+        LayuiUtil.msg(data);
+    }
+    function getStatus() {
+        var id = $("#meetingId").val();
+        var signCode = $("#signCode").val();
+        var url = "${path}/meeting/myCodeStatusNoUser";
+        $.get(url,{'id':id ,'code':signCode },function(data){
+            if(data == "1" || data == 1){
+                status = 1;
+                $("#status0").hide();
+                $("#status1").show();
+			}else {
+//                layuiUtilMsg(data);
+			}
+
+        });
+    }
+    $(function() {
+        if(status == "0" || status == 0){
+            $("#status0").show();
+            $("#status1").hide();
+            $("#status2").hide();
+            setInterval(function(){
+                if(status == "0" || status == 0){
+                    getStatus();
+                }else if(status == "1" || status == 1){
+                    layuiUtilMsg("签到成功!!!!");
+                    status = 2;
+                    setTimeout(function(){
+                        var id = $("#meetingId").val();
+                        window.location.href = "${path}/meeting/myMeetingNoUser?id=" +  id ;
+                    }, 1000);
+                }
+            }, 500);
+		}else if(status == "1" || status == 1){
+            $("#status0").hide();
+            $("#status1").hide();
+            $("#status2").show();
+            setTimeout(function(){
+                var id = $("#meetingId").val();
+                window.location.href = "${path}/meeting/myMeetingNoUser?id=" +  id ;
+            }, 1000);
+		}
+    });
+</script>
 </body>
 </html>

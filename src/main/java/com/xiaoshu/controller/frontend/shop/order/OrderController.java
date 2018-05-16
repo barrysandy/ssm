@@ -40,7 +40,7 @@ public class OrderController extends BaseController {
 	 */
 	@RequestMapping("getStockNoUser")
 	@ResponseBody
-	public String getStockNoUser(HttpServletRequest req, HttpServletResponse resp,@RequestParam("id") Integer id){
+	public String getStockNoUser(HttpServletResponse resp,@RequestParam("id") Integer id){
 		/**
 		 *  1.验证参数
 		 **/
@@ -100,50 +100,6 @@ public class OrderController extends BaseController {
 //	 * @param code 删除订单的验证码 由系统在接收到删除订单的消息时生成，并放入Map集合中，该消息code通过验证后方能删除订单（防止非删除订单），code只能使用一次
 //	 * @return  (1) 0 传入的参数错误 (2)-1 表示 code验证失败 (3)>0 表示删除成功
 //	 */
-//	@ResponseBody
-//	@RequestMapping("cancelOrder")
-//	public String cancelOrder(HttpServletRequest req, HttpServletResponse resp,@RequestParam("order_no") String order_no,@RequestParam("code") String code){
-//		/**未支付订单到期取消场景：
-//		 *  1.验证code是否可用
-//		 *  2.删除订单关联的核销码
-//		 *  3.删除订单
-//		 **/
-//		if(order_no != null && !"".equals(order_no) && code != null && !"".equals(code) ){//判断传入的参数是否有效
-//			//1.验证code是否可用
-//			MessageQueueUtil mqu = MessageQueueUtil.getInstance();
-//			Map<String,String> map = mqu.getCodeMap();
-//			try {
-//				if(map.get(order_no).equals(code)){//如果code验证通过
-//					Order order = orderService.getByOrderNo(order_no);
-//					if(order != null){
-//						//2.删除订单关联的核销码
-//						List<OrderCodes> orderCodeList = order.getOrderCodes();
-//						Iterator<OrderCodes> iterator = orderCodeList.iterator();
-//						while (iterator.hasNext()) {
-//							orderCodesService.deleteById(iterator.next().getId());
-//						}
-//						//3.删除订单
-//						int i = orderService.deleteById(order.getId());
-//						if(i > 0){
-//							map.remove(order_no);
-//						}
-//						resp.getWriter().print(i);
-//					}
-//				}else{
-//					resp.getWriter().print(-1);
-//				}
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else{
-//			try {
-//				resp.getWriter().print(0);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return null;
-//	}
 
 
 	/**

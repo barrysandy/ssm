@@ -254,7 +254,7 @@
                                             </td>
                                             <td align="center">
                                                 <a class="u-btn sm texture f-m-l-xs" title="开始签到" type="button"
-                                                        href="https://www.baidu.com/" target="_blank">
+                                                        href="${path}/meeting/signIndex?id=${bean.id}" target="_blank">
                                                     <i class="iconfont" style="color: green">&#xe62f;</i>
                                                 </a>
                                                 <button class="u-btn sm texture f-m-l-xs" title="查看参会人员" type="button"

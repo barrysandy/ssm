@@ -22,7 +22,6 @@ import java.util.Map;
  */
 @Component
 public class JobPublicAccount {
-
     private static Logger log = LoggerFactory.getLogger(JobPublicAccount.class);
 
     /**
@@ -39,49 +38,10 @@ public class JobPublicAccount {
      * 刷新公众号的Map
      */
     public static void ToRefreshMapJobPublicAccount(){
-        System.out.println("======================ToRefreshMapJobPublicAccount()");
         try {
             String url = Api.GET_ALLPUBLICNUMBER;
             String param = "usable=1";
-            String json = ToolsHttpRequest.sendGet(url, param);
-            if(json != null){
-                if(!"".equals(json)){
-                    List<PublicAccountInfo> bean = JSONUtils.toList(json,PublicAccountInfo.class);
-                    if(bean!=null){
-                        //将启用的公众号参数加入Map中
-                        MapPublicNumber mapPublicNumber = MapPublicNumber.getInstance();
-                        Map<String, String> map = mapPublicNumber.getMap();
-                        map.clear();//清空Map并更新Map
-                        Iterator<PublicAccountInfo> iterator =  bean.iterator();
-                        while (iterator.hasNext()){
-                            PublicAccountInfo publicAccountInfo = iterator.next();
-                            String parentId = publicAccountInfo.getParentMenuId();
-                            map.put("appId"+ parentId ,publicAccountInfo.getAppId());
-                            map.put("appSecret"+ parentId ,publicAccountInfo.getAppSecret());
-                            map.put("token"+ parentId ,publicAccountInfo.getToken());
-                            map.put("openPlatform"+ parentId ,publicAccountInfo.getOpenPlatform());//绑定的公众平台
-                            map.put("mchId"+ parentId ,publicAccountInfo.getMchId());//支付的商户号
-                            map.put("mchKey"+ parentId ,publicAccountInfo.getMchKey());//支付的秘钥
-                            map.put("notifyUrl"+ parentId ,publicAccountInfo.getNotifyUrl());//支付成功通知地址
-                            map.put("notifyErrorUrl"+ parentId ,publicAccountInfo.getNotifyErrorUrl());//支付失败通知地址
-                            map.put("accountType"+ parentId ,publicAccountInfo.getAccountType()+"");//公众号类型
-                            map.put("effectiveTime"+ parentId ,publicAccountInfo.getEffectiveTime()+"");//公众号AccessToken刷新时间
-                            //获取accessToken
-                            AccessToken accessToken = WeixinUtil.getAccessToken(publicAccountInfo.getAppId(),publicAccountInfo.getAppSecret());
-                            if(accessToken != null){
-                                //put accessToken
-                                map.put("accessToken"+ parentId ,accessToken.getAccessToken());//accessToken
-                                System.out.println("------------ [log.info System Message] : AccessToken By PublicAccountInfo menuId = " + parentId + " AccessToken is " + accessToken.getAccessToken() +" ------------");
-                            }
-                        }
-                    }
-                }else{
-                    log.info("------------ [System Message] : Failure to scan the public number list ------------");
-                }
-            }else{
-                log.info("------------ [System Message] : Failure to scan the public number list ------------");
-            }
-
+            ToolsHttpRequest.sendGet(url, param);
         }catch (Exception e){
             e.printStackTrace();
         }
