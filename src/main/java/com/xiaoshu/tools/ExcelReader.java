@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xiaoshu.entity.MeetingSign;
+import com.xiaoshu.po.DtoMeetingSign;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -270,14 +271,14 @@ public class ExcelReader {
     }
 
     // 测试
-//    public static void main(String[] args) {
-//        try {
-//            List<Object> userList = ExcelReader.getListExcelObject(MeetingSign.class, "G:\\3715b6fcfbb6418fb4ed2269be48b48b.xlsx", "Sheet1", 7, 4, 7);
-//            for (Object object : userList) {
-//                System.out.println(object);
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//    }
+    public static void main(String[] args) {
+        try {
+            List<Object> userList = ExcelReader.getListExcelObject(DtoMeetingSign.class, "G:\\test1.xlsx", "Sheet1", 7, 4, 7);
+            for (Object object : userList) {
+                System.out.println(object);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }  

@@ -10,7 +10,7 @@ public class DeadLetterPublishService {
 	@Autowired
 	private RabbitTemplate rmqpTemplate;
     
-    public void send(String routingKey, Object message) {  
+    public void send(String routingKey, Object message) {
     	rmqpTemplate.convertAndSend(routingKey, message);
     }  
     

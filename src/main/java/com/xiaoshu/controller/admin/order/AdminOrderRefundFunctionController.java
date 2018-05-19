@@ -100,7 +100,7 @@ public class AdminOrderRefundFunctionController {
                     String params = "orderNo=" + orderRefund.getOrderNo() +"&menuId=" + menuId +  "&sign=" + ToolsASCIIChang.stringToAscii(sign);
                     DtoMessage dtoMessage = new DtoMessage(UUID.randomUUID().toString(), url, "get" ,params , null);
                     String message = DtoMessage.transformationToJson(dtoMessage);
-                    deadLetterPublishService.send(EnumsMQName.DEAD_ORDER_CHECK , message);
+                    deadLetterPublishService.send(EnumsMQName.DEAD_TEN_SECONDS , message);
                 }
             }
         }catch (Exception e){

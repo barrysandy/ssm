@@ -49,7 +49,7 @@ public class SignJSSDKController {
 	 */
 	@RequestMapping("/sign")
 	@ResponseBody
-	public String sign(HttpServletRequest request,String url,String mapKey,String menuId){
+	public String sign(String url,String mapKey,String menuId){
 		try{
 			//准备签名参数
 			//读取Map中的token

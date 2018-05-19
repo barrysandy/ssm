@@ -105,7 +105,7 @@ public class AdminMeetingSignController {
     @RequestMapping("/toEdit")
     public String toEdit( Model model,String id,String meetingId, String menuId){
         try{
-            MeetingSign bean =  new MeetingSign("-1","", "", "", "", "", "", "", 0, "", "", "", 0, "");
+            MeetingSign bean =  new MeetingSign("-1","", "", "", "", "", "", "", 0, "", "", "", 0, "","男");
             if(StringUtils.isNotBlank(id) && !"-1".equals(id) && !"".equals(id)){
                 bean = meetingSignService.getById(id);
             }

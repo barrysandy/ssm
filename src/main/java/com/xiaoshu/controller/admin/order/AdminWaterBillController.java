@@ -245,6 +245,7 @@ public class AdminWaterBillController {
                 }
             }
         }catch(Exception e){
+            System.out.println("interfaceCheckWaterBill Exception: " + e);
             e.printStackTrace();
             return EnumsMQAck.ACK_FAIL;
             //CODE.append( " Exception :" + e.getMessage());

@@ -22,8 +22,8 @@ public class ReceiveConfirmTestListener implements ChannelAwareMessageListener {
 		try{
 			String flag = "fail";
 			String json = new String(message.getBody());
-			System.out.println("消费消息  consumer -- : " + message.getMessageProperties() + " : " + json );
 			DtoMessage messageJson = DtoMessage.transformationToJson(json);
+			System.out.println("Consumer Message 消费消息 -- messageJson.getUrl(): " + messageJson.getUrl() );
 			if(messageJson != null) {
 				if(messageJson.getRequestMethod() != null) {
 					if("get".equals(messageJson.getRequestMethod())) {
@@ -35,10 +35,13 @@ public class ReceiveConfirmTestListener implements ChannelAwareMessageListener {
 			}
 			
 			if("ok".equals(flag)) {
-				System.out.println("Ack message ："  + json);
+				System.out.println("Ack message ："  + messageJson.getUrl());
 				basicACK(message, channel);//处理正常 ACK消息
-			}else {
-				System.out.println("NAck message ："  + json);
+			} else if("retry".equals(flag)){
+				System.out.println("Retry message ："  + messageJson.getUrl());
+				basicRetry(message, channel);//处理重试 ACK消息
+			} else if("fail".equals(flag)){
+				System.out.println("NAck message ："  + messageJson.getUrl());
 				basicNACK(message, channel);//处理异常 NACK消息
 			}
 		}catch(Exception e){
@@ -52,16 +55,30 @@ public class ReceiveConfirmTestListener implements ChannelAwareMessageListener {
 	private void basicACK(Message message,Channel channel){
 		try{
 			channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+			System.out.println("BasicAck message ："  + message.getBody() );
 		}catch(IOException e){
 			logger.error("通知服务器移除mq时异常，异常信息：" + e);
 		}
 	}
-	//处理异常，mq重回队列
+	//处理异常，mq不再回归队列
 	private void basicNACK(Message message,Channel channel){
 		try{
-			channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,true);
+			//TODO 需要重新编写处理 移除消息
+			channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,false);
+			System.out.println("BasicNack message ："  + message.getBody() );
 		}catch(IOException e){
 			logger.error("mq重新进入服务器时出现异常，异常信息：" + e);
+		}
+	}
+
+	//处理重试，mq重回队列
+	private void basicRetry(Message message,Channel channel){
+		try{
+			//TODO 需要重新编写处理 移除消息
+			channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,true);
+			System.out.println("BasicRetry message ："  + message.getBody() );
+		}catch(IOException e){
+			logger.error("mq重试进入服务器时出现异常，异常信息：" + e);
 		}
 	}
   

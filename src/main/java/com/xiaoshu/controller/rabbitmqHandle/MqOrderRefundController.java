@@ -43,6 +43,8 @@ public class MqOrderRefundController extends BaseController {
 
 	@Autowired private DeadLetterPublishService deadLetterPublishService;
 
+	private static int total = 0;
+
 	/**
 	 * (所有消息处理的返回如果为‘ok’则ack消息，‘fail’则nack消息，只对需要手动确认的消息有效)
 	 * RabbitMQ 更新OrderRefund退款结果描述Controller
@@ -52,7 +54,7 @@ public class MqOrderRefundController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/updateResult", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+	@RequestMapping("/updateResult")
 	public String updateResult(String orderNo,String refundResult,String sign){
 		if(sign != null){ if(!"".equals(sign)){ sign = ToolsASCIIChang.asciiToString(sign); } }//解析sign
 		if(refundResult != null){ if(!"".equals(refundResult)){ refundResult = ToolsASCIIChang.asciiToString(refundResult); } }//解析refundResult
@@ -105,7 +107,14 @@ public class MqOrderRefundController extends BaseController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return EnumsMQAck.ACK_FAIL;
+			total ++;
+			if(total >= 5){
+				System.out.println("com.xiaoshu.controller.rabbitmqHandle.MqOrderRefundController.updateResult 异常超过5次 直接ACK_OK 将异常记录在MQ异常表 !!!  " + e);
+				return EnumsMQAck.ACK_OK;
+			}else {
+				return EnumsMQAck.ACK_FAIL;
+			}
+
 		}
 		return EnumsMQAck.ACK_FAIL;
 	}
@@ -119,7 +128,7 @@ public class MqOrderRefundController extends BaseController {
 	 * @author XGB
 	 * @date 2018-03-10 18:18
 	 */
-	@RequestMapping(value = "/interfaceWechatReurn", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+	@RequestMapping("/interfaceWechatReurn")
 	@ResponseBody
 	public String interfaceWechatReurn(HttpServletRequest request,String orderNo,String menuId,String sign){
 		try{
@@ -136,14 +145,21 @@ public class MqOrderRefundController extends BaseController {
 							String params = "orderNo=" + orderRefund.getOrderNo() +"&refundResult=" + ToolsASCIIChang.stringToAscii(jsonStr) + "&sign=" + sign;
 							DtoMessage dtoMessage = new DtoMessage(UUID.randomUUID().toString(), url, "post" ,params , null);
 							String message = DtoMessage.transformationToJson(dtoMessage);
-							deadLetterPublishService.send(EnumsMQName.DEAD_ORDER_CHECK , message);
+							deadLetterPublishService.send(EnumsMQName.DEAD_TEN_SECONDS , message);
 						}
 					}
 				}
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			return EnumsMQAck.ACK_FAIL;
+			total ++;
+			if(total >= 5){
+				System.out.println("com.xiaoshu.controller.rabbitmqHandle.MqOrderRefundController.interfaceWechatReurn 异常超过5次 直接ACK_OK 将异常记录在MQ异常表 !!!  " + e);
+				return EnumsMQAck.ACK_OK;
+			}else {
+				return EnumsMQAck.ACK_FAIL;
+			}
+
 		}
 		return EnumsMQAck.ACK_OK;
 	}

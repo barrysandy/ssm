@@ -16,6 +16,7 @@ function doUploadImage(){
     }
     $.ajax({
         url: 'http://www.daxi51.com/ssm_file/upload/upImage' ,
+        // url: 'http://120.55.49.68:30000/ssm_file/upload/upImage' ,
         type: 'POST',
         data: formData,
         async: false,

@@ -14,6 +14,7 @@ function doUploadVideo(){
     }
     $.ajax({
         url: 'http://www.daxi51.com/ssm_file/upload/upVideo' ,
+        // url: 'http://120.55.49.68:30000/ssm_file/upload/upVideo' ,
         type: 'POST',
         data: formData,
         async: false,

@@ -13,8 +13,8 @@ public interface MeetingSignMapper {
 	void saveList(@Param("list") List<MeetingSign> lsit) throws Exception;
 
 	/** save one */
-	@Insert("INSERT INTO t_meeting_sign (ID, NAME, HEAD_IMAGE, PHONE, SIGN_CODE, COMPANY , PERSON_TYPE, POSITION, JOIN_DINNER, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS,MEETING_ID) " +
-			"VALUES(#{id},#{name},#{headImage},#{phone},#{signCode},#{company},#{personType},#{position},#{joinDinner},#{createTime},#{updateTime},#{descM},#{status},#{meetingId} )")
+	@Insert("INSERT INTO t_meeting_sign (ID, NAME, HEAD_IMAGE, PHONE, SIGN_CODE, COMPANY , PERSON_TYPE, POSITION, JOIN_DINNER, CREATE_TIME, UPDATE_TIME, DESC_M, STATUS,MEETING_ID,SEX) " +
+			"VALUES(#{id},#{name},#{headImage},#{phone},#{signCode},#{company},#{personType},#{position},#{joinDinner},#{createTime},#{updateTime},#{descM},#{status},#{meetingId},#{sex} )")
 	Integer save(MeetingSign bean) throws Exception;
 
 	/** update 状态 */
@@ -27,7 +27,7 @@ public interface MeetingSignMapper {
 
 	/** update all */
 	@Update("UPDATE t_meeting_sign SET NAME=#{name},HEAD_IMAGE=#{headImage},PHONE=#{phone},SIGN_CODE=#{signCode},COMPANY=#{company},PERSON_TYPE=#{personType}," +
-			"POSITION=#{position},JOIN_DINNER=#{joinDinner},CREATE_TIME=#{createTime},UPDATE_TIME=#{updateTime},DESC_M=#{descM},STATUS=#{status},MEETING_ID=#{meetingId} WHERE ID=#{id} ")
+			"POSITION=#{position},JOIN_DINNER=#{joinDinner},CREATE_TIME=#{createTime},UPDATE_TIME=#{updateTime},DESC_M=#{descM},STATUS=#{status},MEETING_ID=#{meetingId},SEX=#{sex} WHERE ID=#{id} ")
 	Integer updateAll(MeetingSign bean) throws Exception;
 
 	/** delete ById */
@@ -39,18 +39,18 @@ public interface MeetingSignMapper {
 	Integer deleteByMeetingId(@Param("meetingId") String meetingId) throws Exception;
 
 	/** select ById */
-	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID " +
+	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID,SEX " +
 			"FROM t_meeting_sign WHERE ID=#{id}")
 	MeetingSign getById(@Param("id") String id) throws Exception;
 
 	/** select BySignCode */
-	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID " +
+	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID,SEX " +
 			"FROM t_meeting_sign WHERE SIGN_CODE=#{signCode} AND MEETING_ID=#{id} ")
 	MeetingSign getSignCode(@Param("signCode") String signCode,@Param("id") String id) throws Exception;
 
 
 	/** select BySignCode */
-	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID " +
+	@Select("SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID,SEX " +
 			"FROM t_meeting_sign WHERE PHONE=#{phone} AND MEETING_ID=#{id} ")
 	MeetingSign getByPone(@Param("phone") String phone,@Param("id") String id) throws Exception;
 

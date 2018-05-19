@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.MeetingCardMapper">
+	<!-- 按照模糊分页查询列表 -->
+	<select id="getList" parameterType="java.util.Map" resultType="com.xiaoshu.entity.MeetingCard">
+		SELECT ID, NAME, PHONE, ADDRESS, USER_ID, USER_OPENID,NUMBER_TOTAL
+		FROM  t_meeting_card
+		WHERE 1=1
+		<if test="key != null and key != ''">
+			AND NAME LIKE concat(concat('%',#{key}),'%')
+		</if>
+		limit #{index},#{pageSize}
+	</select>
+	
+	<!-- 按照key统计个数 -->
+	<select id="getCountList" resultType="java.lang.Integer">
+		SELECT COUNT(ID) FROM  t_meeting_card
+		WHERE 1=1
+		<if test="key != null and key != ''">
+			AND NAME LIKE concat(concat('%',#{key}),'%')
+		</if>
+	</select>
+
+
+</mapper>

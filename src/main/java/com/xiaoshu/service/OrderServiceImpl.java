@@ -273,11 +273,7 @@ public class OrderServiceImpl implements OrderService{
 					}
 				}
 				String orderNo = EnumsString.ORDER_PREFIX + sb.toString();
-				System.out.println("------------ [LOG["+nowTime+"] ------------");
-				System.out.println("------------ [LOG["+nowTime+"] ------------");
 				System.out.println("------------ [LOG["+nowTime+"] interfaceCreateOrderNumber orderNo : " + orderNo + " ------------");
-				System.out.println("------------ [LOG["+nowTime+"] ------------");
-				System.out.println("------------ [LOG["+nowTime+"] ------------");
 				return orderNo;
 			}
 		}catch (Exception e){
@@ -315,11 +311,7 @@ public class OrderServiceImpl implements OrderService{
 			e.printStackTrace();
 			return "exception";
 		}
-		System.out.println("------------ [LOG["+nowTime+"] ------------");
-		System.out.println("------------ [LOG["+nowTime+"] ------------");
 		System.out.println("------------ [LOG["+nowTime+"] interfaceCreateOrderCode useCode : " + useCode + " ------------");
-		System.out.println("------------ [LOG["+nowTime+"] ------------");
-		System.out.println("------------ [LOG["+nowTime+"] ------------");
 		return useCode;
 	}
 

@@ -72,6 +72,17 @@
                         <td colspan="7"><input type="text" class="u-input" name="name" value="${bean.name}" maxlength="12"></td>
                     </tr>
 
+                    <tr>
+                        <td class="table-header">性别<span style="color: red">*</span></td>
+                        <td colspan="7">
+                            <select name="sex" class="u-input">
+                                <option value="" <c:if test="${bean.sex == ''}">selected="selected"</c:if> >请选择性别</option>
+                                <option value="男" <c:if test="${bean.sex == '男'}">selected="selected"</c:if> >男</option>
+                                <option value="女" <c:if test="${bean.sex == '女'}">selected="selected"</c:if> >女</option>
+                            </select>
+                        </td>
+                    </tr>
+
                     <tr id="showImaList">
                         <td class="table-header"><span >电话</span><span style="color: red">*</span></td>
                         <td colspan="7"><input type="text" class="u-input" name="phone" value="${bean.phone}" maxlength="11"></td>

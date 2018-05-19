@@ -14,4 +14,9 @@ public interface EnumsMQAck {
      * 需要对消息nack
      */
     String ACK_FAIL = "fail";
+
+    /**
+     * 需要对消息retry
+     */
+    String ACK_RETRY = "retry";
 }

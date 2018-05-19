@@ -2,6 +2,7 @@ package com.xgb.springrabbitmq.dto;
 
 
 import com.xiaoshu.tools.JSONUtils;
+import com.xiaoshu.tools.ToolsASCIIChang;
 import com.xiaoshu.tools.ToolsString;
 
 public class DtoMessage {
@@ -76,7 +77,18 @@ public class DtoMessage {
 			return null;
 		}
 	}
-	
+
+	@Override
+	public String toString() {
+		return "DtoMessage{" +
+				"id='" + id + '\'' +
+				", url='" + url + '\'' +
+				", requestMethod='" + requestMethod + '\'' +
+				", params='" + params + '\'' +
+				", descM='" + descM + '\'' +
+				'}';
+	}
+
 	//** json转message对象  */
 	public static DtoMessage transformationToJson(String json) {
 		if(json != null) {
@@ -91,5 +103,7 @@ public class DtoMessage {
 		}else {
 			return null;
 		}
+
+
 	}
 }

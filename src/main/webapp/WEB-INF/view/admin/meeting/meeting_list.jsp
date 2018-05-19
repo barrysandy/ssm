@@ -84,6 +84,17 @@
             });
         }
 
+        function viewCoordinate(id) {
+            layer.open({
+                type: 2,
+                title: '地图坐标列表',
+                skin: 'layui-layer-rim',
+                area: ['95%', '95%'],
+                content: '${path}/meetingCoordinate/list?meetingId='+id
+            });
+        }
+
+
         function confirmDelete(id) {
             layer.open({
                 type: 1,
@@ -257,6 +268,10 @@
                                                         href="${path}/meeting/signIndex?id=${bean.id}" target="_blank">
                                                     <i class="iconfont" style="color: green">&#xe62f;</i>
                                                 </a>
+                                                <button class="u-btn sm texture f-m-l-xs" title="设置导航地图坐标" type="button"
+                                                        onClick="viewCoordinate('${bean.id}')">
+                                                    <i class="iconfont" style="color: magenta">&#xe62e;</i>
+                                                </button>
                                                 <button class="u-btn sm texture f-m-l-xs" title="查看参会人员" type="button"
                                                         onClick="viewMeetingSign('${bean.id}')">
                                                     <i class="iconfont" style="color: deeppink">&#xe785;</i>

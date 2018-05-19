@@ -15,6 +15,7 @@ function doUploadVoice(){
     }
     $.ajax({
         url: 'http://www.daxi51.com/ssm_file/upload/upVoice' ,
+        // url: 'http://120.55.49.68:30000/ssm_file/upload/upVoice' ,
         type: 'POST',
         data: formData,
         async: false,

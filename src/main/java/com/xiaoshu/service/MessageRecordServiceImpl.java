@@ -2,6 +2,7 @@ package com.xiaoshu.service;
 
 
 import com.xiaoshu.api.*;
+import com.xiaoshu.controller.frontend.meeting.MeetingController;
 import com.xiaoshu.dao.*;
 import com.xiaoshu.entity.*;
 import com.xiaoshu.tools.ToolsDate;
@@ -779,7 +780,6 @@ public class MessageRecordServiceImpl implements MessageRecordService{
 					MessageTemple messageTemple = MsgTemplate.getMessageTemple( listTemple,type);
 					if(messageTemple != null){
 						int total = meetingSignMapper.getCountByKeyWord(id,-1,"");
-						System.out.println("   TOTAL : " + total);
 						int pageSize = 10;
 						int totalPage = ToolsPage.totalPage(total, pageSize);//总页数
 						if(totalPage > 0) {
@@ -799,21 +799,21 @@ public class MessageRecordServiceImpl implements MessageRecordService{
 										String signPhone = meetingSign.getPhone();
 										String sign = messageTemple.getSign();
 										String meetingTitle = meeting.getTitle();
-										String meetingCode = com.xiaoshu.api.Set.SYSTEM_URL + "meeting/interfaceMyCodeNoUser?id=" + id + "&code=" + meetingSign.getSignCode();
+										String meetingCode = com.xiaoshu.api.Set.SYSTEM_URL + MeetingController.MEETING_URL2 + id + "&code=" + meetingSign.getSignCode();
 										//
 										// meetingCode = URLEncoder.encode(meetingCode ,"utf-8");
-										String meetingUserName = meetingSign.getName();
-										String meetingUserPhone = meetingSign.getPhone();
+										String meetingUserName = meeting.getName();
+										String meetingUserPhone = meeting.getPhone();
 										String meetingTime = meeting.getBeginTime() + " - " + meeting.getEndTime() ;
 										String address = meeting.getAddress();
 
 										//"您好+，+邀请你参加+会议，你的会议签到码为+，联系人：+ 联系人电话：+，会议地址+，会议时间+，感谢你准时参加。【+】";
-										String[] param = new String[]{signName,sign,meetingTitle,meetingCode,meetingUserName,meetingUserPhone,address,meetingTime,sign};
+										String[] param = new String[]{signName,meetingUserName,meetingTitle,meetingCode,meetingUserName,meetingUserPhone,address,meetingTime,sign};
 										HashMap<String, Object> map = IndustrySMS.link(signPhone, content, "",param);
 										String status = (String) map.get("status");
 										String msg =  (String) map.get("msg");
 										String msgId = UUID.randomUUID().toString();
-										MessageRecord messageRecord = new MessageRecord(msgId, meetingUserPhone, sign, content,meetingSign.getId(), status, new Date(), new Date(), msg ,code, 1);
+										MessageRecord messageRecord = new MessageRecord(msgId, signPhone, sign, content,meetingSign.getId(), status, new Date(), new Date(), msg ,code, 1);
 										messageRecordMapper.save(messageRecord);
 										sendTotal ++;
 										log.info("------------ [LOG["+ nowTime +"]sendMeetingMsg] send Code: " + code + " ------------");

@@ -23,6 +23,8 @@ import java.util.Map;
 @RequestMapping(value = "/interfaceMqMap")
 public class MqMapController extends BaseController {
 
+	private static int total = 0;
+
 	/**
 	 * (所有消息处理的返回如果为‘ok’则ack消息，‘fail’则nack消息，只对需要手动确认的消息有效)
 	 * RabbitMQ 设置mapKey的值失效Controller
@@ -31,8 +33,8 @@ public class MqMapController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/removeUserClickGroupMap", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
-	public String removeTicket(@RequestParam("mapKey") String mapKey){
+	@RequestMapping("/removeUserClickGroupMap")
+	public String removeUserClickGroupMap(@RequestParam("mapKey") String mapKey){
 		if(mapKey != null){
 			if(!"".equals(mapKey)){
 				mapKey = ToolsASCIIChang.asciiToString(mapKey);
@@ -44,7 +46,14 @@ public class MqMapController extends BaseController {
 			System.out.println("------------ [Queue Message] Remove expired map mapKey : "  + mapKey + " ------------");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return EnumsMQAck.ACK_FAIL;
+			total ++;
+			if(total >= 5){
+				System.out.println("com.xiaoshu.controller.rabbitmqHandle.MqMapController.removeUserClickGroupMap 异常超过5次 直接ACK_OK 将异常记录在MQ异常表 !!!  " + e);
+				return EnumsMQAck.ACK_OK;
+			}else {
+				return EnumsMQAck.ACK_FAIL;
+			}
+
 		}
 		return EnumsMQAck.ACK_OK;
 	}

@@ -252,6 +252,7 @@
                                     <tr>
                                         <th align="center" style="width:5%">序号</th>
                                         <th style="width:10%" align="center">姓名</th>
+                                        <th style="width:10%" align="center">性别</th>
                                         <th style="width:10%" align="center">手机电话</th>
                                         <th style="width:8%" align="center">签到码</th>
                                         <th style="width:8%" align="center">单位-公司-机构</th>
@@ -267,6 +268,7 @@
                                         <tr>
                                             <td align="center">${status.index+1}</td>
                                             <td align="center">${bean.name}</td>
+                                            <td align="center">${bean.sex}</td>
                                             <td align="center">${bean.phone}</td>
                                             <td align="center">${bean.signCode}</td>
                                             <td align="center">${bean.company}</td>

@@ -65,6 +65,9 @@ public class MeetingSign implements Serializable {
 	@Column(name = "MEETING_ID")
 	private String meetingId; //所属会议ID。
 
+	@Column(name = "SEX")
+	private String sex; //性别。
+
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
@@ -181,9 +184,17 @@ public class MeetingSign implements Serializable {
 		this.meetingId = meetingId;
 	}
 
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
 	public MeetingSign() { }
 
-	public MeetingSign(String id, String name, String headImage, String phone, String signCode, String company, String personType, String position, Integer joinDinner, String createTime, String updateTime, String descM, Integer status, String meetingId) {
+	public MeetingSign(String id, String name, String headImage, String phone, String signCode, String company, String personType, String position, Integer joinDinner, String createTime, String updateTime, String descM, Integer status, String meetingId, String sex) {
 		this.id = id;
 		this.name = name;
 		this.headImage = headImage;
@@ -198,6 +209,7 @@ public class MeetingSign implements Serializable {
 		this.descM = descM;
 		this.status = status;
 		this.meetingId = meetingId;
+		this.sex = sex;
 	}
 
 	@Override
@@ -217,6 +229,7 @@ public class MeetingSign implements Serializable {
 				", descM='" + descM + '\'' +
 				", status=" + status +
 				", meetingId='" + meetingId + '\'' +
+				", sex='" + sex + '\'' +
 				'}';
 	}
 }

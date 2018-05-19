@@ -24,7 +24,10 @@
                     <td class="table-header">姓名</td>
                     <td colspan="7">&nbsp;${bean.name}</td>
                 </tr>
-
+                <tr>
+                    <td class="table-header">性别</td>
+                    <td colspan="7">&nbsp;${bean.sex}</td>
+                </tr>
                 <tr>
                     <td class="table-header">电话</td>
                     <td colspan="7">&nbsp;${bean.phone}</td>

@@ -308,14 +308,16 @@ if(checked == 0){
                             webToast("获取订单状态错误，请刷新后重试！","middle",2000);//top middle bottom 控制显示位置
                         }
                         else if(info == "1") {
-                            webToast("该订单已经支付了！","middle",2000);//top middle bottom 控制显示位置
+                            payType();
+                            //webToast("该订单已经支付了！","middle",2000);//top middle bottom 控制显示位置
                         }
                     });
                 }else if(info == "-1") {
                     webToast("获取订单状态错误，请刷新后重试！","middle",2000);//top middle bottom 控制显示位置
                 }
                 else if(info == "1") {
-                    webToast("该订单已经支付了！","middle",2000);//top middle bottom 控制显示位置
+                    payType();
+                    //webToast("该订单已经支付了！","middle",2000);//top middle bottom 控制显示位置
                 }
             });
         }

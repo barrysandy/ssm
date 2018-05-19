@@ -24,15 +24,65 @@
 	<!-- <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" confirm-callback="confirmCallBackListener" return-callback="returnCallBackListener" mandatory="true"/> -->
 	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" confirm-callback="confirmCallBackListener" return-callback="returnCallBackListener" mandatory="true"/>
 	
-	<!--<rabbit:queue name="CONFIRM_TEST" />-->
-	<!--<rabbit:direct-exchange name="DIRECT_EX" id="DIRECT_EX" >-->
-		<!--<rabbit:bindings>-->
-			<!--<rabbit:binding queue="CONFIRM_TEST" />-->
-		<!--</rabbit:bindings>-->
-	<!--</rabbit:direct-exchange>-->
-	
 	<!-- 死信队列 -->
-	<rabbit:queue name="dead-letter-queue">
+	<rabbit:queue name="${ssm.queue.dead}">
+		<rabbit:queue-arguments>
+			<entry key="x-message-ttl" value="30000" value-type="java.lang.Long" />
+			<entry key="x-dead-letter-exchange" value="${ssm.exchange.common}" />
+			<entry key="x-dead-letter-routing-key" value="${ssm.queue.common}" />
+		</rabbit:queue-arguments>
+	</rabbit:queue>
+
+	<!-- 死信队列2 检查订单消息队列 -->
+	<rabbit:queue name="${ssm.queue.dead.TenSeconds}">
+		<rabbit:queue-arguments>
+			<entry key="x-message-ttl" value="10000" value-type="java.lang.Long" />
+			<entry key="x-dead-letter-exchange" value="${ssm.exchange.common}" />
+			<entry key="x-dead-letter-routing-key" value="${ssm.queue.common}" />
+		</rabbit:queue-arguments>
+	</rabbit:queue>
+
+	<!-- 死信队列3 Jssdk签名失效消息队列 当前失效10min 600000 -->
+	<rabbit:queue name="${ssm.queue.dead.jssdkInvalid}">
+		<rabbit:queue-arguments>
+			<entry key="x-message-ttl" value="600000" value-type="java.lang.Long" />
+			<entry key="x-dead-letter-exchange" value="${ssm.exchange.jssdkInvalid}" />
+			<entry key="x-dead-letter-routing-key" value="${ssm.queue.common.jssdkInvalid}" />
+		</rabbit:queue-arguments>
+	</rabbit:queue>
+
+	<!-- Jssdk签名失效普通队列 -->
+	<rabbit:queue name="${ssm.queue.common.jssdkInvalid}"/>
+	<rabbit:direct-exchange name="${ssm.exchange.jssdkInvalid}" durable="true" auto-delete="false" id="${ssm.exchange.jssdkInvalid}">
+		<rabbit:bindings>
+			<rabbit:binding queue="${ssm.queue.common.jssdkInvalid}" />
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+
+
+	<!-- 死信队列转发到的普通队列 -->
+	<rabbit:queue name="${ssm.queue.common}"/>
+	<rabbit:direct-exchange name="${ssm.exchange.common}" durable="true" auto-delete="false" id="${ssm.exchange.common}">
+		<rabbit:bindings>
+			<rabbit:binding queue="${ssm.queue.common}" />
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	
+
+	<!-- 配置consumer, 监听的类和queue的对应关系  -->
+	<!-- acknowledge="manual":手动确认消息     concurrency="2":设置消费者的并发数 -->
+	<rabbit:listener-container connection-factory="connectionFactory" acknowledge="manual" concurrency="2">
+		<rabbit:listener queues="${ssm.queue.common}" ref="receiveConfirmTestListener" />
+		<rabbit:listener queues="${ssm.queue.common.jssdkInvalid}" ref="receiveConfirmTestListener" />
+	</rabbit:listener-container>
+
+
+
+
+
+
+	<!-- 死信队列 -->
+<!--	<rabbit:queue name="dead-letter-queue">
 		<rabbit:queue-arguments>
 			<entry key="x-message-ttl" value="30000" value-type="java.lang.Long" />
 			<entry key="x-dead-letter-exchange" value="common-exchange" />
@@ -40,7 +90,7 @@
 		</rabbit:queue-arguments>
 	</rabbit:queue>
 
-	<!-- 死信队列2 检查订单消息队列 -->
+	&lt;!&ndash; 死信队列2 检查订单消息队列 &ndash;&gt;
 	<rabbit:queue name="dead-letter-queue-orderCheck">
 		<rabbit:queue-arguments>
 			<entry key="x-message-ttl" value="10000" value-type="java.lang.Long" />
@@ -49,7 +99,7 @@
 		</rabbit:queue-arguments>
 	</rabbit:queue>
 
-	<!-- 死信队列3 Jssdk签名失效消息队列 当前失效10min 600000 -->
+	&lt;!&ndash; 死信队列3 Jssdk签名失效消息队列 当前失效10min 600000 &ndash;&gt;
 	<rabbit:queue name="dead-letter-queue-JSSDK-Invalid">
 		<rabbit:queue-arguments>
 			<entry key="x-message-ttl" value="600000" value-type="java.lang.Long" />
@@ -58,7 +108,7 @@
 		</rabbit:queue-arguments>
 	</rabbit:queue>
 
-	<!-- Jssdk签名失效普通队列 -->
+	&lt;!&ndash; Jssdk签名失效普通队列 &ndash;&gt;
 	<rabbit:queue name="common-queue-JSSDK-Invalid"/>
 	<rabbit:direct-exchange name="common-exchange-JSSDK-Invalid" durable="true" auto-delete="false" id="common-exchange-JSSDK-Invalid">
 		<rabbit:bindings>
@@ -67,21 +117,20 @@
 	</rabbit:direct-exchange>
 
 
-	<!-- 死信队列转发到的普通队列 -->
+	&lt;!&ndash; 死信队列转发到的普通队列 &ndash;&gt;
 	<rabbit:queue name="common-queue"/>
 	<rabbit:direct-exchange name="common-exchange" durable="true" auto-delete="false" id="common-exchange">
 		<rabbit:bindings>
 			<rabbit:binding queue="common-queue" />
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
-	
 
-	<!-- 配置consumer, 监听的类和queue的对应关系  -->
-	<!-- acknowledge="manual":手动确认消息     concurrency="2":设置消费者的并发数 -->
+
+	&lt;!&ndash; 配置consumer, 监听的类和queue的对应关系  &ndash;&gt;
+	&lt;!&ndash; acknowledge="manual":手动确认消息     concurrency="2":设置消费者的并发数 &ndash;&gt;
 	<rabbit:listener-container connection-factory="connectionFactory" acknowledge="manual" concurrency="2">
-		<!--<rabbit:listener queues="CONFIRM_TEST" ref="receiveConfirmTestListener" />-->
+		&lt;!&ndash;<rabbit:listener queues="CONFIRM_TEST" ref="receiveConfirmTestListener" />&ndash;&gt;
 		<rabbit:listener queues="common-queue" ref="receiveConfirmTestListener" />
 		<rabbit:listener queues="common-queue-JSSDK-Invalid" ref="receiveConfirmTestListener" />
-	</rabbit:listener-container>
-
+	</rabbit:listener-container>-->
 </beans>

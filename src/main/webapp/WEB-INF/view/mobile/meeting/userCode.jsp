@@ -37,7 +37,9 @@
 			<h2 style="color: green;font-size: 1.4rem;">已签到</h2>
 			<img style="margin-top: 0rem;" src="${path}/resources/img/icon/yes.png" width=8%"/>
 		</div>
-
+		<div>
+			<h2><a href="${path}/meeting/myMeetingNoUser?id=${meeting.id}" style="color: black;font-size: 1rem;text-decoration:none;">查看会议流程</a></h2>
+		</div>
 	</div>
 </div>
 

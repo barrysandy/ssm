@@ -37,27 +37,27 @@
         </div>
     </div>
 
-    <div align="center" style="opacity:0.5;margin-left: 32.5%;height: 25%;margin-bottom: 10%;width: 35%;background-color: #8fb9d3;position: fixed;bottom: 0;">
+    <div align="center" style="opacity:0.8;margin-left: 32.5%;height: 25%;margin-bottom: 10%;width: 35%;background-color: #8fb9d3;position: fixed;bottom: 0;">
         <div align="left" style="margin-top: 3.5%;margin-left: 20%;">
             <table>
                 <tr>
-                    <td style="font-size: 16px;">姓名：<span style="color: black" id="name">-- --</span></td>
-                    <td style="font-size: 16px;">职位：<span style="color: black" id="position">-- --</span></td>
+                    <td style="font-size: 18px;">姓名：<span style="color: black" id="name">-- --</span></td>
+                    <td style="font-size: 18px;">职位：<span style="color: black" id="position">-- --</span></td>
                 </tr>
 
                 <tr>
-                    <td style="font-size: 16px;">机构：<span style="color: black" id="company">-- --</span></td>
-                    <td style="font-size: 16px;">电话：<span style="color: black" id="phone">-- --</span></td>
+                    <td style="font-size: 18px;">机构：<span style="color: black" id="company">-- --</span></td>
+                    <td style="font-size: 18px;">电话：<span style="color: black" id="phone">-- --</span></td>
                 </tr>
                 <tr>
-                    <td style="font-size: 16px;">类型：<span style="color: black" id="personType">-- --</span></td>
-                    <td style="font-size: 16px;">晚宴：<span style="color: black" id="joinDinner">-- --</span></td>
+                    <td style="font-size: 18px;">类型：<span style="color: black" id="personType">-- --</span></td>
+                    <td style="font-size: 18px;">晚宴：<span style="color: black" id="joinDinner">-- --</span></td>
                 </tr>
                 <tr>
-                    <td style="font-size: 16px;">签到码：<span style="color: black" id="signCode2">-- --</span></td>
+                    <td style="font-size: 18px;">签到码：<span style="color: black" id="signCode2">-- --</span></td>
                 </tr>
                 <tr>
-                    <td style="font-size: 16px;">签到人数：<span style="color: black" id="total"> ${total} </span></td>
+                    <td style="font-size: 18px;">签到人数：<span style="color: black" id="total"> ${total} </span></td>
                 </tr>
             </table>
             <%--姓名：<span style="color: black" id="name"> </span><br>--%>

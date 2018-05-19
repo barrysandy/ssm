@@ -36,6 +36,8 @@ public class MqOrderController extends BaseController {
 	@Resource private OrderCodesService orderCodesService;
 	@Resource private CommodityService commodityService;
 
+	private static int total = 0;
+
 	/**
 	 * (所有消息处理的返回如果为‘ok’则ack消息，‘fail’则nack消息，只对需要手动确认的消息有效)
 	 * RabbitMQ 创建抽奖中奖订单Controller
@@ -47,7 +49,7 @@ public class MqOrderController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/createOrder", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+	@RequestMapping("/createOrder")
 	public String createOrder(HttpServletResponse resp,HttpServletRequest request,String userId,String userName,String userPhone,int commodityId){
 		try {
 			Commodity commodity = commodityService.findCommodityByIdService(commodityId);
@@ -82,7 +84,14 @@ public class MqOrderController extends BaseController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return EnumsMQAck.ACK_FAIL;
+			total ++;
+			if(total >= 5){
+				System.out.println("com.xiaoshu.controller.rabbitmqHandle.MqOrderController.createOrder 异常超过5次 直接ACK_OK 将异常记录在MQ异常表 !!!  " + e);
+				return EnumsMQAck.ACK_OK;
+			}else {
+				return EnumsMQAck.ACK_FAIL;
+			}
+
 		}
 	}
 

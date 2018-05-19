@@ -44,7 +44,7 @@ public class MqMeetingController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/createBarCode", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+	@RequestMapping("/createBarCode")
 	public String createOrder(HttpServletResponse resp,HttpServletRequest request,String meetingId){
 		Integer createTotal = 0;
 		try {
@@ -73,17 +73,14 @@ public class MqMeetingController extends BaseController {
 								}
 							}
 						}
-						Thread.sleep(500);
 					}
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("异常：" + e);
-
 			e.printStackTrace();
 			total ++;
 			if(total >= 5){
-				System.out.println("超过5次 直接ACK_OK 将异常记录在MQ异常表 !!!  ");
+				System.out.println("com.xiaoshu.controller.rabbitmqHandle.MqMeetingController.createBarCode 异常超过5次 直接ACK_OK 将异常记录在MQ异常表 !!!  " + e);
 				return EnumsMQAck.ACK_OK;
 			}else {
 				return EnumsMQAck.ACK_FAIL;

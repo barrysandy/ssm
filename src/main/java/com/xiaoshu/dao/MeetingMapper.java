@@ -9,14 +9,10 @@ import java.util.List;
 public interface MeetingMapper {
 
 	/** save one */
-	@Insert("INSERT INTO t_meeting (" +
-			"ID,IMAGE,TITLE,DESC_M,NAME," +
-			"PHONE,CREATE_TIME,UPDATE_TIME,BEGIN_TIME,END_TIME," +
-			"SIGN_TOTAL,STATUS,EXCEL_PATH,ADDRESS) " +
-			"VALUES(" +
-			"#{id},#{image},#{title},#{descM},#{name}," +
-			"#{phone},#{createTime},#{updateTime},#{beginTime},#{endTime}," +
-			"#{signTotal},#{status},#{excelPath}，#{address} )")
+	@Insert("INSERT INTO t_meeting " +
+			"(ID,IMAGE,TITLE,DESC_M,NAME,PHONE,CREATE_TIME,UPDATE_TIME,BEGIN_TIME,END_TIME,SIGN_TOTAL,STATUS,EXCEL_PATH,ADDRESS) " +
+			"VALUES" +
+			"(#{id},#{image},#{title},#{descM},#{name},#{phone},#{createTime},#{updateTime},#{beginTime},#{endTime},#{signTotal},#{status},#{excelPath},#{address}) ")
 	Integer save(Meeting bean) throws Exception;
 
 	/** update 状态 */

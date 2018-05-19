@@ -4,7 +4,7 @@
 
 	<!-- 按照模糊分页查询列表 -->
 	<select id="getListByKeyWord" parameterType="java.util.Map" resultType="com.xiaoshu.entity.MeetingSign">
-		SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID
+		SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID,SEX
 		FROM  t_meeting_sign
 		WHERE MEETING_ID=#{id}
 		<if test="status != -1 ">
@@ -33,7 +33,7 @@
 	<!-- 插入集合 -->
 	<insert id ="saveList">
 		<foreach collection="list" item="list" separator=";">
-			INSERT INTO t_meeting_sign(ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID)
+			INSERT INTO t_meeting_sign(ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID,SEX)
 			VALUES(#{list.id},#{list.name},#{list.headImage},#{list.phone},#{list.signCode},#{list.company},#{list.personType},#{list.position},#{list.joinDinner},
 			#{list.createTime},#{list.updateTime},#{list.descM},#{list.status},#{list.meetingId} )
 		</foreach>
@@ -42,7 +42,7 @@
 
 	<!-- 按照模糊分页查询列表 -->
 	<select id="getListByMeetingId" parameterType="java.util.Map" resultType="com.xiaoshu.entity.MeetingSign">
-		SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID
+		SELECT ID,NAME,HEAD_IMAGE,PHONE,SIGN_CODE,COMPANY,PERSON_TYPE,POSITION,JOIN_DINNER,CREATE_TIME,UPDATE_TIME,DESC_M,STATUS,MEETING_ID,SEX
 		FROM  t_meeting_sign
 		WHERE MEETING_ID=#{meetingId}
 		ORDER BY CREATE_TIME DESC

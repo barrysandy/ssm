@@ -5,27 +5,35 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xgb.springrabbitmq.dto.DtoMessage;
 import com.xgb.springrabbitmq.publish.DeadLetterPublishService;
 import com.xiaoshu.api.*;
+import com.xiaoshu.api.Set;
+import com.xiaoshu.entity.WaterBill;
 import com.xiaoshu.enumeration.EnumsMQName;
 import com.xiaoshu.job.JobPublicAccount;
+import com.xiaoshu.service.WaterBillService;
 import com.xiaoshu.tools.JSONUtils;
 import com.xiaoshu.tools.ToolsASCIIChang;
 import com.xiaoshu.tools.ToolsDate;
+import com.xiaoshu.tools.ToolsHttpRequest;
 import com.xiaoshu.tools.single.MapPublicNumber;
+import com.xiaoshu.tools.single.NackMessageMap;
 import com.xiaoshu.vo.WeChatPayNotify;
 import com.xiaoshu.vo.WeChatPayRefund;
 import com.xiaoshu.wechat.pay.*;
 import org.apache.ibatis.annotations.Param;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -205,16 +213,25 @@ public class WeChatPayController {
 	 * URL：pay/payNotify
 	 */
 	@RequestMapping("interfacePayNotify")
-	private String interfacePayNotify(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	private String interfacePayNotify(HttpServletRequest req, HttpServletResponse resp){
 		resp.setContentType("text/xml;charset=utf-8");
 		resp.setCharacterEncoding("utf-8");
 		/** 解析结果存在HashMap中 */
 		Map<String ,String> map = new HashMap<String, String>();
-		InputStream inputStream = req.getInputStream();
+		InputStream inputStream = null;
+		Document doc = null;
 		try{
+			inputStream = req.getInputStream();
 			/** 读入输入流 */
 			SAXReader reader = new SAXReader();
-			Document doc = reader.read(inputStream);
+			try{
+				doc = reader.read(inputStream);
+			}catch (DocumentException de){
+				de.printStackTrace();
+			}finally {
+				inputStream.close();
+			}
+
 			/** 得到xml根目录 */
 			Element root = doc.getRootElement();
 			/** 得到元素的所有子节点 */
@@ -222,9 +239,11 @@ public class WeChatPayController {
 			for(Element e : elementList){
 				map.put(e.getName() , e.getText());
 			}
-
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		try{
 			//TODO 进行业务处理，比如写入账单，进行账单价格对照，然后修改与商品价格相差很多的攻击攻击购买方式的订单状态...
-
 			String appid = map.get("appid");
 			String attach = map.get("attach");
 			String bank_type = map.get("bank_type");
@@ -244,26 +263,62 @@ public class WeChatPayController {
 			String transaction_id = map.get("transaction_id");
 			if(out_trade_no != null){
 				if(out_trade_no != null){
-					if(!"".equals(total_fee)){
-						WeChatPayNotify weChatPayNotify = new WeChatPayNotify(appid, attach, bank_type, cash_fee, fee_type, is_subscribe, mch_id, nonce_str, openid, out_trade_no, result_code, return_code, sign, time_end, total_fee, trade_type, transaction_id);
-						String json = JSONUtils.toJSONString(weChatPayNotify);
-						//TODO Rabbit消息队列 检查账单
-						String url = Api.CHECK_WATER;
-						json = ToolsASCIIChang.stringToAscii(json);
-						String params = "json="+json;
-						DtoMessage dtoMessage = new DtoMessage(UUID.randomUUID().toString(), url, "get" ,params , null);
-						String message = DtoMessage.transformationToJson(dtoMessage);
-						ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-						DeadLetterPublishService deadLetterPublishServiceContext = context.getBean(DeadLetterPublishService.class);
-						deadLetterPublishServiceContext.send(EnumsMQName.DEAD_ORDER_CHECK , message);
+					Map<String,String> messageMap = NackMessageMap.getInstance().getMap();
+					if(messageMap.get("PayNotify"+out_trade_no) == null || "".equals(messageMap.get("PayNotify"+out_trade_no)) ||
+							"0".equals(messageMap.get("PayNotify"+out_trade_no))){
+						messageMap.put("PayNotify"+out_trade_no,"1");
+						if(!"".equals(total_fee)){
+							//TODO 检查账单是否检查过了
+							ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+							WaterBillService waterBillService = context.getBean(WaterBillService.class);
+							WaterBill waterBill = waterBillService.getByOrderNo(out_trade_no);
+							if(waterBill != null){
+								if(waterBill.getRemarks() != null){
+									if(!"".equals(waterBill.getRemarks())){
+										int contain = waterBill.getRemarks().indexOf("Message queuing Check water : CODE:Success");//匹配
+										if(contain != -1 ){
+											System.out.println("///////////////////////////////////////////");
+											System.out.println("Don't Check out_trade_no:" + out_trade_no + " Contain is :" + contain);
+											System.out.println("///////////////////////////////////////////");
+											return  null;
+										}
+									}
+								}
+							}
+							WeChatPayNotify weChatPayNotify = new WeChatPayNotify(appid, attach, bank_type, cash_fee, fee_type, is_subscribe, mch_id, nonce_str, openid, out_trade_no, result_code, return_code, sign, time_end, total_fee, trade_type, transaction_id);
+							String json = JSONUtils.toJSONString(weChatPayNotify);
+//							//TODO Rabbit消息队列 检查账单
+//							String url = Set.SYSTEM_URL + "/interfaceMqWaterBill/checkWaterBill";
+//							json = ToolsASCIIChang.stringToAscii(json);
+//							String params = "json="+json;
+//							DtoMessage dtoMessage = new DtoMessage(UUID.randomUUID().toString(), url, "get" ,params , null);
+//							String message = DtoMessage.transformationToJson(dtoMessage);
+//							DeadLetterPublishService deadLetterPublishServiceContext = context.getBean(DeadLetterPublishService.class);
+//							deadLetterPublishServiceContext.send(EnumsMQName.DEAD_TEN_SECONDS , message);
+//							System.out.println("///////////////////////////////////////////");
+//							System.out.println(out_trade_no + " Begin Checked WaterBill:" + waterBill.getOrderNo() + " Has Send MQMessage!");
+//							System.out.println("///////////////////////////////////////////");
+
+							//TODO 备用方案 检查账单
+							String url = Set.SYSTEM_URL + "/interfaceMqWaterBill/checkWaterBillNotMQ";
+							json = ToolsASCIIChang.stringToAscii(json);
+							String params = "json="+json;
+							String str = ToolsHttpRequest.sendGet(url,params);
+							System.out.println("///////////////////////////////////////////");
+							System.out.println(out_trade_no + " 备用方案 检查账单 Begin Check WaterBill ByNotMq:" + str );
+							System.out.println("///////////////////////////////////////////");
+
+						}
+					}else {
+						System.out.println("///////////////////////////////////////////");
+						System.out.println("Don't Check out_trade_no:" + out_trade_no + " Is exit in Map!!");
+						System.out.println("///////////////////////////////////////////");
 					}
 				}
 			}
 
 		}catch (Exception e){
 			e.printStackTrace();
-		}finally {
-			inputStream.close();
 		}
 		return null;
 	}

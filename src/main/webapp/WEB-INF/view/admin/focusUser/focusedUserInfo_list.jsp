@@ -219,11 +219,12 @@
                                         <th align="center" style="width:50px;">序号</th>
                                         <th style="width:50px;" align="center">头像</th>
                                         <th style="width:10%" align="center">姓名</th>
-                                        <th style="width:10%" align="center">备注</th>
-                                        <th style="width:100px;" align="center">电话号码</th>
+                                        <%--<th style="width:auto" align="center">备注</th>--%>
+                                        <%--<th style="width:auto;" align="center">电话号码</th>--%>
                                         <th style="width:50px;" align="center">性别</th>
-                                        <th style="width:15%" align="center">openid</th>
-                                        <th style="width:15%" align="center">unionid</th>
+                                        <th style="width:18%" align="center">id</th>
+                                        <th style="width:18%" align="center">openid</th>
+                                        <th style="width:18%" align="center">unionid</th>
                                         <th style="width:50px;" align="center">关注状态</th>
                                         <th style="width:10%" align="center">关注时间</th>
                                         <th style="width:10%" align="center">操作</th>
@@ -235,9 +236,10 @@
                                             <td align="center">${status.index+1}</td>
                                             <td align="center"><img src="${bean.headImgUrl}" width="40" onerror="this.src='${path}/resources/img/usermen.png'" style="margin-top: 4px;"></td>
                                             <td align="center">${bean.nickName}</td>
-                                            <td align="center">${bean.username}</td>
-                                            <td align="center">${bean.userphone}</td>
+                                            <%--<td align="center">${bean.username}</td>--%>
+                                            <%--<td align="center">${bean.userphone}</td>--%>
                                             <td align="center">${bean.sexStr}</td>
+                                            <td align="center">${bean.id}</td>
                                             <td align="center">${bean.openid}</td>
                                             <td align="center">${bean.unionid}</td>
                                             <td align="center">

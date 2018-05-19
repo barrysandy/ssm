@@ -16,6 +16,7 @@ function doUploadFile(id,path){
     }
     $.ajax({
         url: 'http://www.daxi51.com/ssm_file/upload/upFileExcle' ,
+        // url: 'http://120.55.49.68:30000/ssm_file/upload/upFileExcle' ,
         type: 'POST',
         data: formData,
         async: false,

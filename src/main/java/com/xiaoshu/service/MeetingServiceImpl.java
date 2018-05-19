@@ -22,6 +22,7 @@ public class MeetingServiceImpl implements MeetingService{
 		ToolsImage.updateSSMFile(bean.getImage(),oldImage);
 		bean.setId(UUID.randomUUID().toString());
 		bean.setCreateTime(ToolsDate.getStringDate(ToolsDate.simpleSecond));
+		ToolsImage.updateSSMFile(bean.getImage(),"");
 		return mapper.save(bean);
 	}
 
@@ -35,6 +36,7 @@ public class MeetingServiceImpl implements MeetingService{
 	@Override
 	public Integer updateAll(Meeting bean,String oldImage) throws Exception {
 		bean.setUpdateTime(ToolsDate.getStringDate(ToolsDate.simpleSecond));
+		ToolsImage.updateSSMFile(bean.getImage(),oldImage);
 		return mapper.updateAll(bean);
 	}
 
